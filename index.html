@@ -1,1 +1,302 @@
+PASO 1: Ve a tu repositorio pmu-studio-landing en GitHub PASO 2: Clic en el archivo index.html existente PASO 3: Clic en el ícono de lápiz (Edit) para editarlo PASO 4: BORRA TODO el contenido actual PASO 5: Pega este nuevo contenido completo:
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMU Studio Pro - Plataforma Todo-en-Uno para Micropigmentación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+        
+        .features {
+            background: white;
+            padding: 80px 20px;
+            margin: 50px 0;
+            border-radius: 20px;
+        }
+        
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #333;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .feature-card p {
+            color: #666;
+        }
+        
+        .pricing {
+            background: white;
+            padding: 80px 20px;
+            margin: 50px 0;
+            border-radius: 20px;
+            text-align: center;
+        }
+        
+        .pricing h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #333;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .price-card {
+            padding: 40px 30px;
+            border-radius: 15px;
+            border: 2px solid #eee;
+            transition: all 0.3s ease;
+        }
+        
+        .price-card:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+        }
+        
+        .price-card.popular {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea10, #764ba210);
+        }
+        
+        .price-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+        }
+        
+        .price-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+        
+        .price-features li {
+            padding: 5px 0;
+            color: #666;
+        }
+        
+        .price-features li:before {
+            content: "✓ ";
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .features h2, .pricing h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="hero">
+            <h1>PMU Studio <span class="gradient-text">Pro</span></h1>
+            <p>La plataforma todo-en-uno para profesionales de micropigmentación. Gestiona clientes, citas, análisis con IA y haz crecer tu negocio.</p>
+            <a href="#" class="btn-primary">Empezar Ahora</a>
+            <a href="#" class="btn-primary">Ver Demo</a>
+        </section>
+
+        <section class="features">
+            <h2>Funciones <span class="gradient-text">Principales</span></h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Análisis con IA</h3>
+                    <p>Tecnología de inteligencia artificial para análisis facial completo y recomendaciones precisas de forma y pigmentos.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Gestión de Clientes</h3>
+                    <p>Mantén organizados todos los datos de tus clientes con historiales médicos completos y fotos de seguimiento.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Agenda Inteligente</h3>
+                    <p>Sistema de citas automatizado con recordatorios SMS/Email y gestión de disponibilidad en tiempo real.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Control Financiero</h3>
+                    <p>Dashboard de ingresos, control de gastos, gestión de inventario y reportes de rentabilidad.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Analytics Avanzados</h3>
+                    <p>KPIs de negocio en tiempo real, análisis de clientes más rentables y exportación a Excel.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>App Móvil</h3>
+                    <p>Accede a tu negocio desde cualquier lugar con nuestra aplicación móvil que funciona offline.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="pricing">
+            <h2>Planes de <span class="gradient-text">Suscripción</span></h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>Standard</h3>
+                    <div class="price">$35<span style="font-size: 1rem;">/mes</span></div>
+                    <ul class="price-features">
+                        <li>Gestión ilimitada de clientes</li>
+                        <li>Sistema de citas y recordatorios</li>
+                        <li>Historial médico básico</li>
+                        <li>Fotos antes/después</li>
+                        <li>Soporte por email</li>
+                    </ul>
+                    <a href="#" class="btn-primary">Empezar</a>
+                </div>
+                <div class="price-card popular">
+                    <h3>Premium</h3>
+                    <div class="price">$65<span style="font-size: 1rem;">/mes</span></div>
+                    <ul class="price-features">
+                        <li>Todo lo de Standard +</li>
+                        <li>Control financiero completo</li>
+                        <li>Gestión de inventario</li>
+                        <li>Reportes de negocio</li>
+                        <li>Exportación a Excel</li>
+                        <li>Soporte prioritario</li>
+                    </ul>
+                    <a href="#" class="btn-primary">Empezar</a>
+                </div>
+                <div class="price-card">
+                    <h3>Executive</h3>
+                    <div class="price">$120<span style="font-size: 1rem;">/mes</span></div>
+                    <ul class="price-features">
+                        <li>Todo lo de Premium +</li>
+                        <li>Análisis con IA avanzada</li>
+                        <li>Recomendaciones de pigmentos</li>
+                        <li>Simulador de resultados</li>
+                        <li>Analytics avanzados</li>
+                        <li>Soporte telefónico 24/7</li>
+                    </ul>
+                    <a href="#" class="btn-primary">Empezar</a>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 PMU Studio Pro. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+</body>
+</html>
