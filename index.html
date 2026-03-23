@@ -1,11 +1,16 @@
-PASO 1: Ve a tu repositorio pmu-studio-landing en GitHub PASO 2: Clic en el archivo index.html existente PASO 3: Clic en el ícono de lápiz (Edit) para editarlo PASO 4: BORRA TODO el contenido actual PASO 5: Pega este nuevo contenido completo:
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PMU Studio Pro - La Plataforma Todo-en-Uno para Profesionales de Micropigmentación. Gestiona clientes, citas, análisis con IA y más.">
+    <meta name="keywords" content="micropigmentación, PMU, cejas, labios, delineado, software, gestión, clientes, citas">
     <title>PMU Studio Pro - Plataforma Todo-en-Uno para Micropigmentación</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <!-- CSS -->
     <style>
         * {
             margin: 0;
@@ -68,6 +73,24 @@ PASO 1: Ve a tu repositorio pmu-studio-landing en GitHub PASO 2: Clic en el arch
         
         .btn-primary:hover {
             transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 15px 30px;
+            border: 2px solid #ff6b6b;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: #ff6b6b;
+            color: white;
         }
         
         .features {
@@ -210,8 +233,8 @@ PASO 1: Ve a tu repositorio pmu-studio-landing en GitHub PASO 2: Clic en el arch
         <section class="hero">
             <h1>PMU Studio <span class="gradient-text">Pro</span></h1>
             <p>La plataforma todo-en-uno para profesionales de micropigmentación. Gestiona clientes, citas, análisis con IA y haz crecer tu negocio.</p>
-            <a href="#" class="btn-primary">Empezar Ahora</a>
-            <a href="#" class="btn-primary">Ver Demo</a>
+            <a href="/app" class="btn-primary">Empezar Ahora</a>
+            <a href="/app" class="btn-secondary">Ver Demo</a>
         </section>
 
         <section class="features">
@@ -263,7 +286,7 @@ PASO 1: Ve a tu repositorio pmu-studio-landing en GitHub PASO 2: Clic en el arch
                         <li>Fotos antes/después</li>
                         <li>Soporte por email</li>
                     </ul>
-                    <a href="#" class="btn-primary">Empezar</a>
+                    <a href="/app" class="btn-primary">Empezar</a>
                 </div>
                 <div class="price-card popular">
                     <h3>Premium</h3>
@@ -276,7 +299,7 @@ PASO 1: Ve a tu repositorio pmu-studio-landing en GitHub PASO 2: Clic en el arch
                         <li>Exportación a Excel</li>
                         <li>Soporte prioritario</li>
                     </ul>
-                    <a href="#" class="btn-primary">Empezar</a>
+                    <a href="/app" class="btn-primary">Empezar</a>
                 </div>
                 <div class="price-card">
                     <h3>Executive</h3>
@@ -289,9 +312,16 @@ PASO 1: Ve a tu repositorio pmu-studio-landing en GitHub PASO 2: Clic en el arch
                         <li>Analytics avanzados</li>
                         <li>Soporte telefónico 24/7</li>
                     </ul>
-                    <a href="#" class="btn-primary">Empezar</a>
+                    <a href="/app" class="btn-primary">Empezar</a>
                 </div>
             </div>
+        </section>
+
+        <section style="text-align: center; padding: 60px 20px; color: white;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">¿Listo para Transformar tu Negocio PMU?</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 40px;">Únete a cientos de profesionales que ya están creciendo con PMU Studio Pro</p>
+            <a href="/app" class="btn-primary" style="font-size: 1.2rem; padding: 18px 35px;">Empezar Prueba Gratis</a>
+            <a href="/app" class="btn-secondary" style="font-size: 1.2rem; padding: 18px 35px;">Acceder a la App</a>
         </section>
 
         <footer>
