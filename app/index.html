@@ -1,0 +1,244 @@
+PASO 2: ACTUALIZAR BOTONES DE LANDING PAGE
+
+Editar el index.html principal
+Cambiar href de botones a /app
+CONTENIDO PARA app/index.html (COPIA EXACTO):
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    
+    <title>PMU Studio Pro - App Móvil</title>
+    <meta name="description" content="PMU Studio Pro - Gestión Profesional de Micropigmentación">
+    
+    <!-- PWA Configuration -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#E879F9">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html, body {
+            height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .app-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .app-header {
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .app-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #E879F9;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .welcome-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dashboard-card:active {
+            transform: scale(0.95);
+        }
+        
+        .card-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .card-subtitle {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+        
+        .action-btn {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            border: none;
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 8px 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .action-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .nav-bar {
+            background: rgba(15, 15, 35, 0.95);
+            padding: 12px 0 20px 0;
+        }
+        
+        .nav-items {
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px;
+            cursor: pointer;
+        }
+        
+        .nav-item.active {
+            color: #E879F9;
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+        }
+        
+        .nav-label {
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="app-title">PMU Studio Pro</div>
+            <div>🔔</div>
+        </header>
+        
+        <main class="main-content">
+            <section class="welcome-section">
+                <h1 class="welcome-title">¡Bienvenido!</h1>
+                <p>Gestiona tu estudio PMU profesionalmente</p>
+            </section>
+            
+            <section class="dashboard-grid">
+                <div class="dashboard-card" onclick="showAlert('Clientes')">
+                    <div class="card-icon">👥</div>
+                    <div class="card-title">Clientes</div>
+                    <div class="card-subtitle">128 registrados</div>
+                </div>
+                
+                <div class="dashboard-card" onclick="showAlert('Citas')">
+                    <div class="card-icon">📅</div>
+                    <div class="card-title">Citas</div>
+                    <div class="card-subtitle">12 hoy</div>
+                </div>
+                
+                <div class="dashboard-card" onclick="showAlert('IA y Diseño')">
+                    <div class="card-icon">🤖</div>
+                    <div class="card-title">IA & Diseño</div>
+                    <div class="card-subtitle">Análisis facial</div>
+                </div>
+                
+                <div class="dashboard-card" onclick="showAlert('Finanzas')">
+                    <div class="card-icon">💰</div>
+                    <div class="card-title">Finanzas</div>
+                    <div class="card-subtitle">$4,250</div>
+                </div>
+            </section>
+            
+            <section>
+                <button class="action-btn" onclick="showAlert('Nuevo Cliente')">
+                    ➕ Nuevo Cliente
+                </button>
+                <button class="action-btn" onclick="showAlert('Agendar Cita')">
+                    📅 Agendar Cita
+                </button>
+                <button class="action-btn" onclick="showAlert('Análisis IA')">
+                    🤖 Análisis IA
+                </button>
+            </section>
+        </main>
+        
+        <nav class="nav-bar">
+            <div class="nav-items">
+                <div class="nav-item active">
+                    <div class="nav-icon">🏠</div>
+                    <div class="nav-label">Inicio</div>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon">👥</div>
+                    <div class="nav-label">Clientes</div>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon">📅</div>
+                    <div class="nav-label">Agenda</div>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon">⚙️</div>
+                    <div class="nav-label">Config</div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <script>
+        function showAlert(section) {
+            alert('Abriendo módulo: ' + section + '\n\n¡Próximamente todas las funciones estarán disponibles!');
+        }
+    </script>
+</body>
+</html>
