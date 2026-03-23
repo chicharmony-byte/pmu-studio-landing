@@ -140,10 +140,17 @@
             gap: 4px;
             padding: 8px;
             cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
         
         .nav-item.active {
             color: #E879F9;
+            background: rgba(232, 121, 249, 0.1);
         }
         
         .nav-icon {
@@ -209,19 +216,19 @@
         
         <nav class="nav-bar">
             <div class="nav-items">
-                <div class="nav-item active">
+                <div class="nav-item active" onclick="setActiveTab('home')">
                     <div class="nav-icon">🏠</div>
                     <div class="nav-label">Inicio</div>
                 </div>
-                <div class="nav-item">
+                <div class="nav-item" onclick="setActiveTab('clients')">
                     <div class="nav-icon">👥</div>
                     <div class="nav-label">Clientes</div>
                 </div>
-                <div class="nav-item">
+                <div class="nav-item" onclick="setActiveTab('calendar')">
                     <div class="nav-icon">📅</div>
                     <div class="nav-label">Agenda</div>
                 </div>
-                <div class="nav-item">
+                <div class="nav-item" onclick="setActiveTab('settings')">
                     <div class="nav-icon">⚙️</div>
                     <div class="nav-label">Config</div>
                 </div>
@@ -256,6 +263,33 @@
                     break;
                 default:
                     alert('Cargando módulo: ' + section);
+            }
+        }
+        
+        // Navigation bar functionality
+        function setActiveTab(tabName) {
+            // Remove active class from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active class to clicked item
+            event.target.closest('.nav-item').classList.add('active');
+            
+            // Navigate based on tab
+            switch(tabName) {
+                case 'home':
+                    goBack();
+                    break;
+                case 'clients':
+                    loadClientsModule();
+                    break;
+                case 'calendar':
+                    loadAppointmentsModule();
+                    break;
+                case 'settings':
+                    loadSettingsModule();
+                    break;
             }
         }
         
@@ -387,6 +421,33 @@
                     </button>
                     <button onclick="alert('Reportes detallados\\n\\nExportación a Excel, gráficos')" style="width: 100%; padding: 16px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 10px; font-size: 16px; cursor: pointer;">
                         📈 Generar Reporte
+                    </button>
+                </div>
+            `;
+        }
+        
+        async function loadSettingsModule() {
+            const mainContent = document.querySelector('.main-content');
+            mainContent.innerHTML = `
+                <div style="padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="color: white; margin: 0;">⚙️ Configuración</h2>
+                        <button onclick="goBack()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 8px 15px; border-radius: 20px; cursor: pointer;">← Atrás</button>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                        <div style="color: white;">
+                            <h3 style="margin-bottom: 20px;">Configuración de Cuenta</h3>
+                            <div style="margin: 15px 0; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                                <div style="font-weight: bold;">Plan Actual: Premium</div>
+                                <div style="opacity: 0.8; font-size: 14px;">$65/mes - Renovación: 15 Ene 2025</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="alert('Cambiar suscripción\\n\\nConecta con Stripe para gestión de pagos')" style="width: 100%; padding: 16px; background: linear-gradient(45deg, #ff6b6b, #feca57); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; margin-bottom: 15px; cursor: pointer;">
+                        💳 Gestionar Suscripción
+                    </button>
+                    <button onclick="alert('Cerrar sesión')" style="width: 100%; padding: 16px; background: rgba(255,0,0,0.2); color: white; border: 1px solid rgba(255,0,0,0.5); border-radius: 10px; font-size: 16px; cursor: pointer;">
+                        🚪 Cerrar Sesión
                     </button>
                 </div>
             `;
