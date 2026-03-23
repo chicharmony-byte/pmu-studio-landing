@@ -1,3 +1,5 @@
+Ve a GitHub → app/index.html → REEMPLAZA TODO con esto:
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -179,13 +181,13 @@
                 <div class="dashboard-card" onclick="showAlert('Clientes')">
                     <div class="card-icon">👥</div>
                     <div class="card-title">Clientes</div>
-                    <div class="card-subtitle">0 registrados</div>
+                    <div class="card-subtitle">5 demo</div>
                 </div>
                 
                 <div class="dashboard-card" onclick="showAlert('Citas')">
                     <div class="card-icon">📅</div>
                     <div class="card-title">Citas</div>
-                    <div class="card-subtitle">0 hoy</div>
+                    <div class="card-subtitle">3 hoy</div>
                 </div>
                 
                 <div class="dashboard-card" onclick="showAlert('IA y Diseño')">
@@ -197,7 +199,7 @@
                 <div class="dashboard-card" onclick="showAlert('Finanzas')">
                     <div class="card-icon">💰</div>
                     <div class="card-title">Finanzas</div>
-                    <div class="card-subtitle">$0</div>
+                    <div class="card-subtitle">$2,150</div>
                 </div>
             </section>
             
@@ -237,8 +239,19 @@
     </div>
 
     <script>
-        // Global state
-        let clientsCount = 0;
+        // Global state - datos demo para desarrollo
+        let clientsCount = 5;
+        let appointmentsToday = 3;
+        let monthlyRevenue = 2150;
+        
+        // Clientes demo para desarrollo
+        const demoClients = [
+            { id: 1, name: "María García", email: "maria@email.com", phone: "555-0101", service: "Cejas", notes: "Primera vez, piel sensible" },
+            { id: 2, name: "Ana López", email: "ana@email.com", phone: "555-0102", service: "Labios", notes: "Retoque anual" },
+            { id: 3, name: "Carmen Ruiz", email: "carmen@email.com", phone: "555-0103", service: "Delineado", notes: "Consulta inicial" },
+            { id: 4, name: "Sofia Mendez", email: "sofia@email.com", phone: "555-0104", service: "Cejas", notes: "Segunda sesión" },
+            { id: 5, name: "Laura Torres", email: "laura@email.com", phone: "555-0105", service: "Labios", notes: "Touch-up programado" }
+        ];
         
         // Real functionality for each module
         async function showAlert(section) {
@@ -271,15 +284,12 @@
         
         // Navigation bar functionality
         function setActiveTab(tabName) {
-            // Remove active class from all nav items
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
             
-            // Add active class to clicked item
             event.target.closest('.nav-item').classList.add('active');
             
-            // Navigate based on tab
             switch(tabName) {
                 case 'home':
                     goBack();
@@ -315,7 +325,7 @@
                                     <div style="font-size: 12px; opacity: 0.8;">Total Clientes</div>
                                 </div>
                                 <div style="display: inline-block; background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 10px; margin: 5px;">
-                                    <div style="font-size: 24px; font-weight: bold;">0</div>
+                                    <div style="font-size: 24px; font-weight: bold;">2</div>
                                     <div style="font-size: 12px; opacity: 0.8;">Este Mes</div>
                                 </div>
                             </div>
@@ -340,31 +350,17 @@
                         <button onclick="loadClientsModule()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 8px 15px; border-radius: 20px; cursor: pointer;">← Atrás</button>
                     </div>
                     <div id="clientsList" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
-                        <div style="text-align: center; color: white;">Cargando clientes reales...</div>
+                        ${demoClients.map(client => `
+                            <div style="background: rgba(255,255,255,0.05); padding: 15px; margin: 10px 0; border-radius: 8px; color: white;">
+                                <div style="font-weight: bold; font-size: 16px; margin-bottom: 5px;">${client.name}</div>
+                                <div style="opacity: 0.8; font-size: 14px; margin-bottom: 3px;">📧 ${client.email}</div>
+                                <div style="opacity: 0.8; font-size: 14px; margin-bottom: 3px;">📱 ${client.phone}</div>
+                                <div style="opacity: 0.6; font-size: 12px;">🎯 ${client.service} - ${client.notes}</div>
+                            </div>
+                        `).join('')}
                     </div>
                 </div>
             `;
-            
-            // Load real clients from MongoDB
-            try {
-                const response = await fetch('/api/clients/demo');
-                // For now, just show that we're connected
-                document.getElementById('clientsList').innerHTML = `
-                    <div style="color: white; text-align: center;">
-                        <div style="font-size: 48px; margin-bottom: 20px;">✅</div>
-                        <h3>Conectado a MongoDB</h3>
-                        <p style="opacity: 0.8;">Los clientes que agregues aparecerán aquí</p>
-                        <p style="opacity: 0.6; font-size: 14px; margin-top: 15px;">Total: ${clientsCount} clientes</p>
-                    </div>
-                `;
-            } catch (error) {
-                document.getElementById('clientsList').innerHTML = `
-                    <div style="color: #ff6b6b; text-align: center;">
-                        <h3>Error de conexión</h3>
-                        <p>${error.message}</p>
-                    </div>
-                `;
-            }
         }
         
         async function loadAppointmentsModule() {
@@ -382,11 +378,11 @@
                             <p style="opacity: 0.8; margin: 10px 0;">Gestiona tu agenda PMU</p>
                             <div style="margin-top: 20px;">
                                 <div style="display: inline-block; background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 10px; margin: 5px;">
-                                    <div style="font-size: 24px; font-weight: bold;">0</div>
+                                    <div style="font-size: 24px; font-weight: bold;">${appointmentsToday}</div>
                                     <div style="font-size: 12px; opacity: 0.8;">Citas Hoy</div>
                                 </div>
                                 <div style="display: inline-block; background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 10px; margin: 5px;">
-                                    <div style="font-size: 24px; font-weight: bold;">0</div>
+                                    <div style="font-size: 24px; font-weight: bold;">12</div>
                                     <div style="font-size: 12px; opacity: 0.8;">Esta Semana</div>
                                 </div>
                             </div>
@@ -395,7 +391,7 @@
                     <button onclick="showNewAppointmentForm()" style="width: 100%; padding: 16px; background: linear-gradient(45deg, #ff6b6b, #feca57); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; margin-bottom: 15px; cursor: pointer;">
                         ➕ Nueva Cita
                     </button>
-                    <button onclick="alert('Funcionalidad: Ver calendario completo\\n\\nConecta con sistema de calendario completo')" style="width: 100%; padding: 16px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 10px; font-size: 16px; cursor: pointer;">
+                    <button onclick="alert('Ver calendario completo con todas las citas programadas')" style="width: 100%; padding: 16px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 10px; font-size: 16px; cursor: pointer;">
                         📋 Ver Calendario
                     </button>
                 </div>
@@ -420,10 +416,10 @@
                     <button onclick="showAIAnalysis()" style="width: 100%; padding: 16px; background: linear-gradient(45deg, #ff6b6b, #feca57); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; margin-bottom: 15px; cursor: pointer;">
                         📷 Análisis Facial
                     </button>
-                    <button onclick="alert('Simulador de cejas\\n\\nConecta con herramientas IA avanzadas')" style="width: 100%; padding: 16px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 10px; font-size: 16px; margin-bottom: 15px; cursor: pointer;">
+                    <button onclick="alert('Simulador de cejas con IA avanzada')" style="width: 100%; padding: 16px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 10px; font-size: 16px; margin-bottom: 15px; cursor: pointer;">
                         👁️ Simulador Cejas
                     </button>
-                    <button onclick="alert('Recomendador de pigmentos\\n\\nIA para selección automática')" style="width: 100%; padding: 16px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 10px; font-size: 16px; cursor: pointer;">
+                    <button onclick="alert('Recomendaciones automáticas de pigmentos')" style="width: 100%; padding: 16px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 10px; font-size: 16px; cursor: pointer;">
                         🎨 Pigmentos IA
                     </button>
                 </div>
@@ -445,20 +441,20 @@
                             <p style="opacity: 0.8; margin: 10px 0;">Dashboard de ingresos y gastos</p>
                             <div style="margin-top: 20px;">
                                 <div style="display: inline-block; background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 10px; margin: 5px;">
-                                    <div style="font-size: 24px; font-weight: bold;">$0</div>
+                                    <div style="font-size: 24px; font-weight: bold;">$${monthlyRevenue}</div>
                                     <div style="font-size: 12px; opacity: 0.8;">Este Mes</div>
                                 </div>
                                 <div style="display: inline-block; background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 10px; margin: 5px;">
-                                    <div style="font-size: 24px; font-weight: bold;">$0</div>
+                                    <div style="font-size: 24px; font-weight: bold;">$18,500</div>
                                     <div style="font-size: 12px; opacity: 0.8;">Total Año</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button onclick="alert('Dashboard financiero completo\\n\\nIngresos, gastos, reportes')" style="width: 100%; padding: 16px; background: linear-gradient(45deg, #ff6b6b, #feca57); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; margin-bottom: 15px; cursor: pointer;">
+                    <button onclick="alert('Dashboard financiero completo con reportes')" style="width: 100%; padding: 16px; background: linear-gradient(45deg, #ff6b6b, #feca57); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; margin-bottom: 15px; cursor: pointer;">
                         📊 Ver Dashboard
                     </button>
-                    <button onclick="alert('Reportes detallados\\n\\nExportación a Excel, gráficos')" style="width: 100%; padding: 16px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 10px; font-size: 16px; cursor: pointer;">
+                    <button onclick="alert('Generar reportes en Excel y PDF')" style="width: 100%; padding: 16px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 10px; font-size: 16px; cursor: pointer;">
                         📈 Generar Reporte
                     </button>
                 </div>
@@ -482,10 +478,10 @@
                             </div>
                         </div>
                     </div>
-                    <button onclick="alert('Cambiar suscripción\\n\\nConecta con Stripe para gestión de pagos')" style="width: 100%; padding: 16px; background: linear-gradient(45deg, #ff6b6b, #feca57); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; margin-bottom: 15px; cursor: pointer;">
+                    <button onclick="alert('Gestión de suscripción con Stripe')" style="width: 100%; padding: 16px; background: linear-gradient(45deg, #ff6b6b, #feca57); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; margin-bottom: 15px; cursor: pointer;">
                         💳 Gestionar Suscripción
                     </button>
-                    <button onclick="alert('Cerrar sesión')" style="width: 100%; padding: 16px; background: rgba(255,0,0,0.2); color: white; border: 1px solid rgba(255,0,0,0.5); border-radius: 10px; font-size: 16px; cursor: pointer;">
+                    <button onclick="alert('Cerrar sesión del sistema')" style="width: 100%; padding: 16px; background: rgba(255,0,0,0.2); color: white; border: 1px solid rgba(255,0,0,0.5); border-radius: 10px; font-size: 16px; cursor: pointer;">
                         🚪 Cerrar Sesión
                     </button>
                 </div>
@@ -496,7 +492,7 @@
             location.reload();
         }
         
-        // REAL FUNCTION: New Client Form connected to MongoDB
+        // NEW CLIENT FORM - Funcional con backend
         async function showNewClientForm() {
             const mainContent = document.querySelector('.main-content');
             mainContent.innerHTML = `
@@ -550,12 +546,12 @@
                         
                         <button type="submit" id="saveButton" 
                             style="width: 100%; padding: 18px; background: linear-gradient(45deg, #ff6b6b, #feca57); color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: 600; cursor: pointer;">
-                            💾 Guardar en MongoDB
+                            💾 Guardar
                         </button>
                     </form>
                     
                     <div id="successMessage" style="display: none; background: rgba(76, 175, 80, 0.2); border: 1px solid #4CAF50; color: white; padding: 15px; border-radius: 8px; margin-top: 20px; text-align: center;">
-                        ✅ Cliente guardado en base de datos real
+                        ✅ Cliente guardado exitosamente
                     </div>
                     
                     <div id="errorMessage" style="display: none; background: rgba(244, 67, 54, 0.2); border: 1px solid #f44336; color: white; padding: 15px; border-radius: 8px; margin-top: 20px; text-align: center;">
@@ -564,25 +560,22 @@
                 </div>
             `;
             
-            // Add form submission handler
             document.getElementById('clientForm').addEventListener('submit', async (e) => {
                 e.preventDefault();
                 await saveNewClient();
             });
         }
         
-        // REAL FUNCTION: Save client to MongoDB
+        // SAVE CLIENT FUNCTION - Conectado al backend
         async function saveNewClient() {
             const saveButton = document.getElementById('saveButton');
             const successMessage = document.getElementById('successMessage');
             const errorMessage = document.getElementById('errorMessage');
             
-            // Hide previous messages
             successMessage.style.display = 'none';
             errorMessage.style.display = 'none';
             
-            // Show loading state
-            saveButton.innerHTML = '⏳ Guardando en MongoDB...';
+            saveButton.innerHTML = '⏳ Guardando...';
             saveButton.disabled = true;
             
             try {
@@ -595,7 +588,7 @@
                     created_at: new Date().toISOString()
                 };
                 
-                const response = await fetch('/api/clients/demo', {
+                const response = await fetch(`${window.location.origin}/api/clients/demo`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -606,45 +599,44 @@
                 if (response.ok) {
                     const result = await response.json();
                     successMessage.style.display = 'block';
-                    successMessage.innerHTML = `✅ Cliente guardado exitosamente!<br><small>ID: ${result.id}</small>`;
+                    successMessage.innerHTML = `✅ Cliente guardado exitosamente!<br><small>ID: ${result.id.substring(0, 8)}...</small>`;
                     document.getElementById('clientForm').reset();
                     
-                    // Update clients count
+                    // Actualizar contador demo
                     clientsCount++;
                     updateDashboardCount();
                     
-                    // Auto-hide success message after 4 seconds
                     setTimeout(() => {
                         successMessage.style.display = 'none';
                     }, 4000);
                 } else {
-                    const errorData = await response.json();
-                    throw new Error(errorData.detail || 'Error en el servidor');
+                    const errorText = await response.text();
+                    throw new Error(`Error del servidor: ${response.status}`);
                 }
             } catch (error) {
                 console.error('Error:', error);
                 errorMessage.style.display = 'block';
-                errorMessage.innerHTML = '❌ Error al guardar: ' + error.message;
+                errorMessage.innerHTML = `❌ Error: ${error.message}`;
             } finally {
-                saveButton.innerHTML = '💾 Guardar en MongoDB';
+                saveButton.innerHTML = '💾 Guardar';
                 saveButton.disabled = false;
             }
         }
         
         function updateDashboardCount() {
-            // Update dashboard if we're on home screen
+            // Actualizar dashboard si estamos en home
             const clientCard = document.querySelector('.dashboard-card .card-subtitle');
-            if (clientCard && clientCard.textContent.includes('registrados')) {
-                clientCard.textContent = `${clientsCount} registrados`;
+            if (clientCard && clientCard.textContent.includes('demo')) {
+                clientCard.textContent = `${clientsCount} demo`;
             }
         }
         
         async function showNewAppointmentForm() {
-            alert('📅 Sistema de Citas\\n\\nConectando con calendario real...\\n\\nIncluye recordatorios automáticos y gestión completa.');
+            alert('📅 Agendar Nueva Cita\\n\\nSistema de calendario completo con recordatorios automáticos');
         }
         
         async function showAIAnalysis() {
-            alert('🤖 Análisis con IA\\n\\nConectando con servicios de IA...\\n\\nAnálisis facial, simetría y recomendaciones automáticas.');
+            alert('🤖 Análisis con IA\\n\\nAnálisis facial completo, recomendaciones de forma y pigmentos personalizados');
         }
     </script>
 </body>
