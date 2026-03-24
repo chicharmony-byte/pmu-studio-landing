@@ -5,395 +5,137 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>PMU Studio Pro - Chic Harmony</title>
     <meta name="theme-color" content="#E879F9">
-    <link rel="manifest" href="/manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
-        :root {
-            --bg-primary: #0F0F23;
-            --bg-secondary: #1A1A3E;
-            --bg-card: #1E1B4B;
-            --bg-input: #2D2A5E;
-            --accent: #E879F9;
-            --accent-dark: #A855F7;
-            --accent-gradient: linear-gradient(135deg, #E879F9 0%, #A855F7 100%);
-            --text-primary: #FFFFFF;
-            --text-secondary: #D1D5DB;
-            --text-muted: #9CA3AF;
-            --border: rgba(232, 121, 249, 0.2);
-            --danger: #EF4444;
-            --success: #10B981;
-            --warning: #F59E0B;
-            --radius: 14px;
-            --safe-bottom: env(safe-area-inset-bottom, 0px);
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            min-height: 100vh;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* ===== TOP BAR ===== */
-        .top-bar {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            background: rgba(15, 15, 35, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 12px 16px;
-            display: flex; align-items: center; justify-content: space-between;
-            border-bottom: 1px solid var(--border);
-        }
-        .top-bar-title {
-            font-size: 18px; font-weight: 700;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .top-bar-sub { font-size: 11px; color: var(--text-muted); letter-spacing: 1px; }
-        .top-bar-right { display: flex; gap: 12px; align-items: center; }
-        .top-bar-btn {
-            background: none; border: none; color: var(--text-secondary); font-size: 22px; cursor: pointer; padding: 4px;
-        }
-
-        /* ===== CONTENT AREA ===== */
-        .content { padding: 70px 16px 90px; min-height: 100vh; }
-
-        /* ===== BOTTOM NAV ===== */
-        .bottom-nav {
-            position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
-            background: rgba(15, 15, 35, 0.97);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-top: 1px solid var(--border);
-            display: flex; justify-content: space-around; align-items: center;
-            padding: 8px 0 calc(8px + var(--safe-bottom));
-        }
-        .nav-item {
-            display: flex; flex-direction: column; align-items: center; gap: 3px;
-            background: none; border: none; color: var(--text-muted); cursor: pointer;
-            font-size: 10px; padding: 6px 12px; min-width: 60px;
-            transition: color 0.2s;
-        }
-        .nav-item.active { color: var(--accent); }
-        .nav-item .nav-icon { font-size: 22px; }
-
-        /* ===== CARDS ===== */
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 16px;
-            margin-bottom: 12px;
-        }
-
-        /* ===== SEARCH BAR ===== */
-        .search-container {
-            position: relative; margin-bottom: 16px;
-        }
-        .search-input {
-            width: 100%; padding: 12px 16px 12px 42px;
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-size: 15px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-        .search-input:focus { border-color: var(--accent); }
-        .search-input::placeholder { color: var(--text-muted); }
-        .search-icon {
-            position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
-            font-size: 18px; color: var(--text-muted);
-        }
-
-        /* ===== BUTTONS ===== */
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 12px 24px;
-            border: none; border-radius: 12px;
-            font-size: 15px; font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.1s, opacity 0.2s;
-        }
-        .btn:active { transform: scale(0.97); }
-        .btn-primary { background: var(--accent-gradient); color: white; }
-        .btn-secondary { background: var(--bg-input); color: var(--text-primary); border: 1px solid var(--border); }
-        .btn-danger { background: var(--danger); color: white; }
-        .btn-success { background: var(--success); color: white; }
-        .btn-sm { padding: 8px 16px; font-size: 13px; }
-        .btn-block { width: 100%; }
-        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-        /* ===== FAB (Floating Action Button) ===== */
-        .fab {
-            position: fixed; bottom: calc(80px + var(--safe-bottom)); right: 20px;
-            width: 56px; height: 56px;
-            background: var(--accent-gradient);
-            border: none; border-radius: 50%;
-            color: white; font-size: 28px;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 6px 20px rgba(232, 121, 249, 0.4);
-            cursor: pointer; z-index: 50;
-            transition: transform 0.2s;
-        }
-        .fab:active { transform: scale(0.9); }
-
-        /* ===== CLIENT CARD ===== */
-        .client-card {
-            display: flex; align-items: center; gap: 12px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .client-card:active { background: rgba(232, 121, 249, 0.05); }
-        .client-avatar {
-            width: 48px; height: 48px;
-            background: var(--accent-gradient);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 18px; font-weight: 700; color: white;
-            flex-shrink: 0;
-        }
-        .client-info { flex: 1; min-width: 0; }
-        .client-name { font-size: 16px; font-weight: 600; color: var(--text-primary); }
-        .client-detail { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
-        .client-actions { display: flex; gap: 8px; flex-shrink: 0; }
-        .client-action-btn {
-            background: none; border: none; font-size: 18px; cursor: pointer; padding: 6px;
-            color: var(--text-muted);
-            transition: color 0.2s;
-        }
-        .client-action-btn.edit:hover, .client-action-btn.edit:active { color: var(--accent); }
-        .client-action-btn.delete:hover, .client-action-btn.delete:active { color: var(--danger); }
-
-        /* ===== FORM ===== */
-        .form-group { margin-bottom: 16px; }
-        .form-label { display: block; font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; }
-        .form-input, .form-textarea, .form-select {
-            width: 100%; padding: 12px 14px;
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            color: var(--text-primary);
-            font-size: 15px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-        .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--accent); }
-        .form-input::placeholder, .form-textarea::placeholder { color: var(--text-muted); }
-        .form-textarea { min-height: 80px; resize: vertical; font-family: inherit; }
-        .form-select { appearance: none; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
-        /* ===== SERVICE CARD ===== */
-        .service-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 14px;
-            margin-bottom: 10px;
-        }
-        .service-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-        .service-type { font-size: 15px; font-weight: 600; color: var(--accent); }
-        .service-date { font-size: 12px; color: var(--text-muted); }
-        .service-price { font-size: 16px; font-weight: 700; color: var(--success); }
-        .service-detail-row { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
-        .service-tag {
-            background: rgba(232, 121, 249, 0.1);
-            border: 1px solid rgba(232, 121, 249, 0.2);
-            border-radius: 8px;
-            padding: 4px 10px;
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-        .service-notes { font-size: 13px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
-
-        /* ===== PAGE HEADERS ===== */
-        .page-header { margin-bottom: 20px; }
-        .page-title { font-size: 24px; font-weight: 800; }
-        .page-subtitle { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
-
-        /* ===== DETAIL HEADER ===== */
-        .detail-header {
-            display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
-        }
-        .back-btn {
-            background: none; border: none; color: var(--accent); font-size: 24px; cursor: pointer; padding: 4px;
-        }
-
-        /* ===== TABS ===== */
-        .tabs { display: flex; gap: 4px; margin-bottom: 16px; background: var(--bg-secondary); border-radius: 12px; padding: 4px; }
-        .tab {
-            flex: 1; padding: 10px; text-align: center;
-            background: none; border: none; color: var(--text-muted);
-            font-size: 13px; font-weight: 600; cursor: pointer;
-            border-radius: 10px;
-            transition: all 0.2s;
-        }
-        .tab.active { background: var(--accent-gradient); color: white; }
-
-        /* ===== EMPTY STATE ===== */
-        .empty-state { text-align: center; padding: 40px 20px; }
-        .empty-icon { font-size: 48px; margin-bottom: 12px; }
-        .empty-text { font-size: 16px; color: var(--text-muted); }
-
-        /* ===== MODAL ===== */
-        .modal-overlay {
-            position: fixed; inset: 0; z-index: 200;
-            background: rgba(0,0,0,0.7);
-            display: none; align-items: flex-end; justify-content: center;
-        }
-        .modal-overlay.show { display: flex; }
-        .modal {
-            background: var(--bg-primary);
-            border-radius: 20px 20px 0 0;
-            width: 100%; max-width: 500px;
-            max-height: 90vh; overflow-y: auto;
-            padding: 24px 20px calc(20px + var(--safe-bottom));
-            animation: slideUpModal 0.3s ease-out;
-        }
-        @keyframes slideUpModal {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
-        }
-        .modal-header {
-            display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;
-        }
-        .modal-title { font-size: 20px; font-weight: 700; }
-        .modal-close {
-            background: none; border: none; color: var(--text-muted); font-size: 24px; cursor: pointer; padding: 4px;
-        }
-
-        /* ===== TOAST ===== */
-        .toast {
-            position: fixed; top: 80px; left: 16px; right: 16px; z-index: 300;
-            padding: 14px 18px;
-            border-radius: 12px;
-            font-size: 14px; font-weight: 600;
-            display: none; align-items: center; gap: 10px;
-            animation: fadeInDown 0.3s ease-out;
-        }
-        .toast.show { display: flex; }
-        .toast.success { background: var(--success); color: white; }
-        .toast.error { background: var(--danger); color: white; }
-        .toast.info { background: var(--accent-dark); color: white; }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* ===== CONFIRM DIALOG ===== */
-        .confirm-overlay {
-            position: fixed; inset: 0; z-index: 300;
-            background: rgba(0,0,0,0.7);
-            display: none; align-items: center; justify-content: center; padding: 20px;
-        }
-        .confirm-overlay.show { display: flex; }
-        .confirm-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 24px;
-            text-align: center;
-            max-width: 340px; width: 100%;
-        }
-        .confirm-icon { font-size: 40px; margin-bottom: 12px; }
-        .confirm-text { font-size: 16px; color: var(--text-secondary); margin-bottom: 20px; }
-        .confirm-actions { display: flex; gap: 12px; }
-        .confirm-actions .btn { flex: 1; }
-
-        /* ===== LOADING ===== */
-        .spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        .loading-overlay {
-            position: fixed; inset: 0; z-index: 250;
-            background: rgba(15, 15, 35, 0.8);
-            display: none; align-items: center; justify-content: center;
-        }
-        .loading-overlay.show { display: flex; }
-
-        /* ===== STATS ===== */
-        .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
-        .stat-card {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
-            padding: 14px; text-align: center;
-        }
-        .stat-value { font-size: 24px; font-weight: 800; color: var(--accent); }
-        .stat-label { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
-
-        /* ===== SECTION DIVIDER ===== */
-        .section-title { font-size: 16px; font-weight: 700; color: var(--text-secondary); margin: 20px 0 12px; display: flex; align-items: center; gap: 8px; }
-
-        /* ===== SCROLLBAR ===== */
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-
-        /* ===== BADGE ===== */
-        .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
-        .badge-success { background: rgba(16, 185, 129, 0.15); color: var(--success); }
-        .badge-warning { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
-        .badge-info { background: rgba(232, 121, 249, 0.15); color: var(--accent); }
-
-        /* ===== HOME SECTION ===== */
-        .welcome-card {
-            background: var(--accent-gradient);
-            border-radius: var(--radius);
-            padding: 24px;
-            margin-bottom: 20px;
-            position: relative; overflow: hidden;
-        }
-        .welcome-card::after {
-            content: '🌸'; position: absolute; right: -10px; bottom: -10px;
-            font-size: 80px; opacity: 0.15;
-        }
-        .welcome-title { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
-        .welcome-sub { font-size: 14px; opacity: 0.9; }
-
-        .quick-actions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
-        .quick-action {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-            padding: 16px; text-align: center; cursor: pointer;
-            transition: border-color 0.2s, transform 0.1s;
-        }
-        .quick-action:active { transform: scale(0.97); border-color: var(--accent); }
-        .quick-action-icon { font-size: 28px; margin-bottom: 8px; }
-        .quick-action-text { font-size: 13px; font-weight: 600; color: var(--text-secondary); }
-
-        /* ===== ANIMATIONS ===== */
-        .fade-in { animation: fadeIn 0.3s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* Hidden */
-        .hidden { display: none !important; }
+        *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+        :root{--bg-primary:#0F0F23;--bg-secondary:#1A1A3E;--bg-card:#1E1B4B;--bg-input:#2D2A5E;--accent:#E879F9;--accent-dark:#A855F7;--accent-gradient:linear-gradient(135deg,#E879F9 0%,#A855F7 100%);--text-primary:#FFF;--text-secondary:#D1D5DB;--text-muted:#9CA3AF;--border:rgba(232,121,249,0.2);--danger:#EF4444;--success:#10B981;--warning:#F59E0B;--radius:14px;--safe-bottom:env(safe-area-inset-bottom,0px)}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:var(--bg-primary);color:var(--text-primary);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+        .top-bar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(15,15,35,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+        .top-bar-title{font-size:18px;font-weight:700;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .top-bar-sub{font-size:11px;color:var(--text-muted);letter-spacing:1px}
+        .top-bar-right{display:flex;gap:12px;align-items:center}
+        .top-bar-btn{background:none;border:none;color:var(--text-secondary);font-size:22px;cursor:pointer;padding:4px}
+        .content{padding:70px 16px 90px;min-height:100vh}
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(15,15,35,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;justify-content:space-around;align-items:center;padding:8px 0 calc(8px + var(--safe-bottom))}
+        .nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:10px;padding:6px 12px;min-width:60px;transition:color 0.2s}
+        .nav-item.active{color:var(--accent)}
+        .nav-item .nav-icon{font-size:22px}
+        .card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px}
+        .search-container{position:relative;margin-bottom:16px}
+        .search-input{width:100%;padding:12px 16px 12px 42px;background:var(--bg-input);border:1px solid var(--border);border-radius:12px;color:var(--text-primary);font-size:15px;outline:none;transition:border-color 0.2s}
+        .search-input:focus{border-color:var(--accent)}
+        .search-input::placeholder{color:var(--text-muted)}
+        .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--text-muted)}
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;transition:transform 0.1s,opacity 0.2s}
+        .btn:active{transform:scale(0.97)}
+        .btn-primary{background:var(--accent-gradient);color:#fff}
+        .btn-secondary{background:var(--bg-input);color:var(--text-primary);border:1px solid var(--border)}
+        .btn-danger{background:var(--danger);color:#fff}
+        .btn-success{background:var(--success);color:#fff}
+        .btn-sm{padding:8px 16px;font-size:13px}
+        .btn-block{width:100%}
+        .btn:disabled{opacity:0.5;cursor:not-allowed}
+        .fab{position:fixed;bottom:calc(80px + var(--safe-bottom));right:20px;width:56px;height:56px;background:var(--accent-gradient);border:none;border-radius:50%;color:#fff;font-size:28px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(232,121,249,0.4);cursor:pointer;z-index:50;transition:transform 0.2s}
+        .fab:active{transform:scale(0.9)}
+        .client-card{display:flex;align-items:center;gap:12px;cursor:pointer;transition:background 0.2s}
+        .client-card:active{background:rgba(232,121,249,0.05)}
+        .client-avatar{width:48px;height:48px;background:var(--accent-gradient);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;flex-shrink:0}
+        .client-info{flex:1;min-width:0}
+        .client-name{font-size:16px;font-weight:600;color:var(--text-primary)}
+        .client-detail{font-size:13px;color:var(--text-muted);margin-top:2px}
+        .client-actions{display:flex;gap:8px;flex-shrink:0}
+        .client-action-btn{background:none;border:none;font-size:18px;cursor:pointer;padding:6px;color:var(--text-muted);transition:color 0.2s}
+        .form-group{margin-bottom:16px}
+        .form-label{display:block;font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:6px}
+        .form-input,.form-textarea,.form-select{width:100%;padding:12px 14px;background:var(--bg-input);border:1px solid var(--border);border-radius:10px;color:var(--text-primary);font-size:15px;outline:none;transition:border-color 0.2s}
+        .form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--accent)}
+        .form-input::placeholder,.form-textarea::placeholder{color:var(--text-muted)}
+        .form-textarea{min-height:80px;resize:vertical;font-family:inherit}
+        .form-select{appearance:none}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+        .service-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px}
+        .service-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+        .service-type{font-size:15px;font-weight:600;color:var(--accent)}
+        .service-date{font-size:12px;color:var(--text-muted)}
+        .service-price{font-size:16px;font-weight:700;color:var(--success)}
+        .service-detail-row{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
+        .service-tag{background:rgba(232,121,249,0.1);border:1px solid rgba(232,121,249,0.2);border-radius:8px;padding:4px 10px;font-size:12px;color:var(--text-secondary)}
+        .service-notes{font-size:13px;color:var(--text-muted);margin-top:8px;font-style:italic}
+        .page-header{margin-bottom:20px}
+        .page-title{font-size:24px;font-weight:800}
+        .page-subtitle{font-size:14px;color:var(--text-muted);margin-top:4px}
+        .detail-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+        .back-btn{background:none;border:none;color:var(--accent);font-size:24px;cursor:pointer;padding:4px}
+        .tabs{display:flex;gap:4px;margin-bottom:16px;background:var(--bg-secondary);border-radius:12px;padding:4px}
+        .tab{flex:1;padding:10px;text-align:center;background:none;border:none;color:var(--text-muted);font-size:13px;font-weight:600;cursor:pointer;border-radius:10px;transition:all 0.2s}
+        .tab.active{background:var(--accent-gradient);color:#fff}
+        .empty-state{text-align:center;padding:40px 20px}
+        .empty-icon{font-size:48px;margin-bottom:12px}
+        .empty-text{font-size:16px;color:var(--text-muted)}
+        .modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.7);display:none;align-items:flex-end;justify-content:center}
+        .modal-overlay.show{display:flex}
+        .modal{background:var(--bg-primary);border-radius:20px 20px 0 0;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;padding:24px 20px calc(20px + var(--safe-bottom));animation:slideUp 0.3s ease-out}
+        @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+        .modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+        .modal-title{font-size:20px;font-weight:700}
+        .modal-close{background:none;border:none;color:var(--text-muted);font-size:24px;cursor:pointer;padding:4px}
+        .toast{position:fixed;top:80px;left:16px;right:16px;z-index:300;padding:14px 18px;border-radius:12px;font-size:14px;font-weight:600;display:none;align-items:center;gap:10px;animation:fadeDown 0.3s ease-out}
+        .toast.show{display:flex}
+        .toast.success{background:var(--success);color:#fff}
+        .toast.error{background:var(--danger);color:#fff}
+        .toast.info{background:var(--accent-dark);color:#fff}
+        @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+        .confirm-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;padding:20px}
+        .confirm-overlay.show{display:flex}
+        .confirm-box{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;max-width:340px;width:100%}
+        .confirm-icon{font-size:40px;margin-bottom:12px}
+        .confirm-text{font-size:16px;color:var(--text-secondary);margin-bottom:20px}
+        .confirm-actions{display:flex;gap:12px}
+        .confirm-actions .btn{flex:1}
+        .spinner{display:inline-block;width:20px;height:20px;border:3px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .loading-overlay{position:fixed;inset:0;z-index:250;background:rgba(15,15,35,0.8);display:none;align-items:center;justify-content:center}
+        .loading-overlay.show{display:flex}
+        .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+        .stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
+        .stat-value{font-size:24px;font-weight:800;color:var(--accent)}
+        .stat-label{font-size:11px;color:var(--text-muted);margin-top:2px}
+        .section-title{font-size:16px;font-weight:700;color:var(--text-secondary);margin:20px 0 12px;display:flex;align-items:center;gap:8px}
+        ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+        .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+        .badge-success{background:rgba(16,185,129,0.15);color:var(--success)}
+        .badge-warning{background:rgba(245,158,11,0.15);color:var(--warning)}
+        .badge-info{background:rgba(232,121,249,0.15);color:var(--accent)}
+        .badge-danger{background:rgba(239,68,68,0.15);color:var(--danger)}
+        .welcome-card{background:var(--accent-gradient);border-radius:var(--radius);padding:24px;margin-bottom:20px;position:relative;overflow:hidden}
+        .welcome-card::after{content:'🌸';position:absolute;right:-10px;bottom:-10px;font-size:80px;opacity:0.15}
+        .welcome-title{font-size:22px;font-weight:800;margin-bottom:4px}
+        .welcome-sub{font-size:14px;opacity:0.9}
+        .quick-actions{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
+        .quick-action{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;cursor:pointer;transition:border-color 0.2s,transform 0.1s}
+        .quick-action:active{transform:scale(0.97);border-color:var(--accent)}
+        .quick-action-icon{font-size:28px;margin-bottom:8px}
+        .quick-action-text{font-size:13px;font-weight:600;color:var(--text-secondary)}
+        .fade-in{animation:fadeIn 0.3s ease-out}
+        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+        .hidden{display:none !important}
+        .appt-card{border-left:3px solid var(--accent)}
+        .appt-card.status-programada,.appt-card.status-confirmada{border-left-color:var(--accent)}
+        .appt-card.status-pendiente{border-left-color:var(--warning)}
+        .appt-card.status-completada{border-left-color:var(--success)}
+        .appt-card.status-cancelada{border-left-color:var(--danger)}
+        .tx-card{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)}
+        .tx-card:last-child{border-bottom:none}
     </style>
 </head>
 <body>
-
-<!-- ===== TOP BAR ===== -->
 <div class="top-bar">
-    <div>
-        <div class="top-bar-title">🌸 CHIC HARMONY</div>
-        <div class="top-bar-sub">PMU STUDIO PRO</div>
-    </div>
-    <div class="top-bar-right">
-        <button class="top-bar-btn" onclick="showToast('info','Notificaciones próximamente')">🔔</button>
-    </div>
+    <div><div class="top-bar-title">🌸 CHIC HARMONY</div><div class="top-bar-sub">PMU STUDIO PRO</div></div>
+    <div class="top-bar-right"><button class="top-bar-btn" onclick="showToast('info','Notificaciones próximamente')">🔔</button></div>
 </div>
-
-<!-- ===== TOAST ===== -->
 <div id="toast" class="toast"></div>
-
-<!-- ===== LOADING ===== -->
-<div id="loadingOverlay" class="loading-overlay">
-    <div class="spinner" style="width:40px;height:40px;border-width:4px;"></div>
-</div>
-
-<!-- ===== CONFIRM DIALOG ===== -->
+<div id="loadingOverlay" class="loading-overlay"><div class="spinner" style="width:40px;height:40px;border-width:4px;"></div></div>
 <div id="confirmOverlay" class="confirm-overlay">
     <div class="confirm-box">
         <div class="confirm-icon" id="confirmIcon">⚠️</div>
@@ -405,909 +147,393 @@
     </div>
 </div>
 
-<!-- ===== MAIN CONTENT ===== -->
 <div class="content" id="mainContent">
-
-    <!-- PAGE: HOME -->
+    <!-- HOME -->
     <div id="page-home" class="page fade-in">
-        <div class="welcome-card">
-            <div class="welcome-title">¡Bienvenida! 👋</div>
-            <div class="welcome-sub">Tu estudio de micropigmentación profesional</div>
-        </div>
-
+        <div class="welcome-card"><div class="welcome-title">¡Bienvenida! 👋</div><div class="welcome-sub">Tu estudio de micropigmentación profesional</div></div>
         <div id="homeStats" class="stats-row">
             <div class="stat-card"><div class="stat-value" id="statClients">-</div><div class="stat-label">Clientes</div></div>
             <div class="stat-card"><div class="stat-value" id="statServices">-</div><div class="stat-label">Servicios</div></div>
             <div class="stat-card"><div class="stat-value" id="statMonth">-</div><div class="stat-label">Este Mes</div></div>
         </div>
-
         <div class="section-title">⚡ Acciones Rápidas</div>
         <div class="quick-actions">
-            <div class="quick-action" onclick="navigateTo('clients'); setTimeout(()=>openAddClientModal(),300)">
-                <div class="quick-action-icon">➕</div>
-                <div class="quick-action-text">Nuevo Cliente</div>
-            </div>
-            <div class="quick-action" onclick="navigateTo('clients')">
-                <div class="quick-action-icon">👥</div>
-                <div class="quick-action-text">Ver Clientes</div>
-            </div>
-            <div class="quick-action" onclick="navigateTo('appointments')">
-                <div class="quick-action-icon">📅</div>
-                <div class="quick-action-text">Citas</div>
-            </div>
-            <div class="quick-action" onclick="navigateTo('finance')">
-                <div class="quick-action-icon">💰</div>
-                <div class="quick-action-text">Finanzas</div>
-            </div>
+            <div class="quick-action" onclick="navigateTo('clients');setTimeout(()=>openAddClientModal(),300)"><div class="quick-action-icon">➕</div><div class="quick-action-text">Nuevo Cliente</div></div>
+            <div class="quick-action" onclick="navigateTo('clients')"><div class="quick-action-icon">👥</div><div class="quick-action-text">Ver Clientes</div></div>
+            <div class="quick-action" onclick="navigateTo('appointments')"><div class="quick-action-icon">📅</div><div class="quick-action-text">Citas</div></div>
+            <div class="quick-action" onclick="navigateTo('finance')"><div class="quick-action-icon">💰</div><div class="quick-action-text">Finanzas</div></div>
         </div>
-
         <div class="section-title">📋 Últimos Clientes</div>
         <div id="recentClients"></div>
     </div>
 
-    <!-- PAGE: CLIENTS LIST -->
+    <!-- CLIENTS LIST -->
     <div id="page-clients" class="page hidden fade-in">
-        <div class="page-header">
-            <div class="page-title">👥 Clientes</div>
-            <div class="page-subtitle">Gestiona tu cartera de clientes</div>
-        </div>
-
-        <div class="search-container">
-            <span class="search-icon">🔍</span>
-            <input type="text" class="search-input" id="clientSearch" placeholder="Buscar por nombre, email, teléfono..." oninput="debounceSearch()">
-        </div>
-
+        <div class="page-header"><div class="page-title">👥 Clientes</div><div class="page-subtitle">Gestiona tu cartera de clientes</div></div>
+        <div class="search-container"><span class="search-icon">🔍</span><input type="text" class="search-input" id="clientSearch" placeholder="Buscar por nombre, email, teléfono..." oninput="debounceSearch()"></div>
         <div id="clientsList"></div>
     </div>
 
-    <!-- PAGE: CLIENT DETAIL -->
+    <!-- CLIENT DETAIL -->
     <div id="page-client-detail" class="page hidden fade-in">
-        <div class="detail-header">
-            <button class="back-btn" onclick="navigateTo('clients')">←</button>
-            <div>
-                <div class="page-title" id="detailClientName"></div>
-                <div class="page-subtitle" id="detailClientSince"></div>
-            </div>
-        </div>
-
+        <div class="detail-header"><button class="back-btn" onclick="navigateTo('clients')">←</button><div><div class="page-title" id="detailClientName"></div><div class="page-subtitle" id="detailClientSince"></div></div></div>
         <div class="tabs">
-            <button class="tab active" onclick="switchDetailTab('info', this)">Info</button>
-            <button class="tab" onclick="switchDetailTab('services', this)">Servicios</button>
+            <button class="tab active" onclick="switchDetailTab('info',this)">Info</button>
+            <button class="tab" onclick="switchDetailTab('services',this)">Servicios</button>
         </div>
-
-        <!-- Client Info Tab -->
-        <div id="tab-info">
-            <div class="card" id="detailClientInfo"></div>
-            <div style="display:flex;gap:10px;margin-top:16px;">
-                <button class="btn btn-secondary btn-block" onclick="openEditClientModal()">✏️ Editar</button>
-                <button class="btn btn-danger btn-block" onclick="confirmDeleteClient()">🗑️ Eliminar</button>
-            </div>
-        </div>
-
-        <!-- Services Tab -->
+        <div id="tab-info"><div class="card" id="detailClientInfo"></div><div style="display:flex;gap:10px;margin-top:16px;"><button class="btn btn-secondary btn-block" onclick="openEditClientModal()">✏️ Editar</button><button class="btn btn-danger btn-block" onclick="confirmDeleteClient()">🗑️ Eliminar</button></div></div>
         <div id="tab-services" class="hidden">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-                <div class="section-title" style="margin:0;">Historial de Servicios</div>
-                <button class="btn btn-primary btn-sm" onclick="openAddServiceModal()">+ Servicio</button>
-            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><div class="section-title" style="margin:0;">Historial de Servicios</div><button class="btn btn-primary btn-sm" onclick="openAddServiceModal()">+ Servicio</button></div>
             <div id="servicesList"></div>
         </div>
     </div>
 
-    <!-- PAGE: APPOINTMENTS -->
+    <!-- APPOINTMENTS -->
     <div id="page-appointments" class="page hidden fade-in">
-        <div class="page-header">
-            <div class="page-title">📅 Citas</div>
-            <div class="page-subtitle">Gestión de agenda y programación</div>
-        </div>
-
-        <div class="stats-row" style="grid-template-columns: repeat(2,1fr);">
-            <div class="stat-card"><div class="stat-value" style="color:var(--success);">0</div><div class="stat-label">Hoy</div></div>
-            <div class="stat-card"><div class="stat-value">0</div><div class="stat-label">Esta Semana</div></div>
-        </div>
-
-        <div class="tabs" style="margin-bottom:16px;">
+        <div class="page-header"><div class="page-title">📅 Citas</div><div class="page-subtitle">Gestión de agenda y programación</div></div>
+        <div id="apptStats" class="stats-row" style="grid-template-columns:repeat(2,1fr);"></div>
+        <div class="tabs" id="apptTabs">
             <button class="tab active" onclick="switchApptTab('upcoming',this)">Próximas</button>
             <button class="tab" onclick="switchApptTab('past',this)">Pasadas</button>
-            <button class="tab" onclick="switchApptTab('calendar',this)">Calendario</button>
         </div>
-
-        <div id="appt-tab-upcoming">
-            <div class="card" style="border-left:3px solid var(--accent);margin-bottom:10px;">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:15px;font-weight:600;">María García López</div>
-                        <div style="font-size:13px;color:var(--accent);margin-top:2px;">Retoque de Cejas</div>
-                        <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">📅 Próxima semana · ⏱️ 90 min</div>
-                    </div>
-                    <span class="badge badge-info">Programada</span>
-                </div>
-            </div>
-            <div class="card" style="border-left:3px solid var(--warning);margin-bottom:10px;">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:15px;font-weight:600;">Ana Martínez Ruiz</div>
-                        <div style="font-size:13px;color:var(--accent);margin-top:2px;">Retoque Lip Blush</div>
-                        <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">📅 En 2 semanas · ⏱️ 120 min</div>
-                    </div>
-                    <span class="badge badge-warning">Pendiente</span>
-                </div>
-            </div>
-            <div style="text-align:center;padding:20px 0;">
-                <div style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">Módulo de citas completo en desarrollo</div>
-                <button class="btn btn-primary btn-sm" onclick="showToast('info','Programación completa próximamente')">+ Nueva Cita</button>
-            </div>
-        </div>
-        <div id="appt-tab-past" class="hidden">
-            <div class="card" style="border-left:3px solid var(--success);margin-bottom:10px;">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:15px;font-weight:600;">Carmen Rodríguez Peña</div>
-                        <div style="font-size:13px;color:var(--accent);margin-top:2px;">Retoque de Cejas</div>
-                        <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">📅 Hace 2 días · ⏱️ 75 min · $150</div>
-                    </div>
-                    <span class="badge badge-success">Completada</span>
-                </div>
-            </div>
-            <div class="card" style="border-left:3px solid var(--success);margin-bottom:10px;">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:15px;font-weight:600;">Ana Martínez Ruiz</div>
-                        <div style="font-size:13px;color:var(--accent);margin-top:2px;">Lip Blush</div>
-                        <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">📅 Hace 10 días · ⏱️ 120 min · $400</div>
-                    </div>
-                    <span class="badge badge-success">Completada</span>
-                </div>
-            </div>
-            <div class="card" style="border-left:3px solid var(--success);margin-bottom:10px;">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:15px;font-weight:600;">María García López</div>
-                        <div style="font-size:13px;color:var(--accent);margin-top:2px;">Micropigmentación Cejas - Híbrida</div>
-                        <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">📅 Hace 45 días · ⏱️ 150 min · $350</div>
-                    </div>
-                    <span class="badge badge-success">Completada</span>
-                </div>
-            </div>
-        </div>
-        <div id="appt-tab-calendar" class="hidden">
-            <div class="card" style="text-align:center;padding:30px;">
-                <div style="font-size:48px;margin-bottom:12px;">📅</div>
-                <div style="font-size:16px;font-weight:600;margin-bottom:8px;">Vista de Calendario</div>
-                <div style="font-size:13px;color:var(--text-muted);">Calendario interactivo completo próximamente</div>
-            </div>
-        </div>
+        <div id="appt-tab-upcoming"></div>
+        <div id="appt-tab-past" class="hidden"></div>
     </div>
 
-    <!-- PAGE: FINANCE -->
+    <!-- FINANCE -->
     <div id="page-finance" class="page hidden fade-in">
-        <div class="page-header">
-            <div class="page-title">💰 Finanzas</div>
-            <div class="page-subtitle">Control de ingresos y gastos</div>
+        <div class="page-header"><div class="page-title">💰 Finanzas</div><div class="page-subtitle">Control de ingresos y gastos</div></div>
+        <div id="finStats" class="stats-row"></div>
+        <div class="tabs" id="finTabs">
+            <button class="tab active" onclick="switchFinTab('all',this)">Todo</button>
+            <button class="tab" onclick="switchFinTab('income',this)">Ingresos</button>
+            <button class="tab" onclick="switchFinTab('expense',this)">Gastos</button>
         </div>
-
-        <div class="stats-row">
-            <div class="stat-card"><div class="stat-value" style="color:var(--success);">$1,580</div><div class="stat-label">Ingresos</div></div>
-            <div class="stat-card"><div class="stat-value" style="color:var(--danger);">$320</div><div class="stat-label">Gastos</div></div>
-            <div class="stat-card"><div class="stat-value">$1,260</div><div class="stat-label">Balance</div></div>
-        </div>
-
-        <div class="tabs" style="margin-bottom:16px;">
-            <button class="tab active" onclick="switchFinanceTab('overview',this)">Resumen</button>
-            <button class="tab" onclick="switchFinanceTab('income',this)">Ingresos</button>
-            <button class="tab" onclick="switchFinanceTab('expenses',this)">Gastos</button>
-        </div>
-
-        <div id="fin-tab-overview">
-            <div class="section-title">📊 Últimas Transacciones</div>
-            <div class="card" style="margin-bottom:8px;">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:14px;font-weight:600;">Retoque de Cejas - Carmen R.</div>
-                        <div style="font-size:12px;color:var(--text-muted);">Hace 2 días</div>
-                    </div>
-                    <div style="font-size:15px;font-weight:700;color:var(--success);">+$150</div>
-                </div>
-            </div>
-            <div class="card" style="margin-bottom:8px;">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:14px;font-weight:600;">Pigmentos PhiBrows</div>
-                        <div style="font-size:12px;color:var(--text-muted);">Hace 3 días · Insumos</div>
-                    </div>
-                    <div style="font-size:15px;font-weight:700;color:var(--danger);">-$85</div>
-                </div>
-            </div>
-            <div class="card" style="margin-bottom:8px;">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:14px;font-weight:600;">Lip Blush - Ana M.</div>
-                        <div style="font-size:12px;color:var(--text-muted);">Hace 10 días</div>
-                    </div>
-                    <div style="font-size:15px;font-weight:700;color:var(--success);">+$400</div>
-                </div>
-            </div>
-            <div class="card" style="margin-bottom:8px;">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:14px;font-weight:600;">Agujas descartables</div>
-                        <div style="font-size:12px;color:var(--text-muted);">Hace 12 días · Insumos</div>
-                    </div>
-                    <div style="font-size:15px;font-weight:700;color:var(--danger);">-$45</div>
-                </div>
-            </div>
-            <div class="card" style="margin-bottom:8px;">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:14px;font-weight:600;">Cejas Híbrida - María G.</div>
-                        <div style="font-size:12px;color:var(--text-muted);">Hace 45 días</div>
-                    </div>
-                    <div style="font-size:15px;font-weight:700;color:var(--success);">+$350</div>
-                </div>
-            </div>
-            <div style="text-align:center;padding:16px 0;">
-                <div style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">Registro completo de transacciones en desarrollo</div>
-                <button class="btn btn-primary btn-sm" onclick="showToast('info','Registro de transacciones próximamente')">+ Transacción</button>
-            </div>
-        </div>
-        <div id="fin-tab-income" class="hidden">
-            <div class="card" style="margin-bottom:8px;border-left:3px solid var(--success);">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:14px;font-weight:600;">Retoque de Cejas - Carmen R.</div>
-                        <div style="font-size:12px;color:var(--text-muted);">Hace 2 días</div>
-                    </div>
-                    <div style="font-size:15px;font-weight:700;color:var(--success);">+$150</div>
-                </div>
-            </div>
-            <div class="card" style="margin-bottom:8px;border-left:3px solid var(--success);">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:14px;font-weight:600;">Lip Blush - Ana M.</div>
-                        <div style="font-size:12px;color:var(--text-muted);">Hace 10 días</div>
-                    </div>
-                    <div style="font-size:15px;font-weight:700;color:var(--success);">+$400</div>
-                </div>
-            </div>
-            <div class="card" style="margin-bottom:8px;border-left:3px solid var(--success);">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:14px;font-weight:600;">Cejas Híbrida - María G.</div>
-                        <div style="font-size:12px;color:var(--text-muted);">Hace 45 días</div>
-                    </div>
-                    <div style="font-size:15px;font-weight:700;color:var(--success);">+$350</div>
-                </div>
-            </div>
-            <div class="card" style="margin-bottom:8px;border-left:3px solid var(--success);">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:14px;font-weight:600;">Powder Brows - Carmen R.</div>
-                        <div style="font-size:12px;color:var(--text-muted);">Hace 100 días</div>
-                    </div>
-                    <div style="font-size:15px;font-weight:700;color:var(--success);">+$380</div>
-                </div>
-            </div>
-            <div class="card" style="margin-bottom:8px;border-left:3px solid var(--success);">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:14px;font-weight:600;">Retoque - Carmen R.</div>
-                        <div style="font-size:12px;color:var(--text-muted);">Hace 60 días</div>
-                    </div>
-                    <div style="font-size:15px;font-weight:700;color:var(--success);">+$150</div>
-                </div>
-            </div>
-        </div>
-        <div id="fin-tab-expenses" class="hidden">
-            <div class="card" style="margin-bottom:8px;border-left:3px solid var(--danger);">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:14px;font-weight:600;">Pigmentos PhiBrows</div>
-                        <div style="font-size:12px;color:var(--text-muted);">Hace 3 días · Insumos</div>
-                    </div>
-                    <div style="font-size:15px;font-weight:700;color:var(--danger);">-$85</div>
-                </div>
-            </div>
-            <div class="card" style="margin-bottom:8px;border-left:3px solid var(--danger);">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:14px;font-weight:600;">Agujas descartables</div>
-                        <div style="font-size:12px;color:var(--text-muted);">Hace 12 días · Insumos</div>
-                    </div>
-                    <div style="font-size:15px;font-weight:700;color:var(--danger);">-$45</div>
-                </div>
-            </div>
-            <div class="card" style="margin-bottom:8px;border-left:3px solid var(--danger);">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:14px;font-weight:600;">Anestésico tópico</div>
-                        <div style="font-size:12px;color:var(--text-muted);">Hace 15 días · Insumos</div>
-                    </div>
-                    <div style="font-size:15px;font-weight:700;color:var(--danger);">-$35</div>
-                </div>
-            </div>
-            <div class="card" style="margin-bottom:8px;border-left:3px solid var(--danger);">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div>
-                        <div style="font-size:14px;font-weight:600;">Renta del studio</div>
-                        <div style="font-size:12px;color:var(--text-muted);">Hace 20 días · Renta</div>
-                    </div>
-                    <div style="font-size:15px;font-weight:700;color:var(--danger);">-$155</div>
-                </div>
-            </div>
-        </div>
+        <div id="finTransactions"></div>
+        <div style="text-align:center;padding:16px 0;"><button class="btn btn-primary btn-sm" onclick="openExpenseModal()">+ Registrar Gasto</button></div>
     </div>
 
-    <!-- PAGE: AI DESIGN -->
+    <!-- AI DESIGN -->
     <div id="page-ai-design" class="page hidden fade-in">
-        <div class="page-header">
-            <div class="page-title">🤖 Análisis con IA</div>
-            <div class="page-subtitle">Herramientas inteligentes de diseño PMU</div>
-        </div>
-
-        <div class="card" style="border-left:3px solid var(--accent);margin-bottom:12px;">
-            <div style="display:flex;gap:14px;align-items:center;">
-                <div style="font-size:36px;">📸</div>
-                <div>
-                    <div style="font-size:16px;font-weight:700;">Análisis Facial Completo</div>
-                    <div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Simetría facial, puntos de referencia y recomendaciones para micropigmentación de cejas</div>
-                </div>
-            </div>
-            <button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="showToast('info','Sube una foto para analizar - Funcionalidad completa próximamente')">Iniciar Análisis</button>
-        </div>
-
-        <div class="card" style="border-left:3px solid var(--warning);margin-bottom:12px;">
-            <div style="display:flex;gap:14px;align-items:center;">
-                <div style="font-size:36px;">🎨</div>
-                <div>
-                    <div style="font-size:16px;font-weight:700;">Análisis de Color</div>
-                    <div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Tono de piel, subtonos y recomendaciones de pigmentos personalizadas</div>
-                </div>
-            </div>
-            <button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="showToast('info','Análisis de color próximamente')">Analizar Color</button>
-        </div>
-
-        <div class="card" style="border-left:3px solid var(--success);margin-bottom:12px;">
-            <div style="display:flex;gap:14px;align-items:center;">
-                <div style="font-size:36px;">✨</div>
-                <div>
-                    <div style="font-size:16px;font-weight:700;">Simulación de Diseño</div>
-                    <div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Vista previa del resultado final sobre la foto del cliente</div>
-                </div>
-            </div>
-            <button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="showToast('info','Simulación de diseño próximamente')">Simular Diseño</button>
-        </div>
-
-        <div class="section-title">🔬 Herramientas Adicionales</div>
-        <div class="quick-actions">
-            <div class="quick-action" onclick="showToast('info','Guía de medidas próximamente')">
-                <div class="quick-action-icon">📐</div>
-                <div class="quick-action-text">Guía de Medidas</div>
-            </div>
-            <div class="quick-action" onclick="showToast('info','Paleta de pigmentos próximamente')">
-                <div class="quick-action-icon">🎨</div>
-                <div class="quick-action-text">Paleta Pigmentos</div>
-            </div>
-        </div>
+        <div class="page-header"><div class="page-title">🤖 Análisis con IA</div><div class="page-subtitle">Herramientas inteligentes de diseño PMU</div></div>
+        <div class="card" style="border-left:3px solid var(--accent);margin-bottom:12px;"><div style="display:flex;gap:14px;align-items:center;"><div style="font-size:36px;">📸</div><div><div style="font-size:16px;font-weight:700;">Análisis Facial Completo</div><div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Simetría facial, puntos de referencia y recomendaciones</div></div></div><button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="showToast('info','Funcionalidad completa próximamente')">Iniciar Análisis</button></div>
+        <div class="card" style="border-left:3px solid var(--warning);margin-bottom:12px;"><div style="display:flex;gap:14px;align-items:center;"><div style="font-size:36px;">🎨</div><div><div style="font-size:16px;font-weight:700;">Análisis de Color</div><div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Tono de piel, subtonos y recomendaciones de pigmentos</div></div></div><button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="showToast('info','Análisis de color próximamente')">Analizar Color</button></div>
+        <div class="card" style="border-left:3px solid var(--success);margin-bottom:12px;"><div style="display:flex;gap:14px;align-items:center;"><div style="font-size:36px;">✨</div><div><div style="font-size:16px;font-weight:700;">Simulación de Diseño</div><div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Vista previa del resultado final</div></div></div><button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="showToast('info','Simulación próximamente')">Simular Diseño</button></div>
     </div>
 
-    <!-- PAGE: MORE -->
+    <!-- MORE -->
     <div id="page-more" class="page hidden fade-in">
-        <div class="page-header">
-            <div class="page-title">⚙️ Más</div>
-            <div class="page-subtitle">Herramientas y configuración</div>
-        </div>
+        <div class="page-header"><div class="page-title">⚙️ Más</div><div class="page-subtitle">Herramientas y configuración</div></div>
         <div class="quick-actions" style="grid-template-columns:1fr;">
-            <div class="quick-action" onclick="navigateTo('ai-design')">
-                <div style="display:flex;align-items:center;gap:14px;">
-                    <div class="quick-action-icon" style="margin:0;">🤖</div>
-                    <div style="text-align:left;">
-                        <div class="quick-action-text">Análisis con IA</div>
-                        <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Simetría facial, color, diseño</div>
-                    </div>
-                </div>
-            </div>
-            <div class="quick-action" onclick="navigateTo('finance')">
-                <div style="display:flex;align-items:center;gap:14px;">
-                    <div class="quick-action-icon" style="margin:0;">📊</div>
-                    <div style="text-align:left;">
-                        <div class="quick-action-text">Reportes y Finanzas</div>
-                        <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Ingresos, gastos, balance</div>
-                    </div>
-                </div>
-            </div>
-            <div class="quick-action" onclick="showToast('info','Inventario próximamente')">
-                <div style="display:flex;align-items:center;gap:14px;">
-                    <div class="quick-action-icon" style="margin:0;">📦</div>
-                    <div style="text-align:left;">
-                        <div class="quick-action-text">Inventario</div>
-                        <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Control de insumos y productos</div>
-                    </div>
-                </div>
-            </div>
-            <div class="quick-action" onclick="showToast('info','Formularios próximamente')">
-                <div style="display:flex;align-items:center;gap:14px;">
-                    <div class="quick-action-icon" style="margin:0;">📋</div>
-                    <div style="text-align:left;">
-                        <div class="quick-action-text">Formularios Digitales</div>
-                        <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Consentimiento, historial médico</div>
-                    </div>
-                </div>
-            </div>
-            <div class="quick-action" onclick="showToast('info','Configuración próximamente')">
-                <div style="display:flex;align-items:center;gap:14px;">
-                    <div class="quick-action-icon" style="margin:0;">⚙️</div>
-                    <div style="text-align:left;">
-                        <div class="quick-action-text">Configuración</div>
-                        <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Perfil, notificaciones, preferencias</div>
-                    </div>
-                </div>
-            </div>
+            <div class="quick-action" onclick="navigateTo('ai-design')"><div style="display:flex;align-items:center;gap:14px;"><div class="quick-action-icon" style="margin:0;">🤖</div><div style="text-align:left;"><div class="quick-action-text">Análisis con IA</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Simetría facial, color, diseño</div></div></div></div>
+            <div class="quick-action" onclick="navigateTo('finance')"><div style="display:flex;align-items:center;gap:14px;"><div class="quick-action-icon" style="margin:0;">📊</div><div style="text-align:left;"><div class="quick-action-text">Reportes y Finanzas</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Ingresos, gastos, balance</div></div></div></div>
+            <div class="quick-action" onclick="showToast('info','Inventario próximamente')"><div style="display:flex;align-items:center;gap:14px;"><div class="quick-action-icon" style="margin:0;">📦</div><div style="text-align:left;"><div class="quick-action-text">Inventario</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Control de insumos y productos</div></div></div></div>
+            <div class="quick-action" onclick="showToast('info','Formularios próximamente')"><div style="display:flex;align-items:center;gap:14px;"><div class="quick-action-icon" style="margin:0;">📋</div><div style="text-align:left;"><div class="quick-action-text">Formularios Digitales</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Consentimiento, historial médico</div></div></div></div>
+            <div class="quick-action" onclick="showToast('info','Configuración próximamente')"><div style="display:flex;align-items:center;gap:14px;"><div class="quick-action-icon" style="margin:0;">⚙️</div><div style="text-align:left;"><div class="quick-action-text">Configuración</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Perfil, notificaciones, preferencias</div></div></div></div>
         </div>
     </div>
 </div>
 
-<!-- ===== FAB (only on clients page) ===== -->
-<button class="fab hidden" id="fabAddClient" onclick="openAddClientModal()">+</button>
+<button class="fab hidden" id="fabBtn" onclick="handleFab()">+</button>
 
-<!-- ===== BOTTOM NAV ===== -->
 <div class="bottom-nav">
-    <button class="nav-item active" data-page="home" onclick="navigateTo('home')">
-        <span class="nav-icon">🏠</span>Inicio
-    </button>
-    <button class="nav-item" data-page="clients" onclick="navigateTo('clients')">
-        <span class="nav-icon">👥</span>Clientes
-    </button>
-    <button class="nav-item" data-page="appointments" onclick="navigateTo('appointments')">
-        <span class="nav-icon">📅</span>Citas
-    </button>
-    <button class="nav-item" data-page="more" onclick="navigateTo('more')">
-        <span class="nav-icon">⚙️</span>Más
-    </button>
+    <button class="nav-item active" data-page="home" onclick="navigateTo('home')"><span class="nav-icon">🏠</span>Inicio</button>
+    <button class="nav-item" data-page="clients" onclick="navigateTo('clients')"><span class="nav-icon">👥</span>Clientes</button>
+    <button class="nav-item" data-page="appointments" onclick="navigateTo('appointments')"><span class="nav-icon">📅</span>Citas</button>
+    <button class="nav-item" data-page="more" onclick="navigateTo('more')"><span class="nav-icon">⚙️</span>Más</button>
 </div>
 
-<!-- ===== MODAL: ADD/EDIT CLIENT ===== -->
+<!-- MODAL: CLIENT -->
 <div id="clientModal" class="modal-overlay">
     <div class="modal">
-        <div class="modal-header">
-            <div class="modal-title" id="clientModalTitle">Nuevo Cliente</div>
-            <button class="modal-close" onclick="closeClientModal()">✕</button>
-        </div>
+        <div class="modal-header"><div class="modal-title" id="clientModalTitle">Nuevo Cliente</div><button class="modal-close" onclick="closeClientModal()">✕</button></div>
         <form id="clientForm" onsubmit="submitClientForm(event)">
             <input type="hidden" id="editClientId">
-            <div class="form-row">
-                <div class="form-group">
-                    <label class="form-label">Nombre *</label>
-                    <input type="text" class="form-input" id="cfFirstName" placeholder="Nombre" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Apellido</label>
-                    <input type="text" class="form-input" id="cfLastName" placeholder="Apellido">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-input" id="cfEmail" placeholder="email@ejemplo.com">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Teléfono</label>
-                <input type="tel" class="form-input" id="cfPhone" placeholder="+1 (555) 123-4567">
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label class="form-label">Fecha de Nacimiento</label>
-                    <input type="date" class="form-input" id="cfDOB">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Tono de Piel</label>
-                    <input type="text" class="form-input" id="cfSkinTone" placeholder="Ej: Medio cálido">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label class="form-label">Color de Cabello</label>
-                    <input type="text" class="form-input" id="cfHairColor" placeholder="Ej: Castaño">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Color de Ojos</label>
-                    <input type="text" class="form-input" id="cfEyeColor" placeholder="Ej: Marrón">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Alergias</label>
-                <input type="text" class="form-input" id="cfAllergies" placeholder="Ej: Sensibilidad a lidocaína">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Condiciones Médicas</label>
-                <input type="text" class="form-input" id="cfMedical" placeholder="Ej: Diabetes, Embarazo...">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Notas</label>
-                <textarea class="form-textarea" id="cfNotes" placeholder="Notas adicionales sobre el cliente..."></textarea>
-            </div>
+            <div class="form-row"><div class="form-group"><label class="form-label">Nombre *</label><input type="text" class="form-input" id="cfFirstName" placeholder="Nombre" required></div><div class="form-group"><label class="form-label">Apellido</label><input type="text" class="form-input" id="cfLastName" placeholder="Apellido"></div></div>
+            <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="cfEmail" placeholder="email@ejemplo.com"></div>
+            <div class="form-group"><label class="form-label">Teléfono</label><input type="tel" class="form-input" id="cfPhone" placeholder="+1 (555) 123-4567"></div>
+            <div class="form-row"><div class="form-group"><label class="form-label">Fecha de Nacimiento</label><input type="date" class="form-input" id="cfDOB"></div><div class="form-group"><label class="form-label">Tono de Piel</label><input type="text" class="form-input" id="cfSkinTone" placeholder="Ej: Medio cálido"></div></div>
+            <div class="form-row"><div class="form-group"><label class="form-label">Color de Cabello</label><input type="text" class="form-input" id="cfHairColor" placeholder="Ej: Castaño"></div><div class="form-group"><label class="form-label">Color de Ojos</label><input type="text" class="form-input" id="cfEyeColor" placeholder="Ej: Marrón"></div></div>
+            <div class="form-group"><label class="form-label">Alergias</label><input type="text" class="form-input" id="cfAllergies" placeholder="Ej: Sensibilidad a lidocaína"></div>
+            <div class="form-group"><label class="form-label">Condiciones Médicas</label><input type="text" class="form-input" id="cfMedical" placeholder="Ej: Diabetes, Embarazo..."></div>
+            <div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="cfNotes" placeholder="Notas adicionales..."></textarea></div>
             <button type="submit" class="btn btn-primary btn-block" id="clientSubmitBtn">Guardar</button>
         </form>
     </div>
 </div>
 
-<!-- ===== MODAL: ADD SERVICE ===== -->
+<!-- MODAL: SERVICE -->
 <div id="serviceModal" class="modal-overlay">
     <div class="modal">
-        <div class="modal-header">
-            <div class="modal-title">Registrar Servicio</div>
-            <button class="modal-close" onclick="closeServiceModal()">✕</button>
-        </div>
+        <div class="modal-header"><div class="modal-title">Registrar Servicio</div><button class="modal-close" onclick="closeServiceModal()">✕</button></div>
         <form id="serviceForm" onsubmit="submitServiceForm(event)">
-            <div class="form-group">
-                <label class="form-label">Tipo de Servicio *</label>
-                <select class="form-select form-input" id="sfType" required>
-                    <option value="">Seleccionar servicio...</option>
-                    <option value="Micropigmentación de Cejas - Microblading">Micropigmentación de Cejas - Microblading</option>
-                    <option value="Micropigmentación de Cejas - Powder Brows">Micropigmentación de Cejas - Powder Brows</option>
-                    <option value="Micropigmentación de Cejas - Técnica Híbrida">Micropigmentación de Cejas - Técnica Híbrida</option>
-                    <option value="Retoque de Cejas">Retoque de Cejas</option>
-                    <option value="Lip Blush">Lip Blush</option>
-                    <option value="Neutralización de Labios">Neutralización de Labios</option>
-                    <option value="Delineado de Ojos">Delineado de Ojos</option>
-                    <option value="Consulta">Consulta</option>
-                    <option value="Remoción">Remoción</option>
-                    <option value="Otro">Otro</option>
-                </select>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label class="form-label">Fecha *</label>
-                    <input type="date" class="form-input" id="sfDate" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Precio ($)</label>
-                    <input type="number" class="form-input" id="sfPrice" placeholder="0.00" step="0.01" min="0">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label class="form-label">Duración (min)</label>
-                    <input type="number" class="form-input" id="sfDuration" placeholder="120" min="0">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Satisfacción</label>
-                    <select class="form-select form-input" id="sfSatisfaction">
-                        <option value="">Seleccionar...</option>
-                        <option value="Muy satisfecha">Muy satisfecha</option>
-                        <option value="Satisfecha">Satisfecha</option>
-                        <option value="Neutral">Neutral</option>
-                        <option value="Insatisfecha">Insatisfecha</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Técnica Utilizada</label>
-                <input type="text" class="form-input" id="sfTechnique" placeholder="Ej: Microblading + Sombreado">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Pigmentos Utilizados</label>
-                <input type="text" class="form-input" id="sfPigments" placeholder="Ej: Soft Brown + Warm Taupe (PhiBrows)">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Notas del Servicio</label>
-                <textarea class="form-textarea" id="sfNotes" placeholder="Observaciones, resultados, recomendaciones..."></textarea>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Próxima Sesión</label>
-                <input type="text" class="form-input" id="sfNextSession" placeholder="Ej: Retoque en 6-8 semanas">
-            </div>
+            <div class="form-group"><label class="form-label">Tipo de Servicio *</label><select class="form-select form-input" id="sfType" required><option value="">Seleccionar servicio...</option><option value="Micropigmentación de Cejas - Microblading">Cejas - Microblading</option><option value="Micropigmentación de Cejas - Powder Brows">Cejas - Powder Brows</option><option value="Micropigmentación de Cejas - Técnica Híbrida">Cejas - Técnica Híbrida</option><option value="Retoque de Cejas">Retoque de Cejas</option><option value="Lip Blush">Lip Blush</option><option value="Neutralización de Labios">Neutralización de Labios</option><option value="Delineado de Ojos">Delineado de Ojos</option><option value="Consulta">Consulta</option><option value="Remoción">Remoción</option><option value="Otro">Otro</option></select></div>
+            <div class="form-row"><div class="form-group"><label class="form-label">Fecha *</label><input type="date" class="form-input" id="sfDate" required></div><div class="form-group"><label class="form-label">Precio ($)</label><input type="number" class="form-input" id="sfPrice" placeholder="0.00" step="0.01" min="0"></div></div>
+            <div class="form-row"><div class="form-group"><label class="form-label">Duración (min)</label><input type="number" class="form-input" id="sfDuration" placeholder="120" min="0"></div><div class="form-group"><label class="form-label">Satisfacción</label><select class="form-select form-input" id="sfSatisfaction"><option value="">Seleccionar...</option><option value="Muy satisfecha">Muy satisfecha</option><option value="Satisfecha">Satisfecha</option><option value="Neutral">Neutral</option><option value="Insatisfecha">Insatisfecha</option></select></div></div>
+            <div class="form-group"><label class="form-label">Técnica</label><input type="text" class="form-input" id="sfTechnique" placeholder="Ej: Microblading + Sombreado"></div>
+            <div class="form-group"><label class="form-label">Pigmentos</label><input type="text" class="form-input" id="sfPigments" placeholder="Ej: Soft Brown (PhiBrows)"></div>
+            <div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="sfNotes" placeholder="Observaciones, resultados..."></textarea></div>
+            <div class="form-group"><label class="form-label">Próxima Sesión</label><input type="text" class="form-input" id="sfNextSession" placeholder="Ej: Retoque en 6-8 semanas"></div>
             <button type="submit" class="btn btn-primary btn-block" id="serviceSubmitBtn">Guardar Servicio</button>
         </form>
     </div>
 </div>
 
+<!-- MODAL: APPOINTMENT -->
+<div id="apptModal" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header"><div class="modal-title" id="apptModalTitle">Nueva Cita</div><button class="modal-close" onclick="closeApptModal()">✕</button></div>
+        <form id="apptForm" onsubmit="submitApptForm(event)">
+            <input type="hidden" id="editApptId">
+            <div class="form-group"><label class="form-label">Cliente *</label><select class="form-select form-input" id="afClient" required><option value="">Seleccionar cliente...</option></select></div>
+            <div class="form-group"><label class="form-label">Servicio *</label><select class="form-select form-input" id="afService" required><option value="">Seleccionar servicio...</option><option value="Micropigmentación de Cejas - Microblading">Cejas - Microblading</option><option value="Micropigmentación de Cejas - Powder Brows">Cejas - Powder Brows</option><option value="Micropigmentación de Cejas - Técnica Híbrida">Cejas - Técnica Híbrida</option><option value="Retoque de Cejas">Retoque de Cejas</option><option value="Lip Blush">Lip Blush</option><option value="Delineado de Ojos">Delineado de Ojos</option><option value="Consulta">Consulta</option><option value="Otro">Otro</option></select></div>
+            <div class="form-row"><div class="form-group"><label class="form-label">Fecha *</label><input type="date" class="form-input" id="afDate" required></div><div class="form-group"><label class="form-label">Hora *</label><input type="time" class="form-input" id="afTime" required value="10:00"></div></div>
+            <div class="form-row"><div class="form-group"><label class="form-label">Duración (min)</label><input type="number" class="form-input" id="afDuration" value="120" min="0"></div><div class="form-group"><label class="form-label">Precio ($)</label><input type="number" class="form-input" id="afPrice" placeholder="0.00" step="0.01" min="0"></div></div>
+            <div class="form-group"><label class="form-label">Estado</label><select class="form-select form-input" id="afStatus"><option value="programada">Programada</option><option value="confirmada">Confirmada</option><option value="pendiente">Pendiente</option><option value="completada">Completada</option><option value="cancelada">Cancelada</option></select></div>
+            <div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="afNotes" placeholder="Notas de la cita..."></textarea></div>
+            <button type="submit" class="btn btn-primary btn-block" id="apptSubmitBtn">Guardar Cita</button>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL: EXPENSE -->
+<div id="expenseModal" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header"><div class="modal-title">Registrar Gasto</div><button class="modal-close" onclick="closeExpenseModal()">✕</button></div>
+        <form id="expenseForm" onsubmit="submitExpenseForm(event)">
+            <div class="form-group"><label class="form-label">Descripción *</label><input type="text" class="form-input" id="efDesc" placeholder="Ej: Pigmentos PhiBrows" required></div>
+            <div class="form-row"><div class="form-group"><label class="form-label">Monto ($) *</label><input type="number" class="form-input" id="efAmount" placeholder="0.00" step="0.01" min="0.01" required></div><div class="form-group"><label class="form-label">Fecha</label><input type="date" class="form-input" id="efDate"></div></div>
+            <div class="form-group"><label class="form-label">Categoría</label><select class="form-select form-input" id="efCategory"><option value="Insumos">Insumos</option><option value="Renta">Renta</option><option value="Marketing">Marketing</option><option value="Servicios">Servicios públicos</option><option value="Educación">Educación/Cursos</option><option value="Equipamiento">Equipamiento</option><option value="General">General</option></select></div>
+            <div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="efNotes" placeholder="Detalles adicionales..."></textarea></div>
+            <button type="submit" class="btn btn-primary btn-block" id="expenseSubmitBtn">Guardar Gasto</button>
+        </form>
+    </div>
+</div>
 
 <script>
-// =============================================================================
-// CONFIGURATION
-// =============================================================================
-// IMPORTANT: Change this to your backend URL.
-// If Vercel proxy is configured correctly, use '' (empty string).
-// Otherwise, use the direct backend URL.
-const API_BASE = 'https://pmu-design-portal.preview.emergentagent.com';
+const API_BASE='https://pmu-design-portal.preview.emergentagent.com';
+let currentPage='home',allClients=[],currentClientId=null,currentClientData=null,confirmCallback=null,searchTimeout=null,currentFinFilter='all';
 
-// =============================================================================
-// STATE
-// =============================================================================
-let currentPage = 'home';
-let allClients = [];
-let currentClientId = null;
-let currentClientData = null;
-let confirmCallback = null;
-let searchTimeout = null;
-
-// =============================================================================
-// NAVIGATION
-// =============================================================================
-function navigateTo(page) {
-    currentPage = page;
-    // Hide all pages
-    document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
-    // Show target page
-    const target = document.getElementById('page-' + page);
-    if (target) {
-        target.classList.remove('hidden');
-        target.classList.add('fade-in');
-    }
-    // Update nav
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-    const navItem = document.querySelector(`.nav-item[data-page="${page}"]`);
-    if (navItem) navItem.classList.add('active');
-    // For sub-pages, highlight parent nav
-    if (page === 'finance' || page === 'ai-design') {
-        document.querySelector('.nav-item[data-page="more"]').classList.add('active');
-    }
-    if (page === 'client-detail') {
-        document.querySelector('.nav-item[data-page="clients"]').classList.add('active');
-    }
-    // FAB visibility
-    const fab = document.getElementById('fabAddClient');
-    if (page === 'clients') {
-        fab.classList.remove('hidden');
-    } else {
-        fab.classList.add('hidden');
-    }
-    // Load data
-    if (page === 'home') loadHomePage();
-    if (page === 'clients') loadClients();
-    // Scroll to top
-    window.scrollTo(0, 0);
+// === NAV ===
+function navigateTo(page){
+    currentPage=page;
+    document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
+    const t=document.getElementById('page-'+page);
+    if(t){t.classList.remove('hidden');t.classList.add('fade-in')}
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+    const ni=document.querySelector(`.nav-item[data-page="${page}"]`);
+    if(ni)ni.classList.add('active');
+    if(page==='finance'||page==='ai-design')document.querySelector('.nav-item[data-page="more"]').classList.add('active');
+    if(page==='client-detail')document.querySelector('.nav-item[data-page="clients"]').classList.add('active');
+    const fab=document.getElementById('fabBtn');
+    if(page==='clients'||page==='appointments'){fab.classList.remove('hidden');fab.textContent='+'}else{fab.classList.add('hidden')}
+    if(page==='home')loadHomePage();
+    if(page==='clients')loadClients();
+    if(page==='appointments')loadAppointments();
+    if(page==='finance')loadFinance();
+    window.scrollTo(0,0);
+}
+function handleFab(){
+    if(currentPage==='clients')openAddClientModal();
+    if(currentPage==='appointments')openAddApptModal();
 }
 
-// =============================================================================
-// API CALLS
-// =============================================================================
-async function apiCall(method, path, body = null) {
-    const url = API_BASE + path;
-    const options = {
-        method: method,
-        headers: { 'Content-Type': 'application/json' },
-    };
-    if (body) options.body = JSON.stringify(body);
-    
-    const response = await fetch(url, options);
-    
-    if (!response.ok) {
-        const errorText = await response.text();
-        let errorMsg;
-        try {
-            const errorJson = JSON.parse(errorText);
-            errorMsg = errorJson.detail || errorJson.message || 'Error del servidor';
-        } catch {
-            errorMsg = 'Error del servidor (' + response.status + ')';
-        }
-        throw new Error(errorMsg);
-    }
-    
-    return await response.json();
+// === API ===
+async function apiCall(method,path,body=null){
+    const url=API_BASE+path;
+    const opts={method,headers:{'Content-Type':'application/json'}};
+    if(body)opts.body=JSON.stringify(body);
+    const r=await fetch(url,opts);
+    if(!r.ok){const t=await r.text();let m;try{m=JSON.parse(t).detail||'Error'}catch{m='Error ('+r.status+')'}throw new Error(m)}
+    return await r.json();
 }
 
-// =============================================================================
-// HOME PAGE
-// =============================================================================
-async function loadHomePage() {
-    try {
-        const data = await apiCall('GET', '/api/clients/list');
-        const clients = data.clients || [];
-        allClients = clients;
+// === HOME ===
+async function loadHomePage(){
+    try{
+        const d=await apiCall('GET','/api/clients/list');
+        allClients=d.clients||[];
+        document.getElementById('statClients').textContent=allClients.length;
+        loadHomeStats(allClients);
+        const recent=allClients.slice(0,3);
+        const c=document.getElementById('recentClients');
+        if(!recent.length){c.innerHTML='<div class="empty-state"><div class="empty-icon">👥</div><div class="empty-text">No hay clientes aún</div></div>'}
+        else{c.innerHTML=recent.map(cl=>`<div class="card client-card" onclick="openClientDetail('${cl.id}')"><div class="client-avatar">${getInitials(cl.first_name,cl.last_name)}</div><div class="client-info"><div class="client-name">${esc(cl.first_name)} ${esc(cl.last_name)}</div><div class="client-detail">${esc(cl.phone||cl.email||'Sin contacto')}</div></div><span style="color:var(--text-muted);font-size:20px;">›</span></div>`).join('')}
+    }catch(e){console.error('Home error:',e)}
+}
+async function loadHomeStats(clients){
+    let total=0,month=0;const now=new Date(),m=now.getMonth(),y=now.getFullYear();
+    for(const cl of clients){try{const d=await apiCall('GET',`/api/clients/${cl.id}/services`);const s=d.services||[];total+=s.length;for(const sv of s){const dt=new Date(sv.date);if(dt.getMonth()===m&&dt.getFullYear()===y)month++}}catch{}}
+    document.getElementById('statServices').textContent=total;
+    document.getElementById('statMonth').textContent=month;
+}
+
+// === CLIENTS ===
+async function loadClients(search=''){
+    try{const sp=search?`?search=${encodeURIComponent(search)}`:'';const d=await apiCall('GET','/api/clients/list'+sp);allClients=d.clients||[];renderClientsList(allClients)}
+    catch(e){showToast('error','Error: '+e.message)}
+}
+function renderClientsList(clients){
+    const c=document.getElementById('clientsList');
+    if(!clients.length){const sv=document.getElementById('clientSearch').value;c.innerHTML=`<div class="empty-state"><div class="empty-icon">${sv?'🔍':'👥'}</div><div class="empty-text">${sv?'No se encontraron clientes':'No hay clientes aún'}</div></div>`;return}
+    c.innerHTML=clients.map(cl=>`<div class="card client-card"><div class="client-avatar" onclick="openClientDetail('${cl.id}')">${getInitials(cl.first_name,cl.last_name)}</div><div class="client-info" onclick="openClientDetail('${cl.id}')"><div class="client-name">${esc(cl.first_name)} ${esc(cl.last_name)}</div><div class="client-detail">${esc(cl.phone||'')} ${cl.email?'· '+esc(cl.email):''}</div></div><div class="client-actions"><button class="client-action-btn" onclick="event.stopPropagation();openEditClientModalById('${cl.id}')">✏️</button><button class="client-action-btn" onclick="event.stopPropagation();confirmDeleteClientById('${cl.id}','${esc(cl.first_name)} ${esc(cl.last_name)}')">🗑️</button></div></div>`).join('');
+}
+function debounceSearch(){clearTimeout(searchTimeout);searchTimeout=setTimeout(()=>{loadClients(document.getElementById('clientSearch').value)},350)}
+
+// === CLIENT DETAIL ===
+async function openClientDetail(id){
+    currentClientId=id;showLoading(true);
+    try{const d=await apiCall('GET',`/api/clients/${id}`);currentClientData=d.client;
+    document.getElementById('detailClientName').textContent=currentClientData.first_name+' '+currentClientData.last_name;
+    document.getElementById('detailClientSince').textContent='Cliente desde '+formatDate(currentClientData.created_at);
+    renderClientInfo(currentClientData);await loadClientServices(id);
+    switchDetailTab('info',document.querySelector('#page-client-detail .tab'));
+    navigateTo('client-detail')}catch(e){showToast('error','Error: '+e.message)}finally{showLoading(false)}
+}
+function renderClientInfo(c){
+    const items=[{i:'📧',l:'Email',v:c.email},{i:'📱',l:'Teléfono',v:c.phone},{i:'🎂',l:'Nacimiento',v:c.date_of_birth?formatDate(c.date_of_birth):''},{i:'🎨',l:'Tono de Piel',v:c.skin_tone},{i:'💇',l:'Color de Cabello',v:c.hair_color},{i:'👁️',l:'Color de Ojos',v:c.eye_color},{i:'⚠️',l:'Alergias',v:c.allergies},{i:'🏥',l:'Condiciones Médicas',v:c.medical_conditions},{i:'📝',l:'Notas',v:c.notes}].filter(x=>x.v);
+    document.getElementById('detailClientInfo').innerHTML=items.map(x=>`<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);"><span style="font-size:18px;">${x.i}</span><div><div style="font-size:12px;color:var(--text-muted);">${x.l}</div><div style="font-size:14px;color:var(--text-primary);margin-top:2px;">${esc(x.v)}</div></div></div>`).join('');
+}
+async function loadClientServices(id){try{const d=await apiCall('GET',`/api/clients/${id}/services`);renderServices(d.services||[])}catch{document.getElementById('servicesList').innerHTML='<div class="empty-state"><div class="empty-text">Error al cargar servicios</div></div>'}}
+function renderServices(svcs){
+    const c=document.getElementById('servicesList');
+    if(!svcs.length){c.innerHTML='<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No hay servicios registrados</div></div>';return}
+    c.innerHTML=svcs.map(s=>`<div class="service-card"><div class="service-header"><div><div class="service-type">${esc(s.service_type)}</div><div class="service-date">📅 ${formatDate(s.date)}</div></div><div class="service-price">$${Number(s.price).toFixed(2)}</div></div><div class="service-detail-row">${s.duration_minutes?`<span class="service-tag">⏱️ ${s.duration_minutes} min</span>`:''}${s.technique?`<span class="service-tag">🔧 ${esc(s.technique)}</span>`:''}${s.satisfaction?`<span class="service-tag">${satEmoji(s.satisfaction)} ${esc(s.satisfaction)}</span>`:''}</div>${s.pigments_used?`<div style="font-size:12px;color:var(--text-muted);margin-top:6px;">🎨 ${esc(s.pigments_used)}</div>`:''}${s.notes?`<div class="service-notes">"${esc(s.notes)}"</div>`:''}${s.next_session?`<div style="font-size:12px;color:var(--accent);margin-top:6px;">📌 ${esc(s.next_session)}</div>`:''}</div>`).join('');
+}
+function switchDetailTab(tab,el){document.querySelectorAll('#page-client-detail .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');document.getElementById('tab-info').classList.toggle('hidden',tab!=='info');document.getElementById('tab-services').classList.toggle('hidden',tab!=='services')}
+
+// === APPOINTMENTS ===
+async function loadAppointments(){
+    try{
+        const d=await apiCall('GET','/api/appointments/list');
+        const appts=d.appointments||[];
+        const now=new Date();
+        const upcoming=appts.filter(a=>new Date(a.date)>=now&&a.status!=='completada'&&a.status!=='cancelada');
+        const past=appts.filter(a=>new Date(a.date)<now||a.status==='completada'||a.status==='cancelada');
         
-        document.getElementById('statClients').textContent = clients.length;
+        document.getElementById('apptStats').innerHTML=`<div class="stat-card"><div class="stat-value" style="color:var(--success);">${upcoming.length}</div><div class="stat-label">Próximas</div></div><div class="stat-card"><div class="stat-value">${past.length}</div><div class="stat-label">Pasadas</div></div>`;
         
-        // Count services would need another call, just show '-' for now
-        // We'll load services count async
-        loadHomeStats(clients);
-        
-        // Show recent clients (last 3)
-        const recent = clients.slice(0, 3);
-        const container = document.getElementById('recentClients');
-        if (recent.length === 0) {
-            container.innerHTML = '<div class="empty-state"><div class="empty-icon">👥</div><div class="empty-text">No hay clientes aún</div></div>';
-        } else {
-            container.innerHTML = recent.map(c => `
-                <div class="card client-card" onclick="openClientDetail('${c.id}')">
-                    <div class="client-avatar">${getInitials(c.first_name, c.last_name)}</div>
-                    <div class="client-info">
-                        <div class="client-name">${esc(c.first_name)} ${esc(c.last_name)}</div>
-                        <div class="client-detail">${esc(c.phone || c.email || 'Sin contacto')}</div>
-                    </div>
-                    <span style="color:var(--text-muted);font-size:20px;">›</span>
-                </div>
-            `).join('');
-        }
-    } catch (err) {
-        console.error('Error loading home:', err);
-    }
+        document.getElementById('appt-tab-upcoming').innerHTML=upcoming.length?upcoming.map(a=>renderApptCard(a)).join('')+'<div style="height:20px;"></div>':`<div class="empty-state"><div class="empty-icon">📅</div><div class="empty-text">No hay citas próximas</div></div>`;
+        document.getElementById('appt-tab-past').innerHTML=past.length?past.map(a=>renderApptCard(a)).join(''):`<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No hay citas pasadas</div></div>`;
+    }catch(e){showToast('error','Error citas: '+e.message)}
+}
+function renderApptCard(a){
+    const statusMap={programada:'badge-info',confirmada:'badge-info',pendiente:'badge-warning',completada:'badge-success',cancelada:'badge-danger'};
+    const statusLabel={programada:'Programada',confirmada:'Confirmada',pendiente:'Pendiente',completada:'Completada',cancelada:'Cancelada'};
+    return `<div class="card appt-card status-${a.status}" style="margin-bottom:10px;"><div style="display:flex;justify-content:space-between;align-items:flex-start;"><div style="flex:1;"><div style="font-size:15px;font-weight:600;">${esc(a.client_name||'Sin cliente')}</div><div style="font-size:13px;color:var(--accent);margin-top:2px;">${esc(a.service_type)}</div><div style="font-size:12px;color:var(--text-muted);margin-top:4px;">📅 ${formatDate(a.date)} · 🕐 ${a.time||''} · ⏱️ ${a.duration_minutes} min${a.price?` · $${Number(a.price).toFixed(2)}`:''}</div>${a.notes?`<div style="font-size:12px;color:var(--text-muted);margin-top:4px;font-style:italic;">${esc(a.notes)}</div>`:''}</div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;"><span class="badge ${statusMap[a.status]||'badge-info'}">${statusLabel[a.status]||a.status}</span><div style="display:flex;gap:4px;"><button class="client-action-btn" onclick="openEditApptModal('${a.id}')" style="font-size:14px;">✏️</button><button class="client-action-btn" onclick="confirmDeleteAppt('${a.id}','${esc(a.client_name)}')" style="font-size:14px;">🗑️</button></div></div></div></div>`;
+}
+function switchApptTab(tab,el){document.querySelectorAll('#apptTabs .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');document.getElementById('appt-tab-upcoming').classList.toggle('hidden',tab!=='upcoming');document.getElementById('appt-tab-past').classList.toggle('hidden',tab!=='past')}
+
+// === FINANCE ===
+async function loadFinance(){
+    try{
+        const s=await apiCall('GET','/api/finance/summary');
+        document.getElementById('finStats').innerHTML=`<div class="stat-card"><div class="stat-value" style="color:var(--success);">$${fmt(s.total_income)}</div><div class="stat-label">Ingresos</div></div><div class="stat-card"><div class="stat-value" style="color:var(--danger);">$${fmt(s.total_expenses)}</div><div class="stat-label">Gastos</div></div><div class="stat-card"><div class="stat-value">$${fmt(s.balance)}</div><div class="stat-label">Balance</div></div>`;
+        loadTransactions(currentFinFilter);
+    }catch(e){showToast('error','Error finanzas: '+e.message)}
+}
+async function loadTransactions(filter){
+    currentFinFilter=filter;
+    try{
+        const param=filter&&filter!=='all'?`?tx_type=${filter}`:'';
+        const d=await apiCall('GET','/api/finance/transactions'+param);
+        const txs=d.transactions||[];
+        const c=document.getElementById('finTransactions');
+        if(!txs.length){c.innerHTML='<div class="empty-state"><div class="empty-icon">💰</div><div class="empty-text">No hay transacciones</div></div>';return}
+        c.innerHTML='<div class="card" style="padding:8px 14px;">'+txs.map(tx=>`<div class="tx-card"><div style="flex:1;"><div style="font-size:14px;font-weight:600;">${esc(tx.description)}</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px;">${formatDate(tx.date)}${tx.category?' · '+esc(tx.category):''}</div></div><div style="font-size:15px;font-weight:700;color:${tx.type==='income'?'var(--success)':'var(--danger)'};">${tx.type==='income'?'+':'-'}$${fmt(tx.amount)}</div></div>`).join('')+'</div>';
+    }catch(e){showToast('error','Error: '+e.message)}
+}
+function switchFinTab(tab,el){document.querySelectorAll('#finTabs .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');loadTransactions(tab)}
+
+// === MODALS: CLIENT ===
+function openAddClientModal(){document.getElementById('clientModalTitle').textContent='Nuevo Cliente';document.getElementById('clientSubmitBtn').textContent='Guardar';document.getElementById('editClientId').value='';document.getElementById('clientForm').reset();document.getElementById('clientModal').classList.add('show')}
+function openEditClientModal(){if(!currentClientData)return;fillClientForm(currentClientData);document.getElementById('clientModal').classList.add('show')}
+async function openEditClientModalById(id){showLoading(true);try{const d=await apiCall('GET',`/api/clients/${id}`);fillClientForm(d.client);document.getElementById('clientModal').classList.add('show')}catch(e){showToast('error','Error: '+e.message)}finally{showLoading(false)}}
+function fillClientForm(c){document.getElementById('clientModalTitle').textContent='Editar Cliente';document.getElementById('clientSubmitBtn').textContent='Actualizar';document.getElementById('editClientId').value=c.id;document.getElementById('cfFirstName').value=c.first_name||'';document.getElementById('cfLastName').value=c.last_name||'';document.getElementById('cfEmail').value=c.email||'';document.getElementById('cfPhone').value=c.phone||'';document.getElementById('cfDOB').value=c.date_of_birth||'';document.getElementById('cfSkinTone').value=c.skin_tone||'';document.getElementById('cfHairColor').value=c.hair_color||'';document.getElementById('cfEyeColor').value=c.eye_color||'';document.getElementById('cfAllergies').value=c.allergies||'';document.getElementById('cfMedical').value=c.medical_conditions||'';document.getElementById('cfNotes').value=c.notes||''}
+function closeClientModal(){document.getElementById('clientModal').classList.remove('show')}
+async function submitClientForm(e){
+    e.preventDefault();const editId=document.getElementById('editClientId').value;const isEdit=!!editId;
+    const p={first_name:document.getElementById('cfFirstName').value.trim(),last_name:document.getElementById('cfLastName').value.trim(),email:document.getElementById('cfEmail').value.trim(),phone:document.getElementById('cfPhone').value.trim(),date_of_birth:document.getElementById('cfDOB').value,skin_tone:document.getElementById('cfSkinTone').value.trim(),hair_color:document.getElementById('cfHairColor').value.trim(),eye_color:document.getElementById('cfEyeColor').value.trim(),allergies:document.getElementById('cfAllergies').value.trim(),medical_conditions:document.getElementById('cfMedical').value.trim(),notes:document.getElementById('cfNotes').value.trim()};
+    if(!p.first_name){showToast('error','El nombre es obligatorio');return}
+    const btn=document.getElementById('clientSubmitBtn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Guardando...';
+    try{if(isEdit){await apiCall('PUT',`/api/clients/update/${editId}`,p);showToast('success','Cliente actualizado ✓')}else{await apiCall('POST','/api/clients/add',p);showToast('success','Cliente guardado ✓')}closeClientModal();if(currentPage==='client-detail'&&isEdit)openClientDetail(editId);else loadClients()}catch(e){showToast('error','Error: '+e.message)}finally{btn.disabled=false;btn.textContent=isEdit?'Actualizar':'Guardar'}
 }
 
-async function loadHomeStats(clients) {
-    let totalServices = 0;
-    let thisMonthServices = 0;
-    const now = new Date();
-    const thisMonth = now.getMonth();
-    const thisYear = now.getFullYear();
-    
-    for (const client of clients) {
-        try {
-            const data = await apiCall('GET', `/api/clients/${client.id}/services`);
-            const services = data.services || [];
-            totalServices += services.length;
-            for (const s of services) {
-                const d = new Date(s.date);
-                if (d.getMonth() === thisMonth && d.getFullYear() === thisYear) {
-                    thisMonthServices++;
-                }
-            }
-        } catch (e) { /* ignore */ }
-    }
-    
-    document.getElementById('statServices').textContent = totalServices;
-    document.getElementById('statMonth').textContent = thisMonthServices;
+// === DELETE CLIENT ===
+function confirmDeleteClient(){if(!currentClientId||!currentClientData)return;showConfirm(`¿Eliminar a ${currentClientData.first_name} ${currentClientData.last_name}?`,async()=>{showLoading(true);try{await apiCall('DELETE',`/api/clients/delete/${currentClientId}`);showToast('success','Cliente eliminado ✓');navigateTo('clients')}catch(e){showToast('error','Error: '+e.message)}finally{showLoading(false)}})}
+function confirmDeleteClientById(id,name){showConfirm(`¿Eliminar a ${name}?`,async()=>{showLoading(true);try{await apiCall('DELETE',`/api/clients/delete/${id}`);showToast('success','Cliente eliminado ✓');loadClients(document.getElementById('clientSearch').value)}catch(e){showToast('error','Error: '+e.message)}finally{showLoading(false)}})}
+
+// === MODALS: SERVICE ===
+function openAddServiceModal(){document.getElementById('serviceForm').reset();document.getElementById('sfDate').value=new Date().toISOString().split('T')[0];document.getElementById('serviceModal').classList.add('show')}
+function closeServiceModal(){document.getElementById('serviceModal').classList.remove('show')}
+async function submitServiceForm(e){
+    e.preventDefault();if(!currentClientId){showToast('error','No hay cliente');return}
+    const p={service_type:document.getElementById('sfType').value,date:document.getElementById('sfDate').value,price:parseFloat(document.getElementById('sfPrice').value)||0,duration_minutes:parseInt(document.getElementById('sfDuration').value)||120,technique:document.getElementById('sfTechnique').value.trim(),pigments_used:document.getElementById('sfPigments').value.trim(),notes:document.getElementById('sfNotes').value.trim(),satisfaction:document.getElementById('sfSatisfaction').value,next_session:document.getElementById('sfNextSession').value.trim()};
+    if(!p.service_type){showToast('error','Selecciona un servicio');return}
+    const btn=document.getElementById('serviceSubmitBtn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>';
+    try{await apiCall('POST',`/api/clients/${currentClientId}/services`,p);showToast('success','Servicio registrado ✓');closeServiceModal();await loadClientServices(currentClientId);switchDetailTab('services',document.querySelectorAll('#page-client-detail .tab')[1])}catch(e){showToast('error','Error: '+e.message)}finally{btn.disabled=false;btn.textContent='Guardar Servicio'}
 }
 
-// =============================================================================
-// CLIENTS LIST
-// =============================================================================
-async function loadClients(search = '') {
-    try {
-        const searchParam = search ? `?search=${encodeURIComponent(search)}` : '';
-        const data = await apiCall('GET', '/api/clients/list' + searchParam);
-        allClients = data.clients || [];
-        renderClientsList(allClients);
-    } catch (err) {
-        console.error('Error loading clients:', err);
-        showToast('error', 'Error al cargar clientes: ' + err.message);
-    }
+// === MODALS: APPOINTMENT ===
+async function openAddApptModal(){
+    document.getElementById('apptModalTitle').textContent='Nueva Cita';document.getElementById('apptSubmitBtn').textContent='Guardar Cita';document.getElementById('editApptId').value='';document.getElementById('apptForm').reset();document.getElementById('afTime').value='10:00';document.getElementById('afDuration').value='120';
+    const tomorrow=new Date();tomorrow.setDate(tomorrow.getDate()+1);document.getElementById('afDate').value=tomorrow.toISOString().split('T')[0];
+    await populateClientSelect();document.getElementById('apptModal').classList.add('show');
 }
-
-function renderClientsList(clients) {
-    const container = document.getElementById('clientsList');
-    
-    if (clients.length === 0) {
-        const searchVal = document.getElementById('clientSearch').value;
-        container.innerHTML = `
-            <div class="empty-state">
-                <div class="empty-icon">${searchVal ? '🔍' : '👥'}</div>
-                <div class="empty-text">${searchVal ? 'No se encontraron clientes' : 'No hay clientes aún. ¡Agrega el primero!'}</div>
-            </div>`;
-        return;
-    }
-    
-    container.innerHTML = clients.map(c => `
-        <div class="card client-card" style="position:relative;">
-            <div class="client-avatar" onclick="openClientDetail('${c.id}')">${getInitials(c.first_name, c.last_name)}</div>
-            <div class="client-info" onclick="openClientDetail('${c.id}')">
-                <div class="client-name">${esc(c.first_name)} ${esc(c.last_name)}</div>
-                <div class="client-detail">${esc(c.phone || '')} ${c.email ? '· ' + esc(c.email) : ''}</div>
-            </div>
-            <div class="client-actions">
-                <button class="client-action-btn edit" title="Editar" onclick="event.stopPropagation();openEditClientModalById('${c.id}')">✏️</button>
-                <button class="client-action-btn delete" title="Eliminar" onclick="event.stopPropagation();confirmDeleteClientById('${c.id}','${esc(c.first_name)} ${esc(c.last_name)}')">🗑️</button>
-            </div>
-        </div>
-    `).join('');
-}
-
-function debounceSearch() {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(() => {
-        const val = document.getElementById('clientSearch').value;
-        loadClients(val);
-    }, 350);
-}
-
-// =============================================================================
-// CLIENT DETAIL
-// =============================================================================
-async function openClientDetail(clientId) {
-    currentClientId = clientId;
+async function openEditApptModal(id){
     showLoading(true);
-    
-    try {
-        const data = await apiCall('GET', `/api/clients/${clientId}`);
-        currentClientData = data.client;
-        
-        document.getElementById('detailClientName').textContent = 
-            currentClientData.first_name + ' ' + currentClientData.last_name;
-        document.getElementById('detailClientSince').textContent = 
-            'Cliente desde ' + formatDate(currentClientData.created_at);
-        
-        renderClientInfo(currentClientData);
-        await loadClientServices(clientId);
-        
-        // Reset to info tab
-        switchDetailTab('info', document.querySelector('.tab'));
-        
-        navigateTo('client-detail');
-        
-    } catch (err) {
-        showToast('error', 'Error al cargar cliente: ' + err.message);
-    } finally {
-        showLoading(false);
-    }
+    try{
+        const d=await apiCall('GET','/api/appointments/list');
+        const a=(d.appointments||[]).find(x=>x.id===id);
+        if(!a){showToast('error','Cita no encontrada');return}
+        await populateClientSelect();
+        document.getElementById('apptModalTitle').textContent='Editar Cita';document.getElementById('apptSubmitBtn').textContent='Actualizar';document.getElementById('editApptId').value=a.id;
+        document.getElementById('afClient').value=a.client_id||'';document.getElementById('afService').value=a.service_type||'';document.getElementById('afDate').value=a.date?a.date.split('T')[0]:'';document.getElementById('afTime').value=a.time||'10:00';document.getElementById('afDuration').value=a.duration_minutes||120;document.getElementById('afPrice').value=a.price||'';document.getElementById('afStatus').value=a.status||'programada';document.getElementById('afNotes').value=a.notes||'';
+        document.getElementById('apptModal').classList.add('show');
+    }catch(e){showToast('error','Error: '+e.message)}finally{showLoading(false)}
+}
+function closeApptModal(){document.getElementById('apptModal').classList.remove('show')}
+async function populateClientSelect(){
+    try{const d=await apiCall('GET','/api/clients/list');const sel=document.getElementById('afClient');const val=sel.value;sel.innerHTML='<option value="">Seleccionar cliente...</option>'+(d.clients||[]).map(c=>`<option value="${c.id}">${esc(c.first_name)} ${esc(c.last_name)}</option>`).join('');if(val)sel.value=val}catch{}
+}
+async function submitApptForm(e){
+    e.preventDefault();const editId=document.getElementById('editApptId').value;const isEdit=!!editId;
+    const sel=document.getElementById('afClient');const clientName=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].text:'';
+    const p={client_id:sel.value,client_name:clientName==='Seleccionar cliente...'?'':clientName,service_type:document.getElementById('afService').value,date:document.getElementById('afDate').value,time:document.getElementById('afTime').value,duration_minutes:parseInt(document.getElementById('afDuration').value)||120,price:parseFloat(document.getElementById('afPrice').value)||0,status:document.getElementById('afStatus').value,notes:document.getElementById('afNotes').value.trim()};
+    if(!p.service_type){showToast('error','Selecciona un servicio');return}
+    const btn=document.getElementById('apptSubmitBtn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>';
+    try{if(isEdit){await apiCall('PUT',`/api/appointments/update/${editId}`,p);showToast('success','Cita actualizada ✓')}else{await apiCall('POST','/api/appointments/add',p);showToast('success','Cita creada ✓')}closeApptModal();loadAppointments()}catch(e){showToast('error','Error: '+e.message)}finally{btn.disabled=false;btn.textContent=isEdit?'Actualizar':'Guardar Cita'}
+}
+function confirmDeleteAppt(id,name){showConfirm(`¿Eliminar cita de ${name}?`,async()=>{showLoading(true);try{await apiCall('DELETE',`/api/appointments/delete/${id}`);showToast('success','Cita eliminada ✓');loadAppointments()}catch(e){showToast('error','Error: '+e.message)}finally{showLoading(false)}})}
+
+// === MODALS: EXPENSE ===
+function openExpenseModal(){document.getElementById('expenseForm').reset();document.getElementById('efDate').value=new Date().toISOString().split('T')[0];document.getElementById('expenseModal').classList.add('show')}
+function closeExpenseModal(){document.getElementById('expenseModal').classList.remove('show')}
+async function submitExpenseForm(e){
+    e.preventDefault();
+    const p={description:document.getElementById('efDesc').value.trim(),amount:parseFloat(document.getElementById('efAmount').value)||0,date:document.getElementById('efDate').value,category:document.getElementById('efCategory').value,notes:document.getElementById('efNotes').value.trim()};
+    if(!p.description){showToast('error','La descripción es obligatoria');return}
+    if(p.amount<=0){showToast('error','El monto debe ser mayor a 0');return}
+    const btn=document.getElementById('expenseSubmitBtn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>';
+    try{await apiCall('POST','/api/finance/expense',p);showToast('success','Gasto registrado ✓');closeExpenseModal();loadFinance()}catch(e){showToast('error','Error: '+e.message)}finally{btn.disabled=false;btn.textContent='Guardar Gasto'}
 }
 
-function renderClientInfo(c) {
-    const infoItems = [
-        { icon: '📧', label: 'Email', value: c.email },
-        { icon: '📱', label: 'Teléfono', value: c.phone },
-        { icon: '🎂', label: 'Nacimiento', value: c.date_of_birth ? formatDate(c.date_of_birth) : '' },
-        { icon: '🎨', label: 'Tono de Piel', value: c.skin_tone },
-        { icon: '💇', label: 'Color de Cabello', value: c.hair_color },
-        { icon: '👁️', label: 'Color de Ojos', value: c.eye_color },
-        { icon: '⚠️', label: 'Alergias', value: c.allergies },
-        { icon: '🏥', label: 'Condiciones Médicas', value: c.medical_conditions },
-        { icon: '📝', label: 'Notas', value: c.notes },
-    ].filter(item => item.value);
-    
-    document.getElementById('detailClientInfo').innerHTML = infoItems.map(item => `
-        <div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);">
-            <span style="font-size:18px;">${item.icon}</span>
-            <div>
-                <div style="font-size:12px;color:var(--text-muted);">${item.label}</div>
-                <div style="font-size:14px;color:var(--text-primary);margin-top:2px;">${esc(item.value)}</div>
-            </div>
-        </div>
-    `).join('');
-}
+// === UI HELPERS ===
+function showToast(type,msg){const t=document.getElementById('toast');t.className='toast show '+type;t.innerHTML=msg;setTimeout(()=>t.classList.remove('show'),3500)}
+function showLoading(s){document.getElementById('loadingOverlay').classList.toggle('show',s)}
+function showConfirm(text,cb){document.getElementById('confirmText').textContent=text;confirmCallback=cb;document.getElementById('confirmOverlay').classList.add('show')}
+function closeConfirm(){document.getElementById('confirmOverlay').classList.remove('show');confirmCallback=null}
+function executeConfirm(){const cb=confirmCallback;closeConfirm();if(cb)cb()}
+function getInitials(f,l){return((f||'')[0]||'')+((l||'')[0]||'')||'?'}
+function esc(s){if(!s)return'';const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function formatDate(ds){if(!ds)return'';try{const d=new Date(ds);if(isNaN(d.getTime()))return ds;return d.toLocaleDateString('es-ES',{year:'numeric',month:'short',day:'numeric'})}catch{return ds}}
+function satEmoji(s){if(!s)return'';if(s.includes('Muy'))return'😄';if(s.includes('Satisf'))return'😊';if(s.includes('Neutral'))return'😐';return'😞'}
+function fmt(n){return Number(n).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',')}
 
-async function loadClientServices(clientId) {
-    try {
-        const data = await apiCall('GET', `/api/clients/${clientId}/services`);
-        const services = data.services || [];
-        renderServices(services);
-    } catch (err) {
-        document.getElementById('servicesList').innerHTML = '<div class="empty-state"><div class="empty-text">Error al cargar servicios</div></div>';
-    }
-}
-
-function renderServices(services) {
-    const container = document.getElementById('servicesList');
-    
-    if (services.length === 0) {
-        container.innerHTML = `
-            <div class="empty-state">
-                <div class="empty-icon">📋</div>
-                <div class="empty-text">No hay servicios registrados para este cliente</div>
-            </div>`;
-        return;
-    }
-    
-    container.innerHTML = services.map(s => `
-        <div class="service-card">
-            <div class="service-header">
-                <div>
-                    <div class="service-type">${esc(s.service_type)}</div>
-                    <div class="service-date">📅 ${formatDate(s.date)}</div>
-                </div>
-                <div class="service-price">$${Number(s.price).toFixed(2)}</div>
-            </div>
-            <div class="service-detail-row">
-                ${s.duration_minutes ? `<span class="service-tag">⏱️ ${s.duration_minutes} min</span>` : ''}
-                ${s.technique ? `<span class="service-tag">🔧 ${esc(s.technique)}</span>` : ''}
-                ${s.satisfaction ? `<span class="service-tag">${getSatisfactionEmoji(s.satisfaction)} ${esc(s.satisfaction)}</span>` : ''}
-            </div>
-            ${s.pigments_used ? `<div style="font-size:12px;color:var(--text-muted);margin-top:6px;">🎨 Pigmentos: ${esc(s.pigments_used)}</div>` : ''}
-            ${s.notes ? `<div class="service-notes">"${esc(s.notes)}"</div>` : ''}
-            ${s.next_session ? `<div style="font-size:12px;color:var(--accent);margin-top:6px;">📌 ${esc(s.next_session)}</div>` : ''}
-        </div>
-    `).join('');
-}
-
-function switchDetailTab(tab, el) {
-    document.querySelectorAll('#page-client-detail .tab').forEach(t => t.classList.remove('active'));
-    el.classList.add('active');
-    
-    document.getElementById('tab-info').classList.toggle('hidden', tab !== 'info');
-    document.getElementById('tab-services').classList.toggle('hidden', tab !== 'services');
-}
-
-// =============================================================================
-// APPOINTMENT TABS
-// =============================================================================
-function switchApptTab(tab, el) {
-    document.querySelectorAll('#page-appointment<response clipped><NOTE>To save on context only part of this file has been shown to you. You should retry this tool after you have searched inside the file with `grep -n` in order to find the line numbers of what you are looking for.</NOTE>
+// === INIT ===
+async function initApp(){loadHomePage()}
+document.addEventListener('DOMContentLoaded',initApp);
+</script>
+</body>
+</html>
 
