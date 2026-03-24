@@ -1,4 +1,1746 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PMU Studio Pro - Chic Harmony</title>
+    <meta name="theme-color" content="#E879F9">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <style>
+        /* ========== RESET & VARIABLES ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg-primary: #0F0F23;
+            --bg-secondary: #1A1A3E;
+            --bg-card: #1E1B4B;
+            --bg-input: #2D2A5E;
+            --accent: #E879F9;
+            --accent-dark: #A855F7;
+            --accent-gradient: linear-gradient(135deg, #E879F9 0%, #A855F7 100%);
+            --text-primary: #FFF;
+            --text-secondary: #D1D5DB;
+            --text-muted: #9CA3AF;
+            --border: rgba(232, 121, 249, 0.2);
+            --danger: #EF4444;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --radius: 14px;
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========== TOP BAR ========== */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .top-bar-title {
+            font-size: 18px;
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .top-bar-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        /* ========== CONTENT & BOTTOM NAV ========== */
+        .content {
+            padding: 70px 16px 90px;
+            min-height: 100vh;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(15, 15, 35, 0.97);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 0 calc(8px + var(--safe-bottom));
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 10px;
+            padding: 6px 12px;
+            min-width: 60px;
+            transition: color 0.2s;
+        }
+
+        .nav-item.active {
+            color: var(--accent);
+        }
+
+        .nav-item .nav-icon {
+            font-size: 22px;
+        }
+
+        /* ========== CARDS ========== */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        /* ========== SEARCH ========== */
+        .search-container {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px 12px 42px;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 15px;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: var(--text-muted);
+        }
+
+        /* ========== BUTTONS ========== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background: var(--bg-input);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: #fff;
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+        }
+
+        /* ========== FAB ========== */
+        .fab {
+            position: fixed;
+            bottom: calc(80px + var(--safe-bottom));
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: var(--accent-gradient);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(232, 121, 249, 0.4);
+            cursor: pointer;
+            z-index: 50;
+        }
+
+        .fab:active {
+            transform: scale(0.9);
+        }
+
+        /* ========== CLIENT CARDS ========== */
+        .client-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .client-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .client-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .client-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .client-detail {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .client-actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .client-action-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 6px;
+            color: var(--text-muted);
+        }
+
+        /* ========== FORMS ========== */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 12px 14px;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 15px;
+            outline: none;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            border-color: var(--accent);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-textarea {
+            min-height: 80px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .form-select {
+            appearance: none;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* ========== SERVICE CARDS ========== */
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 14px;
+            margin-bottom: 10px;
+        }
+
+        .service-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .service-type {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .service-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        .service-detail-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+
+        .service-tag {
+            background: rgba(232, 121, 249, 0.1);
+            border: 1px solid rgba(232, 121, 249, 0.2);
+            border-radius: 8px;
+            padding: 4px 10px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .service-notes {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* ========== PAGE HEADERS ========== */
+        .page-header {
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .page-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .detail-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        /* ========== TABS ========== */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 16px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 4px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+        .tab.active {
+            background: var(--accent-gradient);
+            color: #fff;
+        }
+
+        /* ========== EMPTY STATE ========== */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .empty-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .empty-text {
+            font-size: 16px;
+            color: var(--text-muted);
+        }
+
+        /* ========== MODAL ========== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg-primary);
+            border-radius: 20px 20px 0 0;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 24px 20px calc(20px + var(--safe-bottom));
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* ========== TOAST ========== */
+        .toast {
+            position: fixed;
+            top: 80px;
+            left: 16px;
+            right: 16px;
+            z-index: 300;
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            animation: fadeDown 0.3s ease-out;
+        }
+
+        .toast.show {
+            display: flex;
+        }
+
+        .toast.success {
+            background: var(--success);
+            color: #fff;
+        }
+
+        .toast.error {
+            background: var(--danger);
+            color: #fff;
+        }
+
+        .toast.info {
+            background: var(--accent-dark);
+            color: #fff;
+        }
+
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========== CONFIRM DIALOG ========== */
+        .confirm-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 300;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .confirm-overlay.show {
+            display: flex;
+        }
+
+        .confirm-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            text-align: center;
+            max-width: 340px;
+            width: 100%;
+        }
+
+        .confirm-text {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .confirm-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .confirm-actions .btn {
+            flex: 1;
+        }
+
+        /* ========== SPINNER & LOADING ========== */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 250;
+            background: rgba(15, 15, 35, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-overlay.show {
+            display: flex;
+        }
+
+        /* ========== STATS ROW ========== */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* ========== SECTION TITLE ========== */
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin: 20px 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ========== BADGES ========== */
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .badge-success {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+        }
+
+        .badge-warning {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+        }
+
+        .badge-info {
+            background: rgba(232, 121, 249, 0.15);
+            color: var(--accent);
+        }
+
+        .badge-danger {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+        }
+
+        /* ========== WELCOME CARD ========== */
+        .welcome-card {
+            background: var(--accent-gradient);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-card::after {
+            content: '🌸';
+            position: absolute;
+            right: -10px;
+            bottom: -10px;
+            font-size: 80px;
+            opacity: 0.15;
+        }
+
+        .welcome-title {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .welcome-sub {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* ========== QUICK ACTIONS ========== */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .quick-action {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s, transform 0.1s;
+        }
+
+        .quick-action:active {
+            transform: scale(0.97);
+            border-color: var(--accent);
+        }
+
+        .quick-action-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .quick-action-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        /* ========== ANIMATIONS ========== */
+        .fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* ========== APPOINTMENT CARDS ========== */
+        .appt-card {
+            border-left: 3px solid var(--accent);
+        }
+
+        .appt-card.status-programada,
+        .appt-card.status-confirmada {
+            border-left-color: var(--accent);
+        }
+
+        .appt-card.status-pendiente {
+            border-left-color: var(--warning);
+        }
+
+        .appt-card.status-completada {
+            border-left-color: var(--success);
+        }
+
+        .appt-card.status-cancelada {
+            border-left-color: var(--danger);
+        }
+
+        /* ========== TRANSACTION CARDS ========== */
+        .tx-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tx-card:last-child {
+            border-bottom: none;
+        }
+
+        /* ========== INVENTORY ITEMS ========== */
+        .inv-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .inv-item:last-child {
+            border-bottom: none;
+        }
+
+        .inv-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        /* ========== CHECKBOX ROWS (Forms) ========== */
+        .check-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .check-row:last-child {
+            border-bottom: none;
+        }
+
+        .check-box {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .check-box.checked {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .check-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            flex: 1;
+        }
+
+        /* ========== SETTINGS ========== */
+        .settings-section {
+            margin-bottom: 24px;
+        }
+
+        .settings-section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hour-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .hour-day {
+            width: 80px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .hour-input {
+            width: 80px;
+            padding: 8px;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 13px;
+            text-align: center;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== TOP BAR ==================== -->
+    <div class="top-bar">
+        <div>
+            <div class="top-bar-title">🌸 CHIC HARMONY</div>
+            <div class="top-bar-sub">PMU STUDIO PRO</div>
+        </div>
+        <div>
+            <button style="background:none;border:none;color:var(--text-secondary);font-size:22px;cursor:pointer;" onclick="showToast('info','Notificaciones proximamente')">🔔</button>
+        </div>
+    </div>
+
+    <!-- ==================== TOAST ==================== -->
+    <div id="toast" class="toast"></div>
+
+    <!-- ==================== LOADING OVERLAY ==================== -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner" style="width:40px;height:40px;border-width:4px;"></div>
+    </div>
+
+    <!-- ==================== CONFIRM DIALOG ==================== -->
+    <div id="confirmOverlay" class="confirm-overlay">
+        <div class="confirm-box">
+            <div style="font-size:40px;margin-bottom:12px;">⚠️</div>
+            <div class="confirm-text" id="confirmText"></div>
+            <div class="confirm-actions">
+                <button class="btn btn-secondary" onclick="closeConfirm()">Cancelar</button>
+                <button class="btn btn-danger" onclick="executeConfirm()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <div class="content" id="mainContent">
+
+        <!-- ========== HOME PAGE ========== -->
+        <div id="page-home" class="page fade-in">
+            <div class="welcome-card">
+                <div class="welcome-title">Bienvenida! 👋</div>
+                <div class="welcome-sub">Tu estudio de micropigmentacion profesional</div>
+            </div>
+
+            <div id="homeStats" class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-value" id="statClients">-</div>
+                    <div class="stat-label">Clientes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statServices">-</div>
+                    <div class="stat-label">Servicios</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statMonth">-</div>
+                    <div class="stat-label">Este Mes</div>
+                </div>
+            </div>
+
+            <div class="section-title">⚡ Acciones Rapidas</div>
+            <div class="quick-actions">
+                <div class="quick-action" onclick="navigateTo('clients'); setTimeout(function(){ openAddClientModal(); }, 300);">
+                    <div class="quick-action-icon">➕</div>
+                    <div class="quick-action-text">Nuevo Cliente</div>
+                </div>
+                <div class="quick-action" onclick="navigateTo('clients')">
+                    <div class="quick-action-icon">👥</div>
+                    <div class="quick-action-text">Ver Clientes</div>
+                </div>
+                <div class="quick-action" onclick="navigateTo('appointments')">
+                    <div class="quick-action-icon">📅</div>
+                    <div class="quick-action-text">Citas</div>
+                </div>
+                <div class="quick-action" onclick="navigateTo('finance')">
+                    <div class="quick-action-icon">💰</div>
+                    <div class="quick-action-text">Finanzas</div>
+                </div>
+            </div>
+
+            <div class="section-title">📋 Ultimos Clientes</div>
+            <div id="recentClients"></div>
+        </div>
+
+        <!-- ========== CLIENTS PAGE ========== -->
+        <div id="page-clients" class="page hidden fade-in">
+            <div class="page-header">
+                <div class="page-title">👥 Clientes</div>
+                <div class="page-subtitle">Gestiona tu cartera de clientes</div>
+            </div>
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" id="clientSearch" placeholder="Buscar por nombre, email, telefono..." oninput="debounceSearch()">
+            </div>
+            <div id="clientsList"></div>
+        </div>
+
+        <!-- ========== CLIENT DETAIL PAGE ========== -->
+        <div id="page-client-detail" class="page hidden fade-in">
+            <div class="detail-header">
+                <button class="back-btn" onclick="navigateTo('clients')">&#8592;</button>
+                <div>
+                    <div class="page-title" id="detailClientName"></div>
+                    <div class="page-subtitle" id="detailClientSince"></div>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab active" onclick="switchDetailTab('info', this)">Info</button>
+                <button class="tab" onclick="switchDetailTab('services', this)">Servicios</button>
+                <button class="tab" onclick="switchDetailTab('forms', this)">Formularios</button>
+            </div>
+
+            <!-- Info Tab -->
+            <div id="tab-info">
+                <div class="card" id="detailClientInfo"></div>
+                <div style="display:flex;gap:10px;margin-top:16px;">
+                    <button class="btn btn-secondary btn-block" onclick="openEditClientModal()">✏️ Editar</button>
+                    <button class="btn btn-danger btn-block" onclick="confirmDeleteClient()">🗑️ Eliminar</button>
+                </div>
+            </div>
+
+            <!-- Services Tab -->
+            <div id="tab-services" class="hidden">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                    <div class="section-title" style="margin:0;">Historial de Servicios</div>
+                    <button class="btn btn-primary btn-sm" onclick="openAddServiceModal()">+ Servicio</button>
+                </div>
+                <div id="servicesList"></div>
+            </div>
+
+            <!-- Forms Tab -->
+            <div id="tab-forms" class="hidden">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                    <div class="section-title" style="margin:0;">Formularios</div>
+                    <button class="btn btn-primary btn-sm" onclick="openFormSelector()">+ Formulario</button>
+                </div>
+                <div id="formsList"></div>
+            </div>
+        </div>
+
+        <!-- ========== APPOINTMENTS PAGE ========== -->
+        <div id="page-appointments" class="page hidden fade-in">
+            <div class="page-header">
+                <div class="page-title">📅 Citas</div>
+                <div class="page-subtitle">Gestion de agenda</div>
+            </div>
+            <div id="apptStats" class="stats-row" style="grid-template-columns:repeat(2,1fr);"></div>
+            <div class="tabs" id="apptTabs">
+                <button class="tab active" onclick="switchApptTab('upcoming', this)">Proximas</button>
+                <button class="tab" onclick="switchApptTab('past', this)">Pasadas</button>
+            </div>
+            <div id="appt-tab-upcoming"></div>
+            <div id="appt-tab-past" class="hidden"></div>
+        </div>
+
+        <!-- ========== FINANCE PAGE ========== -->
+        <div id="page-finance" class="page hidden fade-in">
+            <div class="page-header">
+                <div class="page-title">💰 Finanzas</div>
+                <div class="page-subtitle">Control de ingresos y gastos</div>
+            </div>
+            <div id="finStats" class="stats-row"></div>
+            <div class="tabs" id="finTabs">
+                <button class="tab active" onclick="switchFinTab('all', this)">Todo</button>
+                <button class="tab" onclick="switchFinTab('income', this)">Ingresos</button>
+                <button class="tab" onclick="switchFinTab('expense', this)">Gastos</button>
+            </div>
+            <div id="finTransactions"></div>
+            <div style="text-align:center;padding:16px 0;">
+                <button class="btn btn-primary btn-sm" onclick="openExpenseModal()">+ Registrar Gasto</button>
+            </div>
+        </div>
+
+        <!-- ========== INVENTORY PAGE ========== -->
+        <div id="page-inventory" class="page hidden fade-in">
+            <div class="page-header">
+                <div class="page-title">📦 Inventario</div>
+                <div class="page-subtitle">Control de insumos y productos</div>
+            </div>
+            <div id="invStats" class="stats-row"></div>
+            <div class="tabs" id="invTabs">
+                <button class="tab active" onclick="switchInvTab('all', this)">Todo</button>
+                <button class="tab" onclick="switchInvTab('Pigmentos', this)">Pigmentos</button>
+                <button class="tab" onclick="switchInvTab('Agujas', this)">Agujas</button>
+                <button class="tab" onclick="switchInvTab('Anestésicos', this)">Anest.</button>
+            </div>
+            <div id="invList"></div>
+        </div>
+
+        <!-- ========== AI DESIGN PAGE ========== -->
+        <div id="page-ai-design" class="page hidden fade-in">
+            <div class="page-header">
+                <div class="page-title">🤖 Analisis con IA</div>
+                <div class="page-subtitle">Herramientas inteligentes de diseno PMU</div>
+            </div>
+            <div class="card" style="border-left:3px solid var(--accent);margin-bottom:12px;">
+                <div style="display:flex;gap:14px;align-items:center;">
+                    <div style="font-size:36px;">📸</div>
+                    <div>
+                        <div style="font-size:16px;font-weight:700;">Analisis Facial</div>
+                        <div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Simetria y recomendaciones</div>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="showToast('info','Proximamente')">Iniciar</button>
+            </div>
+            <div class="card" style="border-left:3px solid var(--warning);margin-bottom:12px;">
+                <div style="display:flex;gap:14px;align-items:center;">
+                    <div style="font-size:36px;">🎨</div>
+                    <div>
+                        <div style="font-size:16px;font-weight:700;">Analisis de Color</div>
+                        <div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Tonos y pigmentos</div>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="showToast('info','Proximamente')">Analizar</button>
+            </div>
+        </div>
+
+        <!-- ========== SETTINGS PAGE ========== -->
+        <div id="page-settings" class="page hidden fade-in">
+            <div class="page-header">
+                <div class="page-title">⚙️ Configuracion</div>
+                <div class="page-subtitle">Perfil del estudio y preferencias</div>
+            </div>
+            <div id="settingsContent"></div>
+        </div>
+
+        <!-- ========== MORE PAGE ========== -->
+        <div id="page-more" class="page hidden fade-in">
+            <div class="page-header">
+                <div class="page-title">⚙️ Mas</div>
+                <div class="page-subtitle">Herramientas y configuracion</div>
+            </div>
+            <div class="quick-actions" style="grid-template-columns:1fr;">
+                <div class="quick-action" onclick="navigateTo('inventory')">
+                    <div style="display:flex;align-items:center;gap:14px;">
+                        <div style="font-size:28px;margin:0;">📦</div>
+                        <div style="text-align:left;">
+                            <div class="quick-action-text">Inventario</div>
+                            <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Control de insumos y productos</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="quick-action" onclick="navigateTo('ai-design')">
+                    <div style="display:flex;align-items:center;gap:14px;">
+                        <div style="font-size:28px;margin:0;">🤖</div>
+                        <div style="text-align:left;">
+                            <div class="quick-action-text">Analisis con IA</div>
+                            <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Simetria facial, color, diseno</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="quick-action" onclick="navigateTo('finance')">
+                    <div style="display:flex;align-items:center;gap:14px;">
+                        <div style="font-size:28px;margin:0;">📊</div>
+                        <div style="text-align:left;">
+                            <div class="quick-action-text">Reportes y Finanzas</div>
+                            <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Ingresos, gastos, balance</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="quick-action" onclick="navigateTo('settings')">
+                    <div style="display:flex;align-items:center;gap:14px;">
+                        <div style="font-size:28px;margin:0;">⚙️</div>
+                        <div style="text-align:left;">
+                            <div class="quick-action-text">Configuracion</div>
+                            <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Perfil, horarios, precios</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ==================== FAB BUTTON ==================== -->
+    <button class="fab hidden" id="fabBtn" onclick="handleFab()">+</button>
+
+    <!-- ==================== BOTTOM NAV ==================== -->
+    <div class="bottom-nav">
+        <button class="nav-item active" data-page="home" onclick="navigateTo('home')">
+            <span class="nav-icon">🏠</span>Inicio
+        </button>
+        <button class="nav-item" data-page="clients" onclick="navigateTo('clients')">
+            <span class="nav-icon">👥</span>Clientes
+        </button>
+        <button class="nav-item" data-page="appointments" onclick="navigateTo('appointments')">
+            <span class="nav-icon">📅</span>Citas
+        </button>
+        <button class="nav-item" data-page="more" onclick="navigateTo('more')">
+            <span class="nav-icon">⚙️</span>Mas
+        </button>
+    </div>
+
+    <!-- ==================== MODAL: CLIENT ==================== -->
+    <div id="clientModal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title" id="clientModalTitle">Nuevo Cliente</div>
+                <button class="modal-close" onclick="closeModal('clientModal')">&#10005;</button>
+            </div>
+            <form id="clientForm" onsubmit="submitClientForm(event)">
+                <input type="hidden" id="editClientId">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Nombre *</label>
+                        <input type="text" class="form-input" id="cfFirstName" placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Apellido</label>
+                        <input type="text" class="form-input" id="cfLastName" placeholder="Apellido">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" id="cfEmail" placeholder="email@ejemplo.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Telefono</label>
+                    <input type="tel" class="form-input" id="cfPhone" placeholder="+1 (555) 123-4567">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Fecha de Nacimiento</label>
+                        <input type="date" class="form-input" id="cfDOB">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tono de Piel</label>
+                        <input type="text" class="form-input" id="cfSkinTone" placeholder="Ej: Medio calido">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Color de Cabello</label>
+                        <input type="text" class="form-input" id="cfHairColor" placeholder="Ej: Castano">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Color de Ojos</label>
+                        <input type="text" class="form-input" id="cfEyeColor" placeholder="Ej: Marron">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Alergias</label>
+                    <input type="text" class="form-input" id="cfAllergies" placeholder="Ej: Sensibilidad a lidocaina">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Condiciones Medicas</label>
+                    <input type="text" class="form-input" id="cfMedical" placeholder="Ej: Diabetes, Embarazo...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Notas</label>
+                    <textarea class="form-textarea" id="cfNotes" placeholder="Notas adicionales..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" id="clientSubmitBtn">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL: SERVICE ==================== -->
+    <div id="serviceModal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">Registrar Servicio</div>
+                <button class="modal-close" onclick="closeModal('serviceModal')">&#10005;</button>
+            </div>
+            <form id="serviceForm" onsubmit="submitServiceForm(event)">
+                <div class="form-group">
+                    <label class="form-label">Tipo de Servicio *</label>
+                    <select class="form-select form-input" id="sfType" required>
+                        <option value="">Seleccionar...</option>
+                        <option value="Micropigmentacion de Cejas - Microblading">Cejas - Microblading</option>
+                        <option value="Micropigmentacion de Cejas - Powder Brows">Cejas - Powder Brows</option>
+                        <option value="Micropigmentacion de Cejas - Tecnica Hibrida">Cejas - Hibrida</option>
+                        <option value="Retoque de Cejas">Retoque de Cejas</option>
+                        <option value="Lip Blush">Lip Blush</option>
+                        <option value="Neutralizacion de Labios">Neutralizacion Labios</option>
+                        <option value="Delineado de Ojos">Delineado de Ojos</option>
+                        <option value="Consulta">Consulta</option>
+                        <option value="Remocion">Remocion</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Fecha *</label>
+                        <input type="date" class="form-input" id="sfDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Precio ($)</label>
+                        <input type="number" class="form-input" id="sfPrice" placeholder="0" step="0.01" min="0">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Duracion (min)</label>
+                        <input type="number" class="form-input" id="sfDuration" placeholder="120" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Satisfaccion</label>
+                        <select class="form-select form-input" id="sfSatisfaction">
+                            <option value="">...</option>
+                            <option value="Muy satisfecha">Muy satisfecha</option>
+                            <option value="Satisfecha">Satisfecha</option>
+                            <option value="Neutral">Neutral</option>
+                            <option value="Insatisfecha">Insatisfecha</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tecnica</label>
+                    <input type="text" class="form-input" id="sfTechnique" placeholder="Ej: Microblading + Sombreado">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Pigmentos</label>
+                    <input type="text" class="form-input" id="sfPigments" placeholder="Ej: Soft Brown (PhiBrows)">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Notas</label>
+                    <textarea class="form-textarea" id="sfNotes" placeholder="Observaciones..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Proxima Sesion</label>
+                    <input type="text" class="form-input" id="sfNextSession" placeholder="Ej: Retoque en 6-8 semanas">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" id="serviceSubmitBtn">Guardar Servicio</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL: APPOINTMENT ==================== -->
+    <div id="apptModal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title" id="apptModalTitle">Nueva Cita</div>
+                <button class="modal-close" onclick="closeModal('apptModal')">&#10005;</button>
+            </div>
+            <form id="apptForm" onsubmit="submitApptForm(event)">
+                <input type="hidden" id="editApptId">
+                <div class="form-group">
+                    <label class="form-label">Cliente *</label>
+                    <select class="form-select form-input" id="afClient" required>
+                        <option value="">Seleccionar...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Servicio *</label>
+                    <select class="form-select form-input" id="afService" required>
+                        <option value="">Seleccionar...</option>
+                        <option value="Micropigmentacion de Cejas - Microblading">Cejas - Microblading</option>
+                        <option value="Micropigmentacion de Cejas - Powder Brows">Cejas - Powder Brows</option>
+                        <option value="Micropigmentacion de Cejas - Tecnica Hibrida">Cejas - Hibrida</option>
+                        <option value="Retoque de Cejas">Retoque de Cejas</option>
+                        <option value="Lip Blush">Lip Blush</option>
+                        <option value="Delineado de Ojos">Delineado de Ojos</option>
+                        <option value="Consulta">Consulta</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Fecha *</label>
+                        <input type="date" class="form-input" id="afDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Hora *</label>
+                        <input type="time" class="form-input" id="afTime" required value="10:00">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Duracion (min)</label>
+                        <input type="number" class="form-input" id="afDuration" value="120" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Precio ($)</label>
+                        <input type="number" class="form-input" id="afPrice" placeholder="0" step="0.01" min="0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Estado</label>
+                    <select class="form-select form-input" id="afStatus">
+                        <option value="programada">Programada</option>
+                        <option value="confirmada">Confirmada</option>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="completada">Completada</option>
+                        <option value="cancelada">Cancelada</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Notas</label>
+                    <textarea class="form-textarea" id="afNotes" placeholder="Notas..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" id="apptSubmitBtn">Guardar Cita</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL: EXPENSE ==================== -->
+    <div id="expenseModal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">Registrar Gasto</div>
+                <button class="modal-close" onclick="closeModal('expenseModal')">&#10005;</button>
+            </div>
+            <form id="expenseForm" onsubmit="submitExpenseForm(event)">
+                <div class="form-group">
+                    <label class="form-label">Descripcion *</label>
+                    <input type="text" class="form-input" id="efDesc" placeholder="Ej: Pigmentos PhiBrows" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Monto ($) *</label>
+                        <input type="number" class="form-input" id="efAmount" placeholder="0" step="0.01" min="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fecha</label>
+                        <input type="date" class="form-input" id="efDate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Categoria</label>
+                    <select class="form-select form-input" id="efCategory">
+                        <option value="Insumos">Insumos</option>
+                        <option value="Renta">Renta</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Servicios">Servicios publicos</option>
+                        <option value="Educacion">Educacion/Cursos</option>
+                        <option value="Equipamiento">Equipamiento</option>
+                        <option value="General">General</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Notas</label>
+                    <textarea class="form-textarea" id="efNotes" placeholder="Detalles..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" id="expenseSubmitBtn">Guardar Gasto</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL: INVENTORY ==================== -->
+    <div id="invModal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title" id="invModalTitle">Nuevo Producto</div>
+                <button class="modal-close" onclick="closeModal('invModal')">&#10005;</button>
+            </div>
+            <form id="invForm" onsubmit="submitInvForm(event)">
+                <input type="hidden" id="editInvId">
+                <div class="form-group">
+                    <label class="form-label">Nombre *</label>
+                    <input type="text" class="form-input" id="ifName" placeholder="Ej: Soft Brown PhiBrows" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Categoria</label>
+                        <select class="form-select form-input" id="ifCategory">
+                            <option value="Pigmentos">Pigmentos</option>
+                            <option value="Agujas">Agujas</option>
+                            <option value="Anestésicos">Anestesicos</option>
+                            <option value="Equipamiento">Equipamiento</option>
+                            <option value="Consumibles">Consumibles</option>
+                            <option value="General">General</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Marca</label>
+                        <input type="text" class="form-input" id="ifBrand" placeholder="Ej: PhiBrows">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Cantidad</label>
+                        <input type="number" class="form-input" id="ifQty" value="0" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Stock Minimo</label>
+                        <input type="number" class="form-input" id="ifMinStock" value="0" min="0">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Unidad</label>
+                        <select class="form-select form-input" id="ifUnit">
+                            <option value="unidades">Unidades</option>
+                            <option value="cajas">Cajas</option>
+                            <option value="ml">ml</option>
+                            <option value="piezas">Piezas</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Precio/Unidad ($)</label>
+                        <input type="number" class="form-input" id="ifPrice" placeholder="0" step="0.01" min="0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Proveedor</label>
+                    <input type="text" class="form-input" id="ifSupplier" placeholder="Nombre del proveedor">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Notas</label>
+                    <textarea class="form-textarea" id="ifNotes" placeholder="Notas..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" id="invSubmitBtn">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL: FORM SELECTOR ==================== -->
+    <div id="formModal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title" id="formModalTitle">Formulario</div>
+                <button class="modal-close" onclick="closeModal('formModal')">&#10005;</button>
+            </div>
+            <div id="formModalContent"></div>
+        </div>
+    </div>
+
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        // =============================================================
+        // CONFIGURATION
+        // =============================================================
+        var API = 'https://pmu-client-preview.preview.emergentagent.com';
+
+        // =============================================================
+        // STATE
+        // =============================================================
+        var currentPage = 'home';
+        var allClients = [];
+        var currentClientId = null;
+        var currentClientData = null;
+        var confirmCallback = null;
+        var searchTimeout = null;
+        var currentFinFilter = 'all';
+        var currentInvFilter = 'all';
+
+        // =============================================================
+        // NAVIGATION
+        // =============================================================
+        function navigateTo(page) {
+            currentPage = page;
+
+            // Hide all pages
+            var pages = document.querySelectorAll('.page');
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].classList.add('hidden');
+            }
+
+            // Show target page
+            var target = document.getElementById('page-' + page);
+            if (target) {
+                target.classList.remove('hidden');
+                target.classList.add('fade-in');
+            }
+
+            // Update nav items
+            var navItems = document.querySelectorAll('.nav-item');
+            for (var i = 0; i < navItems.length; i++) {
+                navItems[i].classList.remove('active');
+            }
+            var activeNav = document.querySelector('.nav-item[data-page="' + page + '"]');
+            if (activeNav) {
+                activeNav.classList.add('active');
+            }
+
+            // Highlight "More" tab for sub-pages
+            if (['finance', 'ai-design', 'inventory', 'settings'].indexOf(page) !== -1) {
+                var moreNav = document.querySelector('.nav-item[data-page="more"]');
+                if (moreNav) moreNav.classList.add('active');
+            }
+
+            // Highlight "Clients" tab for detail page
+            if (page === 'client-detail') {
+                var clientsNav = document.querySelector('.nav-item[data-page="clients"]');
+                if (clientsNav) clientsNav.classList.add('active');
+            }
+
+            // Show/hide FAB
+            var fab = document.getElementById('fabBtn');
+            if (page === 'clients' || page === 'appointments' || page === 'inventory') {
+                fab.classList.remove('hidden');
+            } else {
+                fab.classList.add('hidden');
+            }
+
+            // Load page data
+            if (page === 'home') loadHomePage();
+            if (page === 'clients') loadClients();
+            if (page === 'appointments') loadAppointments();
+            if (page === 'finance') loadFinance();
+            if (page === 'inventory') loadInventory();
+            if (page === 'settings') loadSettings();
+
+            window.scrollTo(0, 0);
+        }
+
+        function handleFab() {
+            if (currentPage === 'clients') openAddClientModal();
+            if (currentPage === 'appointments') openAddApptModal();
+            if (currentPage === 'inventory') openAddInvModal();
+        }
+
+        // =============================================================
+        // UTILITY FUNCTIONS
+        // =============================================================
+        async function apiCall(method, path, body) {
+            var url = API + path;
+            var options = {
+                method: method,
+                headers: { 'Content-Type': 'application/json' }
+            };
+            if (body) {
+                options.body = JSON.stringify(body);
+            }
+            var response = await fetch(url, options);
+            if (!response.ok) {
+                var text = await response.text();
+                var msg;
+                try {
+                    msg = JSON.parse(text).detail || 'Error';
+                } catch (e) {
+                    msg = 'Error (' + response.status + ')';
+                }
+                throw new Error(msg);
+            }
+            return await response.json();
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('show');
+        }
+
+        function showToast(type, msg) {
+            var t = document.getElementById('toast');
+            t.className = 'toast show ' + type;
+            t.innerHTML = msg;
+            setTimeout(function() {
+                t.classList.remove('show');
+            }, 3500);
+        }
+
+        function showLoading(show) {
+            document.getElementById('loadingOverlay').classList.toggle('show', show);
+        }
+
+        function showConfirm(text, callback) {
+            document.getElementById('confirmText').textContent = text;
+            confirmCallback = callback;
+            document.getElementById('confirmOverlay').classList.add('show');
+        }
+
+        function closeConfirm() {
+            document.getElementById('confirmOverlay').classList.remove('show');
+            confirmCallback = null;
+        }
+
+        function executeConfirm() {
+            var cb = confirmCallback;
+            closeConfirm();
+            if (cb) cb();
+        }
+
+        function getInitials(first, last) {
+            return ((first || '')[0] || '') + ((last || '')[0] || '') || '?';
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            var div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return '';
+            try {
+                var d = new Date(dateStr);
+                if (isNaN(d.getTime())) return dateStr;
+                return d.toLocaleDateString('es-ES', { year: 'numeric', month: 'short', day: 'numeric' });
+            } catch (e) {
+                return dateStr;
+            }
+        }
+
+        function formatMoney(num) {
+            return Number(num).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        function satisfactionEmoji(s) {
+            if (!s) return '';
+            if (s.indexOf('Muy') !== -1) return '😄';
+            if (s.indexOf('Satisf') !== -1) return '😊';
+            if (s.indexOf('Neutral') !== -1) return '😐';
+            return '😞';
+        }
+
+        // =============================================================
+        // HOME PAGE
+        // =============================================================
+        async function loadHomePage() {
+            try {
+                var data = await apiCall('GET', '/api/clients/list');
+                allClients = data.clients || [];
+                document.getElementById('statClients').textContent = allClients.length;
+
+                // Load stats in background
+                loadHomeStats();
+
+                // Recent clients
+                var recent = allClients.slice(0, 3);
+                var container = document.getElementById('recentClients');
+                if (!recent.length) {
+                    container.innerHTML = '<div class="empty-state"><div class="empty-icon">👥</div><div class="empty-text">No hay clientes aun</div></div>';
                 } else {
+                    var html = '';
+                    for (var i = 0; i < recent.length; i++) {
+                        var cl = recent[i];
+                        html += '<div class="card client-card" onclick="openClientDetail(\'' + cl.id + '\')">'
+                            + '<div class="client-avatar">' + getInitials(cl.first_name, cl.last_name) + '</div>'
+                            + '<div class="client-info">'
+                            + '<div class="client-name">' + escapeHtml(cl.first_name) + ' ' + escapeHtml(cl.last_name) + '</div>'
+            <response clipped><NOTE>To save on context only part of this file has been shown to you. You should retry this tool after you have searched inside the file with `grep -n` in order to find the line numbers of what you are looking for.</NOTE>
+} else {
                     for (var i = 0; i < upcoming.length; i++) {
                         upHtml += renderAppointmentCard(upcoming[i]);
                     }
