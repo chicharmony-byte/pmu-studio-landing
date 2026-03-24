@@ -431,11 +431,11 @@
                 <div class="quick-action-icon">👥</div>
                 <div class="quick-action-text">Ver Clientes</div>
             </div>
-            <div class="quick-action" onclick="showToast('info','Citas próximamente')">
+            <div class="quick-action" onclick="navigateTo('appointments')">
                 <div class="quick-action-icon">📅</div>
-                <div class="quick-action-text">Nueva Cita</div>
+                <div class="quick-action-text">Citas</div>
             </div>
-            <div class="quick-action" onclick="showToast('info','Finanzas próximamente')">
+            <div class="quick-action" onclick="navigateTo('finance')">
                 <div class="quick-action-icon">💰</div>
                 <div class="quick-action-text">Finanzas</div>
             </div>
@@ -494,15 +494,299 @@
         </div>
     </div>
 
-    <!-- PAGE: APPOINTMENTS (Placeholder) -->
+    <!-- PAGE: APPOINTMENTS -->
     <div id="page-appointments" class="page hidden fade-in">
         <div class="page-header">
             <div class="page-title">📅 Citas</div>
-            <div class="page-subtitle">Gestión de agenda</div>
+            <div class="page-subtitle">Gestión de agenda y programación</div>
         </div>
-        <div class="empty-state">
-            <div class="empty-icon">📅</div>
-            <div class="empty-text">Módulo de citas próximamente</div>
+
+        <div class="stats-row" style="grid-template-columns: repeat(2,1fr);">
+            <div class="stat-card"><div class="stat-value" style="color:var(--success);">0</div><div class="stat-label">Hoy</div></div>
+            <div class="stat-card"><div class="stat-value">0</div><div class="stat-label">Esta Semana</div></div>
+        </div>
+
+        <div class="tabs" style="margin-bottom:16px;">
+            <button class="tab active" onclick="switchApptTab('upcoming',this)">Próximas</button>
+            <button class="tab" onclick="switchApptTab('past',this)">Pasadas</button>
+            <button class="tab" onclick="switchApptTab('calendar',this)">Calendario</button>
+        </div>
+
+        <div id="appt-tab-upcoming">
+            <div class="card" style="border-left:3px solid var(--accent);margin-bottom:10px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:15px;font-weight:600;">María García López</div>
+                        <div style="font-size:13px;color:var(--accent);margin-top:2px;">Retoque de Cejas</div>
+                        <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">📅 Próxima semana · ⏱️ 90 min</div>
+                    </div>
+                    <span class="badge badge-info">Programada</span>
+                </div>
+            </div>
+            <div class="card" style="border-left:3px solid var(--warning);margin-bottom:10px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:15px;font-weight:600;">Ana Martínez Ruiz</div>
+                        <div style="font-size:13px;color:var(--accent);margin-top:2px;">Retoque Lip Blush</div>
+                        <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">📅 En 2 semanas · ⏱️ 120 min</div>
+                    </div>
+                    <span class="badge badge-warning">Pendiente</span>
+                </div>
+            </div>
+            <div style="text-align:center;padding:20px 0;">
+                <div style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">Módulo de citas completo en desarrollo</div>
+                <button class="btn btn-primary btn-sm" onclick="showToast('info','Programación completa próximamente')">+ Nueva Cita</button>
+            </div>
+        </div>
+        <div id="appt-tab-past" class="hidden">
+            <div class="card" style="border-left:3px solid var(--success);margin-bottom:10px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:15px;font-weight:600;">Carmen Rodríguez Peña</div>
+                        <div style="font-size:13px;color:var(--accent);margin-top:2px;">Retoque de Cejas</div>
+                        <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">📅 Hace 2 días · ⏱️ 75 min · $150</div>
+                    </div>
+                    <span class="badge badge-success">Completada</span>
+                </div>
+            </div>
+            <div class="card" style="border-left:3px solid var(--success);margin-bottom:10px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:15px;font-weight:600;">Ana Martínez Ruiz</div>
+                        <div style="font-size:13px;color:var(--accent);margin-top:2px;">Lip Blush</div>
+                        <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">📅 Hace 10 días · ⏱️ 120 min · $400</div>
+                    </div>
+                    <span class="badge badge-success">Completada</span>
+                </div>
+            </div>
+            <div class="card" style="border-left:3px solid var(--success);margin-bottom:10px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:15px;font-weight:600;">María García López</div>
+                        <div style="font-size:13px;color:var(--accent);margin-top:2px;">Micropigmentación Cejas - Híbrida</div>
+                        <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">📅 Hace 45 días · ⏱️ 150 min · $350</div>
+                    </div>
+                    <span class="badge badge-success">Completada</span>
+                </div>
+            </div>
+        </div>
+        <div id="appt-tab-calendar" class="hidden">
+            <div class="card" style="text-align:center;padding:30px;">
+                <div style="font-size:48px;margin-bottom:12px;">📅</div>
+                <div style="font-size:16px;font-weight:600;margin-bottom:8px;">Vista de Calendario</div>
+                <div style="font-size:13px;color:var(--text-muted);">Calendario interactivo completo próximamente</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE: FINANCE -->
+    <div id="page-finance" class="page hidden fade-in">
+        <div class="page-header">
+            <div class="page-title">💰 Finanzas</div>
+            <div class="page-subtitle">Control de ingresos y gastos</div>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat-card"><div class="stat-value" style="color:var(--success);">$1,580</div><div class="stat-label">Ingresos</div></div>
+            <div class="stat-card"><div class="stat-value" style="color:var(--danger);">$320</div><div class="stat-label">Gastos</div></div>
+            <div class="stat-card"><div class="stat-value">$1,260</div><div class="stat-label">Balance</div></div>
+        </div>
+
+        <div class="tabs" style="margin-bottom:16px;">
+            <button class="tab active" onclick="switchFinanceTab('overview',this)">Resumen</button>
+            <button class="tab" onclick="switchFinanceTab('income',this)">Ingresos</button>
+            <button class="tab" onclick="switchFinanceTab('expenses',this)">Gastos</button>
+        </div>
+
+        <div id="fin-tab-overview">
+            <div class="section-title">📊 Últimas Transacciones</div>
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:14px;font-weight:600;">Retoque de Cejas - Carmen R.</div>
+                        <div style="font-size:12px;color:var(--text-muted);">Hace 2 días</div>
+                    </div>
+                    <div style="font-size:15px;font-weight:700;color:var(--success);">+$150</div>
+                </div>
+            </div>
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:14px;font-weight:600;">Pigmentos PhiBrows</div>
+                        <div style="font-size:12px;color:var(--text-muted);">Hace 3 días · Insumos</div>
+                    </div>
+                    <div style="font-size:15px;font-weight:700;color:var(--danger);">-$85</div>
+                </div>
+            </div>
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:14px;font-weight:600;">Lip Blush - Ana M.</div>
+                        <div style="font-size:12px;color:var(--text-muted);">Hace 10 días</div>
+                    </div>
+                    <div style="font-size:15px;font-weight:700;color:var(--success);">+$400</div>
+                </div>
+            </div>
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:14px;font-weight:600;">Agujas descartables</div>
+                        <div style="font-size:12px;color:var(--text-muted);">Hace 12 días · Insumos</div>
+                    </div>
+                    <div style="font-size:15px;font-weight:700;color:var(--danger);">-$45</div>
+                </div>
+            </div>
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:14px;font-weight:600;">Cejas Híbrida - María G.</div>
+                        <div style="font-size:12px;color:var(--text-muted);">Hace 45 días</div>
+                    </div>
+                    <div style="font-size:15px;font-weight:700;color:var(--success);">+$350</div>
+                </div>
+            </div>
+            <div style="text-align:center;padding:16px 0;">
+                <div style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">Registro completo de transacciones en desarrollo</div>
+                <button class="btn btn-primary btn-sm" onclick="showToast('info','Registro de transacciones próximamente')">+ Transacción</button>
+            </div>
+        </div>
+        <div id="fin-tab-income" class="hidden">
+            <div class="card" style="margin-bottom:8px;border-left:3px solid var(--success);">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:14px;font-weight:600;">Retoque de Cejas - Carmen R.</div>
+                        <div style="font-size:12px;color:var(--text-muted);">Hace 2 días</div>
+                    </div>
+                    <div style="font-size:15px;font-weight:700;color:var(--success);">+$150</div>
+                </div>
+            </div>
+            <div class="card" style="margin-bottom:8px;border-left:3px solid var(--success);">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:14px;font-weight:600;">Lip Blush - Ana M.</div>
+                        <div style="font-size:12px;color:var(--text-muted);">Hace 10 días</div>
+                    </div>
+                    <div style="font-size:15px;font-weight:700;color:var(--success);">+$400</div>
+                </div>
+            </div>
+            <div class="card" style="margin-bottom:8px;border-left:3px solid var(--success);">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:14px;font-weight:600;">Cejas Híbrida - María G.</div>
+                        <div style="font-size:12px;color:var(--text-muted);">Hace 45 días</div>
+                    </div>
+                    <div style="font-size:15px;font-weight:700;color:var(--success);">+$350</div>
+                </div>
+            </div>
+            <div class="card" style="margin-bottom:8px;border-left:3px solid var(--success);">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:14px;font-weight:600;">Powder Brows - Carmen R.</div>
+                        <div style="font-size:12px;color:var(--text-muted);">Hace 100 días</div>
+                    </div>
+                    <div style="font-size:15px;font-weight:700;color:var(--success);">+$380</div>
+                </div>
+            </div>
+            <div class="card" style="margin-bottom:8px;border-left:3px solid var(--success);">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:14px;font-weight:600;">Retoque - Carmen R.</div>
+                        <div style="font-size:12px;color:var(--text-muted);">Hace 60 días</div>
+                    </div>
+                    <div style="font-size:15px;font-weight:700;color:var(--success);">+$150</div>
+                </div>
+            </div>
+        </div>
+        <div id="fin-tab-expenses" class="hidden">
+            <div class="card" style="margin-bottom:8px;border-left:3px solid var(--danger);">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:14px;font-weight:600;">Pigmentos PhiBrows</div>
+                        <div style="font-size:12px;color:var(--text-muted);">Hace 3 días · Insumos</div>
+                    </div>
+                    <div style="font-size:15px;font-weight:700;color:var(--danger);">-$85</div>
+                </div>
+            </div>
+            <div class="card" style="margin-bottom:8px;border-left:3px solid var(--danger);">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:14px;font-weight:600;">Agujas descartables</div>
+                        <div style="font-size:12px;color:var(--text-muted);">Hace 12 días · Insumos</div>
+                    </div>
+                    <div style="font-size:15px;font-weight:700;color:var(--danger);">-$45</div>
+                </div>
+            </div>
+            <div class="card" style="margin-bottom:8px;border-left:3px solid var(--danger);">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:14px;font-weight:600;">Anestésico tópico</div>
+                        <div style="font-size:12px;color:var(--text-muted);">Hace 15 días · Insumos</div>
+                    </div>
+                    <div style="font-size:15px;font-weight:700;color:var(--danger);">-$35</div>
+                </div>
+            </div>
+            <div class="card" style="margin-bottom:8px;border-left:3px solid var(--danger);">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                        <div style="font-size:14px;font-weight:600;">Renta del studio</div>
+                        <div style="font-size:12px;color:var(--text-muted);">Hace 20 días · Renta</div>
+                    </div>
+                    <div style="font-size:15px;font-weight:700;color:var(--danger);">-$155</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE: AI DESIGN -->
+    <div id="page-ai-design" class="page hidden fade-in">
+        <div class="page-header">
+            <div class="page-title">🤖 Análisis con IA</div>
+            <div class="page-subtitle">Herramientas inteligentes de diseño PMU</div>
+        </div>
+
+        <div class="card" style="border-left:3px solid var(--accent);margin-bottom:12px;">
+            <div style="display:flex;gap:14px;align-items:center;">
+                <div style="font-size:36px;">📸</div>
+                <div>
+                    <div style="font-size:16px;font-weight:700;">Análisis Facial Completo</div>
+                    <div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Simetría facial, puntos de referencia y recomendaciones para micropigmentación de cejas</div>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="showToast('info','Sube una foto para analizar - Funcionalidad completa próximamente')">Iniciar Análisis</button>
+        </div>
+
+        <div class="card" style="border-left:3px solid var(--warning);margin-bottom:12px;">
+            <div style="display:flex;gap:14px;align-items:center;">
+                <div style="font-size:36px;">🎨</div>
+                <div>
+                    <div style="font-size:16px;font-weight:700;">Análisis de Color</div>
+                    <div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Tono de piel, subtonos y recomendaciones de pigmentos personalizadas</div>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="showToast('info','Análisis de color próximamente')">Analizar Color</button>
+        </div>
+
+        <div class="card" style="border-left:3px solid var(--success);margin-bottom:12px;">
+            <div style="display:flex;gap:14px;align-items:center;">
+                <div style="font-size:36px;">✨</div>
+                <div>
+                    <div style="font-size:16px;font-weight:700;">Simulación de Diseño</div>
+                    <div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Vista previa del resultado final sobre la foto del cliente</div>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="showToast('info','Simulación de diseño próximamente')">Simular Diseño</button>
+        </div>
+
+        <div class="section-title">🔬 Herramientas Adicionales</div>
+        <div class="quick-actions">
+            <div class="quick-action" onclick="showToast('info','Guía de medidas próximamente')">
+                <div class="quick-action-icon">📐</div>
+                <div class="quick-action-text">Guía de Medidas</div>
+            </div>
+            <div class="quick-action" onclick="showToast('info','Paleta de pigmentos próximamente')">
+                <div class="quick-action-icon">🎨</div>
+                <div class="quick-action-text">Paleta Pigmentos</div>
+            </div>
         </div>
     </div>
 
@@ -510,24 +794,53 @@
     <div id="page-more" class="page hidden fade-in">
         <div class="page-header">
             <div class="page-title">⚙️ Más</div>
-            <div class="page-subtitle">Configuración y herramientas</div>
+            <div class="page-subtitle">Herramientas y configuración</div>
         </div>
         <div class="quick-actions" style="grid-template-columns:1fr;">
-            <div class="quick-action" onclick="showToast('info','IA próximamente')">
-                <div class="quick-action-icon">🤖</div>
-                <div class="quick-action-text">Análisis con IA</div>
+            <div class="quick-action" onclick="navigateTo('ai-design')">
+                <div style="display:flex;align-items:center;gap:14px;">
+                    <div class="quick-action-icon" style="margin:0;">🤖</div>
+                    <div style="text-align:left;">
+                        <div class="quick-action-text">Análisis con IA</div>
+                        <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Simetría facial, color, diseño</div>
+                    </div>
+                </div>
             </div>
-            <div class="quick-action" onclick="showToast('info','Finanzas próximamente')">
-                <div class="quick-action-icon">📊</div>
-                <div class="quick-action-text">Reportes y Finanzas</div>
+            <div class="quick-action" onclick="navigateTo('finance')">
+                <div style="display:flex;align-items:center;gap:14px;">
+                    <div class="quick-action-icon" style="margin:0;">📊</div>
+                    <div style="text-align:left;">
+                        <div class="quick-action-text">Reportes y Finanzas</div>
+                        <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Ingresos, gastos, balance</div>
+                    </div>
+                </div>
             </div>
             <div class="quick-action" onclick="showToast('info','Inventario próximamente')">
-                <div class="quick-action-icon">📦</div>
-                <div class="quick-action-text">Inventario</div>
+                <div style="display:flex;align-items:center;gap:14px;">
+                    <div class="quick-action-icon" style="margin:0;">📦</div>
+                    <div style="text-align:left;">
+                        <div class="quick-action-text">Inventario</div>
+                        <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Control de insumos y productos</div>
+                    </div>
+                </div>
+            </div>
+            <div class="quick-action" onclick="showToast('info','Formularios próximamente')">
+                <div style="display:flex;align-items:center;gap:14px;">
+                    <div class="quick-action-icon" style="margin:0;">📋</div>
+                    <div style="text-align:left;">
+                        <div class="quick-action-text">Formularios Digitales</div>
+                        <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Consentimiento, historial médico</div>
+                    </div>
+                </div>
             </div>
             <div class="quick-action" onclick="showToast('info','Configuración próximamente')">
-                <div class="quick-action-icon">⚙️</div>
-                <div class="quick-action-text">Configuración</div>
+                <div style="display:flex;align-items:center;gap:14px;">
+                    <div class="quick-action-icon" style="margin:0;">⚙️</div>
+                    <div style="text-align:left;">
+                        <div class="quick-action-text">Configuración</div>
+                        <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Perfil, notificaciones, preferencias</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -724,6 +1037,13 @@ function navigateTo(page) {
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     const navItem = document.querySelector(`.nav-item[data-page="${page}"]`);
     if (navItem) navItem.classList.add('active');
+    // For sub-pages, highlight parent nav
+    if (page === 'finance' || page === 'ai-design') {
+        document.querySelector('.nav-item[data-page="more"]').classList.add('active');
+    }
+    if (page === 'client-detail') {
+        document.querySelector('.nav-item[data-page="clients"]').classList.add('active');
+    }
     // FAB visibility
     const fab = document.getElementById('fabAddClient');
     if (page === 'clients') {
@@ -902,9 +1222,6 @@ async function openClientDetail(clientId) {
         switchDetailTab('info', document.querySelector('.tab'));
         
         navigateTo('client-detail');
-        // Hide nav items active
-        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-        document.querySelector('.nav-item[data-page="clients"]').classList.add('active');
         
     } catch (err) {
         showToast('error', 'Error al cargar cliente: ' + err.message);
@@ -981,7 +1298,7 @@ function renderServices(services) {
 }
 
 function switchDetailTab(tab, el) {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('#page-client-detail .tab').forEach(t => t.classList.remove('active'));
     el.classList.add('active');
     
     document.getElementById('tab-info').classList.toggle('hidden', tab !== 'info');
@@ -989,287 +1306,8 @@ function switchDetailTab(tab, el) {
 }
 
 // =============================================================================
-// ADD / EDIT CLIENT
+// APPOINTMENT TABS
 // =============================================================================
-function openAddClientModal() {
-    document.getElementById('clientModalTitle').textContent = 'Nuevo Cliente';
-    document.getElementById('clientSubmitBtn').textContent = 'Guardar';
-    document.getElementById('editClientId').value = '';
-    document.getElementById('clientForm').reset();
-    document.getElementById('clientModal').classList.add('show');
-}
-
-function openEditClientModal() {
-    if (!currentClientData) return;
-    fillClientForm(currentClientData);
-    document.getElementById('clientModal').classList.add('show');
-}
-
-async function openEditClientModalById(clientId) {
-    showLoading(true);
-    try {
-        const data = await apiCall('GET', `/api/clients/${clientId}`);
-        fillClientForm(data.client);
-        document.getElementById('clientModal').classList.add('show');
-    } catch (err) {
-        showToast('error', 'Error al cargar datos del cliente');
-    } finally {
-        showLoading(false);
-    }
-}
-
-function fillClientForm(c) {
-    document.getElementById('clientModalTitle').textContent = 'Editar Cliente';
-    document.getElementById('clientSubmitBtn').textContent = 'Actualizar';
-    document.getElementById('editClientId').value = c.id;
-    document.getElementById('cfFirstName').value = c.first_name || '';
-    document.getElementById('cfLastName').value = c.last_name || '';
-    document.getElementById('cfEmail').value = c.email || '';
-    document.getElementById('cfPhone').value = c.phone || '';
-    document.getElementById('cfDOB').value = c.date_of_birth || '';
-    document.getElementById('cfSkinTone').value = c.skin_tone || '';
-    document.getElementById('cfHairColor').value = c.hair_color || '';
-    document.getElementById('cfEyeColor').value = c.eye_color || '';
-    document.getElementById('cfAllergies').value = c.allergies || '';
-    document.getElementById('cfMedical').value = c.medical_conditions || '';
-    document.getElementById('cfNotes').value = c.notes || '';
-}
-
-function closeClientModal() {
-    document.getElementById('clientModal').classList.remove('show');
-}
-
-async function submitClientForm(event) {
-    event.preventDefault();
-    const editId = document.getElementById('editClientId').value;
-    const isEdit = !!editId;
-    
-    const payload = {
-        first_name: document.getElementById('cfFirstName').value.trim(),
-        last_name: document.getElementById('cfLastName').value.trim(),
-        email: document.getElementById('cfEmail').value.trim(),
-        phone: document.getElementById('cfPhone').value.trim(),
-        date_of_birth: document.getElementById('cfDOB').value,
-        skin_tone: document.getElementById('cfSkinTone').value.trim(),
-        hair_color: document.getElementById('cfHairColor').value.trim(),
-        eye_color: document.getElementById('cfEyeColor').value.trim(),
-        allergies: document.getElementById('cfAllergies').value.trim(),
-        medical_conditions: document.getElementById('cfMedical').value.trim(),
-        notes: document.getElementById('cfNotes').value.trim(),
-    };
-    
-    if (!payload.first_name) {
-        showToast('error', 'El nombre es obligatorio');
-        return;
-    }
-    
-    const btn = document.getElementById('clientSubmitBtn');
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span> Guardando...';
-    
-    try {
-        if (isEdit) {
-            await apiCall('PUT', `/api/clients/update/${editId}`, payload);
-            showToast('success', 'Cliente actualizado exitosamente ✓');
-        } else {
-            await apiCall('POST', '/api/clients/add', payload);
-            showToast('success', 'Cliente guardado exitosamente ✓');
-        }
-        
-        closeClientModal();
-        
-        // Refresh current view
-        if (currentPage === 'client-detail' && isEdit) {
-            openClientDetail(editId);
-        } else {
-            loadClients();
-        }
-        
-    } catch (err) {
-        showToast('error', 'Error: ' + err.message);
-    } finally {
-        btn.disabled = false;
-        btn.textContent = isEdit ? 'Actualizar' : 'Guardar';
-    }
-}
-
-// =============================================================================
-// DELETE CLIENT
-// =============================================================================
-function confirmDeleteClient() {
-    if (!currentClientId || !currentClientData) return;
-    showConfirm(
-        `¿Eliminar a ${currentClientData.first_name} ${currentClientData.last_name}? Esta acción no se puede deshacer.`,
-        async () => {
-            showLoading(true);
-            try {
-                await apiCall('DELETE', `/api/clients/delete/${currentClientId}`);
-                showToast('success', 'Cliente eliminado ✓');
-                navigateTo('clients');
-            } catch (err) {
-                showToast('error', 'Error al eliminar: ' + err.message);
-            } finally {
-                showLoading(false);
-            }
-        }
-    );
-}
-
-function confirmDeleteClientById(clientId, clientName) {
-    showConfirm(
-        `¿Eliminar a ${clientName}? Esta acción no se puede deshacer.`,
-        async () => {
-            showLoading(true);
-            try {
-                await apiCall('DELETE', `/api/clients/delete/${clientId}`);
-                showToast('success', 'Cliente eliminado ✓');
-                loadClients(document.getElementById('clientSearch').value);
-            } catch (err) {
-                showToast('error', 'Error al eliminar: ' + err.message);
-            } finally {
-                showLoading(false);
-            }
-        }
-    );
-}
-
-// =============================================================================
-// ADD SERVICE
-// =============================================================================
-function openAddServiceModal() {
-    document.getElementById('serviceForm').reset();
-    // Set today as default date
-    document.getElementById('sfDate').value = new Date().toISOString().split('T')[0];
-    document.getElementById('serviceModal').classList.add('show');
-}
-
-function closeServiceModal() {
-    document.getElementById('serviceModal').classList.remove('show');
-}
-
-async function submitServiceForm(event) {
-    event.preventDefault();
-    
-    if (!currentClientId) {
-        showToast('error', 'Error: No hay cliente seleccionado');
-        return;
-    }
-    
-    const payload = {
-        service_type: document.getElementById('sfType').value,
-        date: document.getElementById('sfDate').value,
-        price: parseFloat(document.getElementById('sfPrice').value) || 0,
-        duration_minutes: parseInt(document.getElementById('sfDuration').value) || 120,
-        technique: document.getElementById('sfTechnique').value.trim(),
-        pigments_used: document.getElementById('sfPigments').value.trim(),
-        notes: document.getElementById('sfNotes').value.trim(),
-        satisfaction: document.getElementById('sfSatisfaction').value,
-        next_session: document.getElementById('sfNextSession').value.trim(),
-    };
-    
-    if (!payload.service_type) {
-        showToast('error', 'Selecciona un tipo de servicio');
-        return;
-    }
-    
-    const btn = document.getElementById('serviceSubmitBtn');
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span> Guardando...';
-    
-    try {
-        await apiCall('POST', `/api/clients/${currentClientId}/services`, payload);
-        showToast('success', 'Servicio registrado exitosamente ✓');
-        closeServiceModal();
-        await loadClientServices(currentClientId);
-        // Switch to services tab
-        switchDetailTab('services', document.querySelectorAll('.tab')[1]);
-    } catch (err) {
-        showToast('error', 'Error: ' + err.message);
-    } finally {
-        btn.disabled = false;
-        btn.textContent = 'Guardar Servicio';
-    }
-}
-
-// =============================================================================
-// UI HELPERS
-// =============================================================================
-function showToast(type, message) {
-    const toast = document.getElementById('toast');
-    toast.className = 'toast show ' + type;
-    toast.innerHTML = message;
-    setTimeout(() => { toast.classList.remove('show'); }, 3500);
-}
-
-function showLoading(show) {
-    document.getElementById('loadingOverlay').classList.toggle('show', show);
-}
-
-function showConfirm(text, callback) {
-    document.getElementById('confirmText').textContent = text;
-    confirmCallback = callback;
-    document.getElementById('confirmOverlay').classList.add('show');
-}
-
-function closeConfirm() {
-    document.getElementById('confirmOverlay').classList.remove('show');
-    confirmCallback = null;
-}
-
-function executeConfirm() {
-    closeConfirm();
-    if (confirmCallback) confirmCallback();
-}
-
-function getInitials(first, last) {
-    return ((first || '')[0] || '') + ((last || '')[0] || '') || '?';
-}
-
-function esc(str) {
-    if (!str) return '';
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-}
-
-function formatDate(dateStr) {
-    if (!dateStr) return '';
-    try {
-        const d = new Date(dateStr);
-        if (isNaN(d.getTime())) return dateStr;
-        return d.toLocaleDateString('es-ES', { year: 'numeric', month: 'short', day: 'numeric' });
-    } catch {
-        return dateStr;
-    }
-}
-
-function getSatisfactionEmoji(sat) {
-    if (!sat) return '';
-    if (sat.includes('Muy')) return '😄';
-    if (sat.includes('Satisf')) return '😊';
-    if (sat.includes('Neutral')) return '😐';
-    if (sat.includes('Insatisf')) return '😞';
-    return '📋';
-}
-
-// =============================================================================
-// INITIALIZATION
-// =============================================================================
-async function initApp() {
-    // Try to seed demo data (will only create if no clients exist)
-    try {
-        await apiCall('POST', '/api/seed-demo-data');
-    } catch (e) {
-        console.log('Seed check:', e.message);
-    }
-    
-    // Load home page
-    loadHomePage();
-}
-
-// Start the app
-document.addEventListener('DOMContentLoaded', initApp);
-</script>
-</body>
-</html>
+function switchApptTab(tab, el) {
+    document.querySelectorAll('#page-appointment<response clipped><NOTE>To save on context only part of this file has been shown to you. You should retry this tool after you have searched inside the file with `grep -n` in order to find the line numbers of what you are looking for.</NOTE>
 
