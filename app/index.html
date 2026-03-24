@@ -1740,90 +1740,8 @@
                             + '<div class="client-info">'
                             + '<div class="client-name">' + escapeHtml(cl.first_name) + ' ' + escapeHtml(cl.last_name) + '</div>'
             <response clipped><NOTE>To save on context only part of this file has been shown to you. You should retry this tool after you have searched inside the file with `grep -n` in order to find the line numbers of what you are looking for.</NOTE>
-} else {
-                    for (var i = 0; i < upcoming.length; i++) {
-                        upHtml += renderAppointmentCard(upcoming[i]);
-                    }
-                }
-                document.getElementById('appt-tab-upcoming').innerHTML = upHtml;
 
-                var pastHtml = '';
-                if (!past.length) {
-                    pastHtml = '<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No hay citas pasadas</div></div>';
-                } else {
-                    for (var i = 0; i < past.length; i++) {
-                        pastHtml += renderAppointmentCard(past[i]);
-                    }
-                }
-                document.getElementById('appt-tab-past').innerHTML = pastHtml;
 
-            } catch (e) {
-                showToast('error', 'Error: ' + e.message);
-            }
-        }
-
-        function renderAppointmentCard(a) {
-            var statusMap = {
-                programada: 'badge-info',
-                confirmada: 'badge-info',
-                pendiente: 'badge-warning',
-                completada: 'badge-success',
-                cancelada: 'badge-danger'
-            };
-            var statusLabels = {
-                programada: 'Programada',
-                confirmada: 'Confirmada',
-                pendiente: 'Pendiente',
-                completada: 'Completada',
-                cancelada: 'Cancelada'
-            };
-
-            var safeName = escapeHtml(a.client_name || 'Sin cliente');
-
-            return '<div class="card appt-card status-' + a.status + '" style="margin-bottom:10px;">'
-                + '<div style="display:flex;justify-content:space-between;align-items:flex-start;">'
-                + '<div style="flex:1;">'
-                + '<div style="font-size:15px;font-weight:600;">' + safeName + '</div>'
-                + '<div style="font-size:13px;color:var(--accent);margin-top:2px;">' + escapeHtml(a.service_type) + '</div>'
-                + '<div style="font-size:12px;color:var(--text-muted);margin-top:4px;">📅 ' + formatDate(a.date) + ' &middot; 🕐 ' + (a.time || '') + ' &middot; ⏱️ ' + a.duration_minutes + 'min' + (a.price ? ' &middot; $' + formatMoney(a.price) : '') + '</div>'
-                + '</div>'
-                + '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">'
-                + '<span class="badge ' + (statusMap[a.status] || 'badge-info') + '">' + (statusLabels[a.status] || a.status) + '</span>'
-                + '<div style="display:flex;gap:4px;">'
-                + '<button class="client-action-btn" onclick="openEditAppt(\'' + a.id + '\')" style="font-size:14px;">✏️</button>'
-                + '<button class="client-action-btn" onclick="confirmDeleteAppt(\'' + a.id + '\',\'' + safeName.replace(/'/g, "\\'") + '\')" style="font-size:14px;">🗑️</button>'
-                + '</div>'
-                + '</div>'
-                + '</div>'
-                + '</div>';
-        }
-
-        function switchApptTab(tab, el) {
-            var tabs = document.querySelectorAll('#apptTabs .tab');
-            for (var i = 0; i < tabs.length; i++) {
-                tabs[i].classList.remove('active');
-            }
-            el.classList.add('active');
-
-            document.getElementById('appt-tab-upcoming').classList.toggle('hidden', tab !== 'upcoming');
-            document.getElementById('appt-tab-past').classList.toggle('hidden', tab !== 'past');
-        }
-
-        // =============================================================
-        // FINANCE
-        // =============================================================
-        async function loadFinance() {
-            try {
-                var s = await apiCall('GET', '/api/finance/summary');
-                document.getElementById('finStats').innerHTML =
-                    '<div class="stat-card"><div class="stat-value" style="color:var(--success);">$' + formatMoney(s.total_income) + '</div><div class="stat-label">Ingresos</div></div>'
-                    + '<div class="stat-card"><div class="stat-value" style="color:var(--danger);">$' + formatMoney(s.total_expenses) + '</div><div class="stat-label">Gastos</div></div>'
-                    + '<div class="stat-card"><div class="stat-value">$' + formatMoney(s.balance) + '</div><div class="stat-label">Balance</div></div>';
-
-                loadTransactions(currentFinFilter);
-            } catch (e) {
-                showToast('error', 'Error: ' + e.message);
-            }
         }
 
         async function loadTransactions(filter) {
@@ -2711,3 +2629,4 @@
 
 </body>
 </html>
+
