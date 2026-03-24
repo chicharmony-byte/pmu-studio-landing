@@ -14,148 +14,59 @@
         .top-bar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(15,15,35,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
         .top-bar-title{font-size:18px;font-weight:700;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
         .top-bar-sub{font-size:11px;color:var(--text-muted);letter-spacing:1px}
-        .top-bar-right{display:flex;gap:12px;align-items:center}
-        .top-bar-btn{background:none;border:none;color:var(--text-secondary);font-size:22px;cursor:pointer;padding:4px}
         .content{padding:70px 16px 90px;min-height:100vh}
         .bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(15,15,35,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;justify-content:space-around;align-items:center;padding:8px 0 calc(8px + var(--safe-bottom))}
         .nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:10px;padding:6px 12px;min-width:60px;transition:color 0.2s}
-        .nav-item.active{color:var(--accent)}
-        .nav-item .nav-icon{font-size:22px}
+        .nav-item.active{color:var(--accent)}.nav-item .nav-icon{font-size:22px}
         .card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px}
         .search-container{position:relative;margin-bottom:16px}
-        .search-input{width:100%;padding:12px 16px 12px 42px;background:var(--bg-input);border:1px solid var(--border);border-radius:12px;color:var(--text-primary);font-size:15px;outline:none;transition:border-color 0.2s}
-        .search-input:focus{border-color:var(--accent)}
-        .search-input::placeholder{color:var(--text-muted)}
+        .search-input{width:100%;padding:12px 16px 12px 42px;background:var(--bg-input);border:1px solid var(--border);border-radius:12px;color:var(--text-primary);font-size:15px;outline:none}
+        .search-input:focus{border-color:var(--accent)}.search-input::placeholder{color:var(--text-muted)}
         .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--text-muted)}
-        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;transition:transform 0.1s,opacity 0.2s}
-        .btn:active{transform:scale(0.97)}
-        .btn-primary{background:var(--accent-gradient);color:#fff}
-        .btn-secondary{background:var(--bg-input);color:var(--text-primary);border:1px solid var(--border)}
-        .btn-danger{background:var(--danger);color:#fff}
-        .btn-success{background:var(--success);color:#fff}
-        .btn-sm{padding:8px 16px;font-size:13px}
-        .btn-block{width:100%}
-        .btn:disabled{opacity:0.5;cursor:not-allowed}
-        .fab{position:fixed;bottom:calc(80px + var(--safe-bottom));right:20px;width:56px;height:56px;background:var(--accent-gradient);border:none;border-radius:50%;color:#fff;font-size:28px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(232,121,249,0.4);cursor:pointer;z-index:50;transition:transform 0.2s}
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;transition:transform 0.1s}
+        .btn:active{transform:scale(0.97)}.btn-primary{background:var(--accent-gradient);color:#fff}.btn-secondary{background:var(--bg-input);color:var(--text-primary);border:1px solid var(--border)}.btn-danger{background:var(--danger);color:#fff}.btn-sm{padding:8px 16px;font-size:13px}.btn-block{width:100%}.btn:disabled{opacity:0.5}
+        .fab{position:fixed;bottom:calc(80px + var(--safe-bottom));right:20px;width:56px;height:56px;background:var(--accent-gradient);border:none;border-radius:50%;color:#fff;font-size:28px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(232,121,249,0.4);cursor:pointer;z-index:50}
         .fab:active{transform:scale(0.9)}
-        .client-card{display:flex;align-items:center;gap:12px;cursor:pointer;transition:background 0.2s}
-        .client-card:active{background:rgba(232,121,249,0.05)}
-        .client-avatar{width:48px;height:48px;background:var(--accent-gradient);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;flex-shrink:0}
-        .client-info{flex:1;min-width:0}
-        .client-name{font-size:16px;font-weight:600;color:var(--text-primary)}
-        .client-detail{font-size:13px;color:var(--text-muted);margin-top:2px}
-        .client-actions{display:flex;gap:8px;flex-shrink:0}
-        .client-action-btn{background:none;border:none;font-size:18px;cursor:pointer;padding:6px;color:var(--text-muted);transition:color 0.2s}
-        .form-group{margin-bottom:16px}
-        .form-label{display:block;font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:6px}
-        .form-input,.form-textarea,.form-select{width:100%;padding:12px 14px;background:var(--bg-input);border:1px solid var(--border);border-radius:10px;color:var(--text-primary);font-size:15px;outline:none;transition:border-color 0.2s}
-        .form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--accent)}
-        .form-input::placeholder,.form-textarea::placeholder{color:var(--text-muted)}
-        .form-textarea{min-height:80px;resize:vertical;font-family:inherit}
-        .form-select{appearance:none}
-        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-        .service-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px}
-        .service-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
-        .service-type{font-size:15px;font-weight:600;color:var(--accent)}
-        .service-date{font-size:12px;color:var(--text-muted)}
-        .service-price{font-size:16px;font-weight:700;color:var(--success)}
-        .service-detail-row{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
-        .service-tag{background:rgba(232,121,249,0.1);border:1px solid rgba(232,121,249,0.2);border-radius:8px;padding:4px 10px;font-size:12px;color:var(--text-secondary)}
-        .service-notes{font-size:13px;color:var(--text-muted);margin-top:8px;font-style:italic}
-        .page-header{margin-bottom:20px}
-        .page-title{font-size:24px;font-weight:800}
-        .page-subtitle{font-size:14px;color:var(--text-muted);margin-top:4px}
-        .detail-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
-        .back-btn{background:none;border:none;color:var(--accent);font-size:24px;cursor:pointer;padding:4px}
-        .tabs{display:flex;gap:4px;margin-bottom:16px;background:var(--bg-secondary);border-radius:12px;padding:4px}
-        .tab{flex:1;padding:10px;text-align:center;background:none;border:none;color:var(--text-muted);font-size:13px;font-weight:600;cursor:pointer;border-radius:10px;transition:all 0.2s}
-        .tab.active{background:var(--accent-gradient);color:#fff}
-        .empty-state{text-align:center;padding:40px 20px}
-        .empty-icon{font-size:48px;margin-bottom:12px}
-        .empty-text{font-size:16px;color:var(--text-muted)}
-        .modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.7);display:none;align-items:flex-end;justify-content:center}
-        .modal-overlay.show{display:flex}
-        .modal{background:var(--bg-primary);border-radius:20px 20px 0 0;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;padding:24px 20px calc(20px + var(--safe-bottom));animation:slideUp 0.3s ease-out}
-        @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-        .modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-        .modal-title{font-size:20px;font-weight:700}
-        .modal-close{background:none;border:none;color:var(--text-muted);font-size:24px;cursor:pointer;padding:4px}
-        .toast{position:fixed;top:80px;left:16px;right:16px;z-index:300;padding:14px 18px;border-radius:12px;font-size:14px;font-weight:600;display:none;align-items:center;gap:10px;animation:fadeDown 0.3s ease-out}
-        .toast.show{display:flex}
-        .toast.success{background:var(--success);color:#fff}
-        .toast.error{background:var(--danger);color:#fff}
-        .toast.info{background:var(--accent-dark);color:#fff}
-        @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
-        .confirm-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;padding:20px}
-        .confirm-overlay.show{display:flex}
-        .confirm-box{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;max-width:340px;width:100%}
-        .confirm-icon{font-size:40px;margin-bottom:12px}
-        .confirm-text{font-size:16px;color:var(--text-secondary);margin-bottom:20px}
-        .confirm-actions{display:flex;gap:12px}
-        .confirm-actions .btn{flex:1}
-        .spinner{display:inline-block;width:20px;height:20px;border:3px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite}
-        @keyframes spin{to{transform:rotate(360deg)}}
-        .loading-overlay{position:fixed;inset:0;z-index:250;background:rgba(15,15,35,0.8);display:none;align-items:center;justify-content:center}
-        .loading-overlay.show{display:flex}
-        .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
-        .stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
-        .stat-value{font-size:24px;font-weight:800;color:var(--accent)}
-        .stat-label{font-size:11px;color:var(--text-muted);margin-top:2px}
+        .client-card{display:flex;align-items:center;gap:12px;cursor:pointer}.client-avatar{width:48px;height:48px;background:var(--accent-gradient);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;flex-shrink:0}.client-info{flex:1;min-width:0}.client-name{font-size:16px;font-weight:600}.client-detail{font-size:13px;color:var(--text-muted);margin-top:2px}.client-actions{display:flex;gap:8px;flex-shrink:0}.client-action-btn{background:none;border:none;font-size:18px;cursor:pointer;padding:6px;color:var(--text-muted)}
+        .form-group{margin-bottom:16px}.form-label{display:block;font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:6px}.form-input,.form-textarea,.form-select{width:100%;padding:12px 14px;background:var(--bg-input);border:1px solid var(--border);border-radius:10px;color:var(--text-primary);font-size:15px;outline:none}.form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--accent)}.form-input::placeholder,.form-textarea::placeholder{color:var(--text-muted)}.form-textarea{min-height:80px;resize:vertical;font-family:inherit}.form-select{appearance:none}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+        .service-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px}.service-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}.service-type{font-size:15px;font-weight:600;color:var(--accent)}.service-price{font-size:16px;font-weight:700;color:var(--success)}.service-detail-row{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}.service-tag{background:rgba(232,121,249,0.1);border:1px solid rgba(232,121,249,0.2);border-radius:8px;padding:4px 10px;font-size:12px;color:var(--text-secondary)}.service-notes{font-size:13px;color:var(--text-muted);margin-top:8px;font-style:italic}
+        .page-header{margin-bottom:20px}.page-title{font-size:24px;font-weight:800}.page-subtitle{font-size:14px;color:var(--text-muted);margin-top:4px}
+        .detail-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}.back-btn{background:none;border:none;color:var(--accent);font-size:24px;cursor:pointer;padding:4px}
+        .tabs{display:flex;gap:4px;margin-bottom:16px;background:var(--bg-secondary);border-radius:12px;padding:4px}.tab{flex:1;padding:10px;text-align:center;background:none;border:none;color:var(--text-muted);font-size:13px;font-weight:600;cursor:pointer;border-radius:10px;transition:all 0.2s}.tab.active{background:var(--accent-gradient);color:#fff}
+        .empty-state{text-align:center;padding:40px 20px}.empty-icon{font-size:48px;margin-bottom:12px}.empty-text{font-size:16px;color:var(--text-muted)}
+        .modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.7);display:none;align-items:flex-end;justify-content:center}.modal-overlay.show{display:flex}.modal{background:var(--bg-primary);border-radius:20px 20px 0 0;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;padding:24px 20px calc(20px + var(--safe-bottom));animation:slideUp 0.3s ease-out}@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}.modal-title{font-size:20px;font-weight:700}.modal-close{background:none;border:none;color:var(--text-muted);font-size:24px;cursor:pointer}
+        .toast{position:fixed;top:80px;left:16px;right:16px;z-index:300;padding:14px 18px;border-radius:12px;font-size:14px;font-weight:600;display:none;align-items:center;gap:10px;animation:fadeDown 0.3s ease-out}.toast.show{display:flex}.toast.success{background:var(--success);color:#fff}.toast.error{background:var(--danger);color:#fff}.toast.info{background:var(--accent-dark);color:#fff}@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+        .confirm-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;padding:20px}.confirm-overlay.show{display:flex}.confirm-box{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;max-width:340px;width:100%}.confirm-text{font-size:16px;color:var(--text-secondary);margin-bottom:20px}.confirm-actions{display:flex;gap:12px}.confirm-actions .btn{flex:1}
+        .spinner{display:inline-block;width:20px;height:20px;border:3px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+        .loading-overlay{position:fixed;inset:0;z-index:250;background:rgba(15,15,35,0.8);display:none;align-items:center;justify-content:center}.loading-overlay.show{display:flex}
+        .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}.stat-value{font-size:24px;font-weight:800;color:var(--accent)}.stat-label{font-size:11px;color:var(--text-muted);margin-top:2px}
         .section-title{font-size:16px;font-weight:700;color:var(--text-secondary);margin:20px 0 12px;display:flex;align-items:center;gap:8px}
-        ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
-        .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
-        .badge-success{background:rgba(16,185,129,0.15);color:var(--success)}
-        .badge-warning{background:rgba(245,158,11,0.15);color:var(--warning)}
-        .badge-info{background:rgba(232,121,249,0.15);color:var(--accent)}
-        .badge-danger{background:rgba(239,68,68,0.15);color:var(--danger)}
-        .welcome-card{background:var(--accent-gradient);border-radius:var(--radius);padding:24px;margin-bottom:20px;position:relative;overflow:hidden}
-        .welcome-card::after{content:'🌸';position:absolute;right:-10px;bottom:-10px;font-size:80px;opacity:0.15}
-        .welcome-title{font-size:22px;font-weight:800;margin-bottom:4px}
-        .welcome-sub{font-size:14px;opacity:0.9}
-        .quick-actions{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
-        .quick-action{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;cursor:pointer;transition:border-color 0.2s,transform 0.1s}
-        .quick-action:active{transform:scale(0.97);border-color:var(--accent)}
-        .quick-action-icon{font-size:28px;margin-bottom:8px}
-        .quick-action-text{font-size:13px;font-weight:600;color:var(--text-secondary)}
-        .fade-in{animation:fadeIn 0.3s ease-out}
-        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-        .hidden{display:none !important}
-        .appt-card{border-left:3px solid var(--accent)}
-        .appt-card.status-programada,.appt-card.status-confirmada{border-left-color:var(--accent)}
-        .appt-card.status-pendiente{border-left-color:var(--warning)}
-        .appt-card.status-completada{border-left-color:var(--success)}
-        .appt-card.status-cancelada{border-left-color:var(--danger)}
-        .tx-card{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)}
-        .tx-card:last-child{border-bottom:none}
+        .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}.badge-success{background:rgba(16,185,129,0.15);color:var(--success)}.badge-warning{background:rgba(245,158,11,0.15);color:var(--warning)}.badge-info{background:rgba(232,121,249,0.15);color:var(--accent)}.badge-danger{background:rgba(239,68,68,0.15);color:var(--danger)}
+        .welcome-card{background:var(--accent-gradient);border-radius:var(--radius);padding:24px;margin-bottom:20px;position:relative;overflow:hidden}.welcome-card::after{content:'🌸';position:absolute;right:-10px;bottom:-10px;font-size:80px;opacity:0.15}.welcome-title{font-size:22px;font-weight:800;margin-bottom:4px}.welcome-sub{font-size:14px;opacity:0.9}
+        .quick-actions{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}.quick-action{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;cursor:pointer;transition:border-color 0.2s,transform 0.1s}.quick-action:active{transform:scale(0.97);border-color:var(--accent)}.quick-action-icon{font-size:28px;margin-bottom:8px}.quick-action-text{font-size:13px;font-weight:600;color:var(--text-secondary)}
+        .fade-in{animation:fadeIn 0.3s ease-out}@keyframes fadeIn{from{opacity:0}to{opacity:1}}.hidden{display:none !important}
+        .appt-card{border-left:3px solid var(--accent)}.appt-card.status-programada,.appt-card.status-confirmada{border-left-color:var(--accent)}.appt-card.status-pendiente{border-left-color:var(--warning)}.appt-card.status-completada{border-left-color:var(--success)}.appt-card.status-cancelada{border-left-color:var(--danger)}
+        .tx-card{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)}.tx-card:last-child{border-bottom:none}
+        .inv-item{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--border)}.inv-item:last-child{border-bottom:none}
+        .inv-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+        .check-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--border)}.check-row:last-child{border-bottom:none}
+        .check-box{width:22px;height:22px;border-radius:6px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:14px;transition:all 0.2s}.check-box.checked{background:var(--accent);border-color:var(--accent)}
+        .check-label{font-size:14px;color:var(--text-secondary);cursor:pointer;flex:1}
+        .settings-section{margin-bottom:24px}.settings-section-title{font-size:14px;font-weight:700;color:var(--accent);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px}
+        .hour-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}.hour-day{width:80px;font-size:13px;font-weight:600;color:var(--text-secondary)}.hour-input{width:80px;padding:8px;background:var(--bg-input);border:1px solid var(--border);border-radius:8px;color:var(--text-primary);font-size:13px;text-align:center;outline:none}
     </style>
 </head>
 <body>
-<div class="top-bar">
-    <div><div class="top-bar-title">🌸 CHIC HARMONY</div><div class="top-bar-sub">PMU STUDIO PRO</div></div>
-    <div class="top-bar-right"><button class="top-bar-btn" onclick="showToast('info','Notificaciones próximamente')">🔔</button></div>
-</div>
+<div class="top-bar"><div><div class="top-bar-title">🌸 CHIC HARMONY</div><div class="top-bar-sub">PMU STUDIO PRO</div></div><div><button style="background:none;border:none;color:var(--text-secondary);font-size:22px;cursor:pointer;" onclick="showToast('info','Notificaciones próximamente')">🔔</button></div></div>
 <div id="toast" class="toast"></div>
 <div id="loadingOverlay" class="loading-overlay"><div class="spinner" style="width:40px;height:40px;border-width:4px;"></div></div>
-<div id="confirmOverlay" class="confirm-overlay">
-    <div class="confirm-box">
-        <div class="confirm-icon" id="confirmIcon">⚠️</div>
-        <div class="confirm-text" id="confirmText"></div>
-        <div class="confirm-actions">
-            <button class="btn btn-secondary" onclick="closeConfirm()">Cancelar</button>
-            <button class="btn btn-danger" id="confirmBtn" onclick="executeConfirm()">Eliminar</button>
-        </div>
-    </div>
-</div>
+<div id="confirmOverlay" class="confirm-overlay"><div class="confirm-box"><div style="font-size:40px;margin-bottom:12px;">⚠️</div><div class="confirm-text" id="confirmText"></div><div class="confirm-actions"><button class="btn btn-secondary" onclick="closeConfirm()">Cancelar</button><button class="btn btn-danger" onclick="executeConfirm()">Eliminar</button></div></div></div>
 
 <div class="content" id="mainContent">
     <!-- HOME -->
     <div id="page-home" class="page fade-in">
         <div class="welcome-card"><div class="welcome-title">¡Bienvenida! 👋</div><div class="welcome-sub">Tu estudio de micropigmentación profesional</div></div>
-        <div id="homeStats" class="stats-row">
-            <div class="stat-card"><div class="stat-value" id="statClients">-</div><div class="stat-label">Clientes</div></div>
-            <div class="stat-card"><div class="stat-value" id="statServices">-</div><div class="stat-label">Servicios</div></div>
-            <div class="stat-card"><div class="stat-value" id="statMonth">-</div><div class="stat-label">Este Mes</div></div>
-        </div>
+        <div id="homeStats" class="stats-row"><div class="stat-card"><div class="stat-value" id="statClients">-</div><div class="stat-label">Clientes</div></div><div class="stat-card"><div class="stat-value" id="statServices">-</div><div class="stat-label">Servicios</div></div><div class="stat-card"><div class="stat-value" id="statMonth">-</div><div class="stat-label">Este Mes</div></div></div>
         <div class="section-title">⚡ Acciones Rápidas</div>
         <div class="quick-actions">
             <div class="quick-action" onclick="navigateTo('clients');setTimeout(()=>openAddClientModal(),300)"><div class="quick-action-icon">➕</div><div class="quick-action-text">Nuevo Cliente</div></div>
@@ -163,377 +74,100 @@
             <div class="quick-action" onclick="navigateTo('appointments')"><div class="quick-action-icon">📅</div><div class="quick-action-text">Citas</div></div>
             <div class="quick-action" onclick="navigateTo('finance')"><div class="quick-action-icon">💰</div><div class="quick-action-text">Finanzas</div></div>
         </div>
-        <div class="section-title">📋 Últimos Clientes</div>
-        <div id="recentClients"></div>
+        <div class="section-title">📋 Últimos Clientes</div><div id="recentClients"></div>
     </div>
-
-    <!-- CLIENTS LIST -->
-    <div id="page-clients" class="page hidden fade-in">
-        <div class="page-header"><div class="page-title">👥 Clientes</div><div class="page-subtitle">Gestiona tu cartera de clientes</div></div>
-        <div class="search-container"><span class="search-icon">🔍</span><input type="text" class="search-input" id="clientSearch" placeholder="Buscar por nombre, email, teléfono..." oninput="debounceSearch()"></div>
-        <div id="clientsList"></div>
-    </div>
-
-    <!-- CLIENT DETAIL -->
-    <div id="page-client-detail" class="page hidden fade-in">
-        <div class="detail-header"><button class="back-btn" onclick="navigateTo('clients')">←</button><div><div class="page-title" id="detailClientName"></div><div class="page-subtitle" id="detailClientSince"></div></div></div>
-        <div class="tabs">
-            <button class="tab active" onclick="switchDetailTab('info',this)">Info</button>
-            <button class="tab" onclick="switchDetailTab('services',this)">Servicios</button>
-        </div>
-        <div id="tab-info"><div class="card" id="detailClientInfo"></div><div style="display:flex;gap:10px;margin-top:16px;"><button class="btn btn-secondary btn-block" onclick="openEditClientModal()">✏️ Editar</button><button class="btn btn-danger btn-block" onclick="confirmDeleteClient()">🗑️ Eliminar</button></div></div>
-        <div id="tab-services" class="hidden">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><div class="section-title" style="margin:0;">Historial de Servicios</div><button class="btn btn-primary btn-sm" onclick="openAddServiceModal()">+ Servicio</button></div>
-            <div id="servicesList"></div>
-        </div>
-    </div>
-
-    <!-- APPOINTMENTS -->
-    <div id="page-appointments" class="page hidden fade-in">
-        <div class="page-header"><div class="page-title">📅 Citas</div><div class="page-subtitle">Gestión de agenda y programación</div></div>
-        <div id="apptStats" class="stats-row" style="grid-template-columns:repeat(2,1fr);"></div>
-        <div class="tabs" id="apptTabs">
-            <button class="tab active" onclick="switchApptTab('upcoming',this)">Próximas</button>
-            <button class="tab" onclick="switchApptTab('past',this)">Pasadas</button>
-        </div>
-        <div id="appt-tab-upcoming"></div>
-        <div id="appt-tab-past" class="hidden"></div>
-    </div>
-
-    <!-- FINANCE -->
-    <div id="page-finance" class="page hidden fade-in">
-        <div class="page-header"><div class="page-title">💰 Finanzas</div><div class="page-subtitle">Control de ingresos y gastos</div></div>
-        <div id="finStats" class="stats-row"></div>
-        <div class="tabs" id="finTabs">
-            <button class="tab active" onclick="switchFinTab('all',this)">Todo</button>
-            <button class="tab" onclick="switchFinTab('income',this)">Ingresos</button>
-            <button class="tab" onclick="switchFinTab('expense',this)">Gastos</button>
-        </div>
-        <div id="finTransactions"></div>
-        <div style="text-align:center;padding:16px 0;"><button class="btn btn-primary btn-sm" onclick="openExpenseModal()">+ Registrar Gasto</button></div>
-    </div>
-
-    <!-- AI DESIGN -->
-    <div id="page-ai-design" class="page hidden fade-in">
-        <div class="page-header"><div class="page-title">🤖 Análisis con IA</div><div class="page-subtitle">Herramientas inteligentes de diseño PMU</div></div>
-        <div class="card" style="border-left:3px solid var(--accent);margin-bottom:12px;"><div style="display:flex;gap:14px;align-items:center;"><div style="font-size:36px;">📸</div><div><div style="font-size:16px;font-weight:700;">Análisis Facial Completo</div><div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Simetría facial, puntos de referencia y recomendaciones</div></div></div><button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="showToast('info','Funcionalidad completa próximamente')">Iniciar Análisis</button></div>
-        <div class="card" style="border-left:3px solid var(--warning);margin-bottom:12px;"><div style="display:flex;gap:14px;align-items:center;"><div style="font-size:36px;">🎨</div><div><div style="font-size:16px;font-weight:700;">Análisis de Color</div><div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Tono de piel, subtonos y recomendaciones de pigmentos</div></div></div><button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="showToast('info','Análisis de color próximamente')">Analizar Color</button></div>
-        <div class="card" style="border-left:3px solid var(--success);margin-bottom:12px;"><div style="display:flex;gap:14px;align-items:center;"><div style="font-size:36px;">✨</div><div><div style="font-size:16px;font-weight:700;">Simulación de Diseño</div><div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Vista previa del resultado final</div></div></div><button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="showToast('info','Simulación próximamente')">Simular Diseño</button></div>
-    </div>
-
-    <!-- MORE -->
-    <div id="page-more" class="page hidden fade-in">
-        <div class="page-header"><div class="page-title">⚙️ Más</div><div class="page-subtitle">Herramientas y configuración</div></div>
-        <div class="quick-actions" style="grid-template-columns:1fr;">
-            <div class="quick-action" onclick="navigateTo('ai-design')"><div style="display:flex;align-items:center;gap:14px;"><div class="quick-action-icon" style="margin:0;">🤖</div><div style="text-align:left;"><div class="quick-action-text">Análisis con IA</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Simetría facial, color, diseño</div></div></div></div>
-            <div class="quick-action" onclick="navigateTo('finance')"><div style="display:flex;align-items:center;gap:14px;"><div class="quick-action-icon" style="margin:0;">📊</div><div style="text-align:left;"><div class="quick-action-text">Reportes y Finanzas</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Ingresos, gastos, balance</div></div></div></div>
-            <div class="quick-action" onclick="showToast('info','Inventario próximamente')"><div style="display:flex;align-items:center;gap:14px;"><div class="quick-action-icon" style="margin:0;">📦</div><div style="text-align:left;"><div class="quick-action-text">Inventario</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Control de insumos y productos</div></div></div></div>
-            <div class="quick-action" onclick="showToast('info','Formularios próximamente')"><div style="display:flex;align-items:center;gap:14px;"><div class="quick-action-icon" style="margin:0;">📋</div><div style="text-align:left;"><div class="quick-action-text">Formularios Digitales</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Consentimiento, historial médico</div></div></div></div>
-            <div class="quick-action" onclick="showToast('info','Configuración próximamente')"><div style="display:flex;align-items:center;gap:14px;"><div class="quick-action-icon" style="margin:0;">⚙️</div><div style="text-align:left;"><div class="quick-action-text">Configuración</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Perfil, notificaciones, preferencias</div></div></div></div>
-        </div>
-    </div>
+    <!-- CLIENTS --><div id="page-clients" class="page hidden fade-in"><div class="page-header"><div class="page-title">👥 Clientes</div><div class="page-subtitle">Gestiona tu cartera de clientes</div></div><div class="search-container"><span class="search-icon">🔍</span><input type="text" class="search-input" id="clientSearch" placeholder="Buscar por nombre, email, teléfono..." oninput="debounceSearch()"></div><div id="clientsList"></div></div>
+    <!-- CLIENT DETAIL --><div id="page-client-detail" class="page hidden fade-in"><div class="detail-header"><button class="back-btn" onclick="navigateTo('clients')">←</button><div><div class="page-title" id="detailClientName"></div><div class="page-subtitle" id="detailClientSince"></div></div></div><div class="tabs"><button class="tab active" onclick="switchDetailTab('info',this)">Info</button><button class="tab" onclick="switchDetailTab('services',this)">Servicios</button><button class="tab" onclick="switchDetailTab('forms',this)">Formularios</button></div><div id="tab-info"><div class="card" id="detailClientInfo"></div><div style="display:flex;gap:10px;margin-top:16px;"><button class="btn btn-secondary btn-block" onclick="openEditClientModal()">✏️ Editar</button><button class="btn btn-danger btn-block" onclick="confirmDeleteClient()">🗑️ Eliminar</button></div></div><div id="tab-services" class="hidden"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><div class="section-title" style="margin:0;">Historial de Servicios</div><button class="btn btn-primary btn-sm" onclick="openAddServiceModal()">+ Servicio</button></div><div id="servicesList"></div></div><div id="tab-forms" class="hidden"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><div class="section-title" style="margin:0;">Formularios</div><button class="btn btn-primary btn-sm" onclick="openFormSelector()">+ Formulario</button></div><div id="formsList"></div></div></div>
+    <!-- APPOINTMENTS --><div id="page-appointments" class="page hidden fade-in"><div class="page-header"><div class="page-title">📅 Citas</div><div class="page-subtitle">Gestión de agenda</div></div><div id="apptStats" class="stats-row" style="grid-template-columns:repeat(2,1fr);"></div><div class="tabs" id="apptTabs"><button class="tab active" onclick="switchApptTab('upcoming',this)">Próximas</button><button class="tab" onclick="switchApptTab('past',this)">Pasadas</button></div><div id="appt-tab-upcoming"></div><div id="appt-tab-past" class="hidden"></div></div>
+    <!-- FINANCE --><div id="page-finance" class="page hidden fade-in"><div class="page-header"><div class="page-title">💰 Finanzas</div><div class="page-subtitle">Control de ingresos y gastos</div></div><div id="finStats" class="stats-row"></div><div class="tabs" id="finTabs"><button class="tab active" onclick="switchFinTab('all',this)">Todo</button><button class="tab" onclick="switchFinTab('income',this)">Ingresos</button><button class="tab" onclick="switchFinTab('expense',this)">Gastos</button></div><div id="finTransactions"></div><div style="text-align:center;padding:16px 0;"><button class="btn btn-primary btn-sm" onclick="openExpenseModal()">+ Registrar Gasto</button></div></div>
+    <!-- INVENTORY --><div id="page-inventory" class="page hidden fade-in"><div class="page-header"><div class="page-title">📦 Inventario</div><div class="page-subtitle">Control de insumos y productos</div></div><div id="invStats" class="stats-row"></div><div class="tabs" id="invTabs"><button class="tab active" onclick="switchInvTab('all',this)">Todo</button><button class="tab" onclick="switchInvTab('Pigmentos',this)">Pigmentos</button><button class="tab" onclick="switchInvTab('Agujas',this)">Agujas</button><button class="tab" onclick="switchInvTab('Anestésicos',this)">Anest.</button></div><div id="invList"></div></div>
+    <!-- AI --><div id="page-ai-design" class="page hidden fade-in"><div class="page-header"><div class="page-title">🤖 Análisis con IA</div><div class="page-subtitle">Herramientas inteligentes de diseño PMU</div></div><div class="card" style="border-left:3px solid var(--accent);margin-bottom:12px;"><div style="display:flex;gap:14px;align-items:center;"><div style="font-size:36px;">📸</div><div><div style="font-size:16px;font-weight:700;">Análisis Facial</div><div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Simetría y recomendaciones</div></div></div><button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="showToast('info','Próximamente')">Iniciar</button></div><div class="card" style="border-left:3px solid var(--warning);margin-bottom:12px;"><div style="display:flex;gap:14px;align-items:center;"><div style="font-size:36px;">🎨</div><div><div style="font-size:16px;font-weight:700;">Análisis de Color</div><div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Tonos y pigmentos</div></div></div><button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="showToast('info','Próximamente')">Analizar</button></div></div>
+    <!-- SETTINGS --><div id="page-settings" class="page hidden fade-in"><div class="page-header"><div class="page-title">⚙️ Configuración</div><div class="page-subtitle">Perfil del estudio y preferencias</div></div><div id="settingsContent"></div></div>
+    <!-- MORE --><div id="page-more" class="page hidden fade-in"><div class="page-header"><div class="page-title">⚙️ Más</div><div class="page-subtitle">Herramientas y configuración</div></div><div class="quick-actions" style="grid-template-columns:1fr;"><div class="quick-action" onclick="navigateTo('inventory')"><div style="display:flex;align-items:center;gap:14px;"><div style="font-size:28px;margin:0;">📦</div><div style="text-align:left;"><div class="quick-action-text">Inventario</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Control de insumos y productos</div></div></div></div><div class="quick-action" onclick="navigateTo('ai-design')"><div style="display:flex;align-items:center;gap:14px;"><div style="font-size:28px;margin:0;">🤖</div><div style="text-align:left;"><div class="quick-action-text">Análisis con IA</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Simetría facial, color, diseño</div></div></div></div><div class="quick-action" onclick="navigateTo('finance')"><div style="display:flex;align-items:center;gap:14px;"><div style="font-size:28px;margin:0;">📊</div><div style="text-align:left;"><div class="quick-action-text">Reportes y Finanzas</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Ingresos, gastos, balance</div></div></div></div><div class="quick-action" onclick="navigateTo('settings')"><div style="display:flex;align-items:center;gap:14px;"><div style="font-size:28px;margin:0;">⚙️</div><div style="text-align:left;"><div class="quick-action-text">Configuración</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Perfil, horarios, precios</div></div></div></div></div></div>
 </div>
-
 <button class="fab hidden" id="fabBtn" onclick="handleFab()">+</button>
+<div class="bottom-nav"><button class="nav-item active" data-page="home" onclick="navigateTo('home')"><span class="nav-icon">🏠</span>Inicio</button><button class="nav-item" data-page="clients" onclick="navigateTo('clients')"><span class="nav-icon">👥</span>Clientes</button><button class="nav-item" data-page="appointments" onclick="navigateTo('appointments')"><span class="nav-icon">📅</span>Citas</button><button class="nav-item" data-page="more" onclick="navigateTo('more')"><span class="nav-icon">⚙️</span>Más</button></div>
 
-<div class="bottom-nav">
-    <button class="nav-item active" data-page="home" onclick="navigateTo('home')"><span class="nav-icon">🏠</span>Inicio</button>
-    <button class="nav-item" data-page="clients" onclick="navigateTo('clients')"><span class="nav-icon">👥</span>Clientes</button>
-    <button class="nav-item" data-page="appointments" onclick="navigateTo('appointments')"><span class="nav-icon">📅</span>Citas</button>
-    <button class="nav-item" data-page="more" onclick="navigateTo('more')"><span class="nav-icon">⚙️</span>Más</button>
-</div>
-
-<!-- MODAL: CLIENT -->
-<div id="clientModal" class="modal-overlay">
-    <div class="modal">
-        <div class="modal-header"><div class="modal-title" id="clientModalTitle">Nuevo Cliente</div><button class="modal-close" onclick="closeClientModal()">✕</button></div>
-        <form id="clientForm" onsubmit="submitClientForm(event)">
-            <input type="hidden" id="editClientId">
-            <div class="form-row"><div class="form-group"><label class="form-label">Nombre *</label><input type="text" class="form-input" id="cfFirstName" placeholder="Nombre" required></div><div class="form-group"><label class="form-label">Apellido</label><input type="text" class="form-input" id="cfLastName" placeholder="Apellido"></div></div>
-            <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="cfEmail" placeholder="email@ejemplo.com"></div>
-            <div class="form-group"><label class="form-label">Teléfono</label><input type="tel" class="form-input" id="cfPhone" placeholder="+1 (555) 123-4567"></div>
-            <div class="form-row"><div class="form-group"><label class="form-label">Fecha de Nacimiento</label><input type="date" class="form-input" id="cfDOB"></div><div class="form-group"><label class="form-label">Tono de Piel</label><input type="text" class="form-input" id="cfSkinTone" placeholder="Ej: Medio cálido"></div></div>
-            <div class="form-row"><div class="form-group"><label class="form-label">Color de Cabello</label><input type="text" class="form-input" id="cfHairColor" placeholder="Ej: Castaño"></div><div class="form-group"><label class="form-label">Color de Ojos</label><input type="text" class="form-input" id="cfEyeColor" placeholder="Ej: Marrón"></div></div>
-            <div class="form-group"><label class="form-label">Alergias</label><input type="text" class="form-input" id="cfAllergies" placeholder="Ej: Sensibilidad a lidocaína"></div>
-            <div class="form-group"><label class="form-label">Condiciones Médicas</label><input type="text" class="form-input" id="cfMedical" placeholder="Ej: Diabetes, Embarazo..."></div>
-            <div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="cfNotes" placeholder="Notas adicionales..."></textarea></div>
-            <button type="submit" class="btn btn-primary btn-block" id="clientSubmitBtn">Guardar</button>
-        </form>
-    </div>
-</div>
-
-<!-- MODAL: SERVICE -->
-<div id="serviceModal" class="modal-overlay">
-    <div class="modal">
-        <div class="modal-header"><div class="modal-title">Registrar Servicio</div><button class="modal-close" onclick="closeServiceModal()">✕</button></div>
-        <form id="serviceForm" onsubmit="submitServiceForm(event)">
-            <div class="form-group"><label class="form-label">Tipo de Servicio *</label><select class="form-select form-input" id="sfType" required><option value="">Seleccionar servicio...</option><option value="Micropigmentación de Cejas - Microblading">Cejas - Microblading</option><option value="Micropigmentación de Cejas - Powder Brows">Cejas - Powder Brows</option><option value="Micropigmentación de Cejas - Técnica Híbrida">Cejas - Técnica Híbrida</option><option value="Retoque de Cejas">Retoque de Cejas</option><option value="Lip Blush">Lip Blush</option><option value="Neutralización de Labios">Neutralización de Labios</option><option value="Delineado de Ojos">Delineado de Ojos</option><option value="Consulta">Consulta</option><option value="Remoción">Remoción</option><option value="Otro">Otro</option></select></div>
-            <div class="form-row"><div class="form-group"><label class="form-label">Fecha *</label><input type="date" class="form-input" id="sfDate" required></div><div class="form-group"><label class="form-label">Precio ($)</label><input type="number" class="form-input" id="sfPrice" placeholder="0.00" step="0.01" min="0"></div></div>
-            <div class="form-row"><div class="form-group"><label class="form-label">Duración (min)</label><input type="number" class="form-input" id="sfDuration" placeholder="120" min="0"></div><div class="form-group"><label class="form-label">Satisfacción</label><select class="form-select form-input" id="sfSatisfaction"><option value="">Seleccionar...</option><option value="Muy satisfecha">Muy satisfecha</option><option value="Satisfecha">Satisfecha</option><option value="Neutral">Neutral</option><option value="Insatisfecha">Insatisfecha</option></select></div></div>
-            <div class="form-group"><label class="form-label">Técnica</label><input type="text" class="form-input" id="sfTechnique" placeholder="Ej: Microblading + Sombreado"></div>
-            <div class="form-group"><label class="form-label">Pigmentos</label><input type="text" class="form-input" id="sfPigments" placeholder="Ej: Soft Brown (PhiBrows)"></div>
-            <div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="sfNotes" placeholder="Observaciones, resultados..."></textarea></div>
-            <div class="form-group"><label class="form-label">Próxima Sesión</label><input type="text" class="form-input" id="sfNextSession" placeholder="Ej: Retoque en 6-8 semanas"></div>
-            <button type="submit" class="btn btn-primary btn-block" id="serviceSubmitBtn">Guardar Servicio</button>
-        </form>
-    </div>
-</div>
-
-<!-- MODAL: APPOINTMENT -->
-<div id="apptModal" class="modal-overlay">
-    <div class="modal">
-        <div class="modal-header"><div class="modal-title" id="apptModalTitle">Nueva Cita</div><button class="modal-close" onclick="closeApptModal()">✕</button></div>
-        <form id="apptForm" onsubmit="submitApptForm(event)">
-            <input type="hidden" id="editApptId">
-            <div class="form-group"><label class="form-label">Cliente *</label><select class="form-select form-input" id="afClient" required><option value="">Seleccionar cliente...</option></select></div>
-            <div class="form-group"><label class="form-label">Servicio *</label><select class="form-select form-input" id="afService" required><option value="">Seleccionar servicio...</option><option value="Micropigmentación de Cejas - Microblading">Cejas - Microblading</option><option value="Micropigmentación de Cejas - Powder Brows">Cejas - Powder Brows</option><option value="Micropigmentación de Cejas - Técnica Híbrida">Cejas - Técnica Híbrida</option><option value="Retoque de Cejas">Retoque de Cejas</option><option value="Lip Blush">Lip Blush</option><option value="Delineado de Ojos">Delineado de Ojos</option><option value="Consulta">Consulta</option><option value="Otro">Otro</option></select></div>
-            <div class="form-row"><div class="form-group"><label class="form-label">Fecha *</label><input type="date" class="form-input" id="afDate" required></div><div class="form-group"><label class="form-label">Hora *</label><input type="time" class="form-input" id="afTime" required value="10:00"></div></div>
-            <div class="form-row"><div class="form-group"><label class="form-label">Duración (min)</label><input type="number" class="form-input" id="afDuration" value="120" min="0"></div><div class="form-group"><label class="form-label">Precio ($)</label><input type="number" class="form-input" id="afPrice" placeholder="0.00" step="0.01" min="0"></div></div>
-            <div class="form-group"><label class="form-label">Estado</label><select class="form-select form-input" id="afStatus"><option value="programada">Programada</option><option value="confirmada">Confirmada</option><option value="pendiente">Pendiente</option><option value="completada">Completada</option><option value="cancelada">Cancelada</option></select></div>
-            <div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="afNotes" placeholder="Notas de la cita..."></textarea></div>
-            <button type="submit" class="btn btn-primary btn-block" id="apptSubmitBtn">Guardar Cita</button>
-        </form>
-    </div>
-</div>
-
-<!-- MODAL: EXPENSE -->
-<div id="expenseModal" class="modal-overlay">
-    <div class="modal">
-        <div class="modal-header"><div class="modal-title">Registrar Gasto</div><button class="modal-close" onclick="closeExpenseModal()">✕</button></div>
-        <form id="expenseForm" onsubmit="submitExpenseForm(event)">
-            <div class="form-group"><label class="form-label">Descripción *</label><input type="text" class="form-input" id="efDesc" placeholder="Ej: Pigmentos PhiBrows" required></div>
-            <div class="form-row"><div class="form-group"><label class="form-label">Monto ($) *</label><input type="number" class="form-input" id="efAmount" placeholder="0.00" step="0.01" min="0.01" required></div><div class="form-group"><label class="form-label">Fecha</label><input type="date" class="form-input" id="efDate"></div></div>
-            <div class="form-group"><label class="form-label">Categoría</label><select class="form-select form-input" id="efCategory"><option value="Insumos">Insumos</option><option value="Renta">Renta</option><option value="Marketing">Marketing</option><option value="Servicios">Servicios públicos</option><option value="Educación">Educación/Cursos</option><option value="Equipamiento">Equipamiento</option><option value="General">General</option></select></div>
-            <div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="efNotes" placeholder="Detalles adicionales..."></textarea></div>
-            <button type="submit" class="btn btn-primary btn-block" id="expenseSubmitBtn">Guardar Gasto</button>
-        </form>
-    </div>
-</div>
+<!-- MODAL: CLIENT --><div id="clientModal" class="modal-overlay"><div class="modal"><div class="modal-header"><div class="modal-title" id="clientModalTitle">Nuevo Cliente</div><button class="modal-close" onclick="closeModal('clientModal')">✕</button></div><form id="clientForm" onsubmit="submitClientForm(event)"><input type="hidden" id="editClientId"><div class="form-row"><div class="form-group"><label class="form-label">Nombre *</label><input type="text" class="form-input" id="cfFirstName" placeholder="Nombre" required></div><div class="form-group"><label class="form-label">Apellido</label><input type="text" class="form-input" id="cfLastName" placeholder="Apellido"></div></div><div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="cfEmail" placeholder="email@ejemplo.com"></div><div class="form-group"><label class="form-label">Teléfono</label><input type="tel" class="form-input" id="cfPhone" placeholder="+1 (555) 123-4567"></div><div class="form-row"><div class="form-group"><label class="form-label">Fecha de Nacimiento</label><input type="date" class="form-input" id="cfDOB"></div><div class="form-group"><label class="form-label">Tono de Piel</label><input type="text" class="form-input" id="cfSkinTone" placeholder="Ej: Medio cálido"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Color de Cabello</label><input type="text" class="form-input" id="cfHairColor" placeholder="Ej: Castaño"></div><div class="form-group"><label class="form-label">Color de Ojos</label><input type="text" class="form-input" id="cfEyeColor" placeholder="Ej: Marrón"></div></div><div class="form-group"><label class="form-label">Alergias</label><input type="text" class="form-input" id="cfAllergies" placeholder="Ej: Sensibilidad a lidocaína"></div><div class="form-group"><label class="form-label">Condiciones Médicas</label><input type="text" class="form-input" id="cfMedical" placeholder="Ej: Diabetes, Embarazo..."></div><div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="cfNotes" placeholder="Notas adicionales..."></textarea></div><button type="submit" class="btn btn-primary btn-block" id="clientSubmitBtn">Guardar</button></form></div></div>
+<!-- MODAL: SERVICE --><div id="serviceModal" class="modal-overlay"><div class="modal"><div class="modal-header"><div class="modal-title">Registrar Servicio</div><button class="modal-close" onclick="closeModal('serviceModal')">✕</button></div><form id="serviceForm" onsubmit="submitServiceForm(event)"><div class="form-group"><label class="form-label">Tipo de Servicio *</label><select class="form-select form-input" id="sfType" required><option value="">Seleccionar...</option><option value="Micropigmentación de Cejas - Microblading">Cejas - Microblading</option><option value="Micropigmentación de Cejas - Powder Brows">Cejas - Powder Brows</option><option value="Micropigmentación de Cejas - Técnica Híbrida">Cejas - Híbrida</option><option value="Retoque de Cejas">Retoque de Cejas</option><option value="Lip Blush">Lip Blush</option><option value="Neutralización de Labios">Neutralización Labios</option><option value="Delineado de Ojos">Delineado de Ojos</option><option value="Consulta">Consulta</option><option value="Remoción">Remoción</option><option value="Otro">Otro</option></select></div><div class="form-row"><div class="form-group"><label class="form-label">Fecha *</label><input type="date" class="form-input" id="sfDate" required></div><div class="form-group"><label class="form-label">Precio ($)</label><input type="number" class="form-input" id="sfPrice" placeholder="0" step="0.01" min="0"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Duración (min)</label><input type="number" class="form-input" id="sfDuration" placeholder="120" min="0"></div><div class="form-group"><label class="form-label">Satisfacción</label><select class="form-select form-input" id="sfSatisfaction"><option value="">...</option><option value="Muy satisfecha">Muy satisfecha</option><option value="Satisfecha">Satisfecha</option><option value="Neutral">Neutral</option><option value="Insatisfecha">Insatisfecha</option></select></div></div><div class="form-group"><label class="form-label">Técnica</label><input type="text" class="form-input" id="sfTechnique" placeholder="Ej: Microblading + Sombreado"></div><div class="form-group"><label class="form-label">Pigmentos</label><input type="text" class="form-input" id="sfPigments" placeholder="Ej: Soft Brown (PhiBrows)"></div><div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="sfNotes" placeholder="Observaciones..."></textarea></div><div class="form-group"><label class="form-label">Próxima Sesión</label><input type="text" class="form-input" id="sfNextSession" placeholder="Ej: Retoque en 6-8 semanas"></div><button type="submit" class="btn btn-primary btn-block" id="serviceSubmitBtn">Guardar Servicio</button></form></div></div>
+<!-- MODAL: APPOINTMENT --><div id="apptModal" class="modal-overlay"><div class="modal"><div class="modal-header"><div class="modal-title" id="apptModalTitle">Nueva Cita</div><button class="modal-close" onclick="closeModal('apptModal')">✕</button></div><form id="apptForm" onsubmit="submitApptForm(event)"><input type="hidden" id="editApptId"><div class="form-group"><label class="form-label">Cliente *</label><select class="form-select form-input" id="afClient" required><option value="">Seleccionar...</option></select></div><div class="form-group"><label class="form-label">Servicio *</label><select class="form-select form-input" id="afService" required><option value="">Seleccionar...</option><option value="Micropigmentación de Cejas - Microblading">Cejas - Microblading</option><option value="Micropigmentación de Cejas - Powder Brows">Cejas - Powder Brows</option><option value="Micropigmentación de Cejas - Técnica Híbrida">Cejas - Híbrida</option><option value="Retoque de Cejas">Retoque de Cejas</option><option value="Lip Blush">Lip Blush</option><option value="Delineado de Ojos">Delineado de Ojos</option><option value="Consulta">Consulta</option><option value="Otro">Otro</option></select></div><div class="form-row"><div class="form-group"><label class="form-label">Fecha *</label><input type="date" class="form-input" id="afDate" required></div><div class="form-group"><label class="form-label">Hora *</label><input type="time" class="form-input" id="afTime" required value="10:00"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Duración (min)</label><input type="number" class="form-input" id="afDuration" value="120" min="0"></div><div class="form-group"><label class="form-label">Precio ($)</label><input type="number" class="form-input" id="afPrice" placeholder="0" step="0.01" min="0"></div></div><div class="form-group"><label class="form-label">Estado</label><select class="form-select form-input" id="afStatus"><option value="programada">Programada</option><option value="confirmada">Confirmada</option><option value="pendiente">Pendiente</option><option value="completada">Completada</option><option value="cancelada">Cancelada</option></select></div><div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="afNotes" placeholder="Notas..."></textarea></div><button type="submit" class="btn btn-primary btn-block" id="apptSubmitBtn">Guardar Cita</button></form></div></div>
+<!-- MODAL: EXPENSE --><div id="expenseModal" class="modal-overlay"><div class="modal"><div class="modal-header"><div class="modal-title">Registrar Gasto</div><button class="modal-close" onclick="closeModal('expenseModal')">✕</button></div><form id="expenseForm" onsubmit="submitExpenseForm(event)"><div class="form-group"><label class="form-label">Descripción *</label><input type="text" class="form-input" id="efDesc" placeholder="Ej: Pigmentos PhiBrows" required></div><div class="form-row"><div class="form-group"><label class="form-label">Monto ($) *</label><input type="number" class="form-input" id="efAmount" placeholder="0" step="0.01" min="0.01" required></div><div class="form-group"><label class="form-label">Fecha</label><input type="date" class="form-input" id="efDate"></div></div><div class="form-group"><label class="form-label">Categoría</label><select class="form-select form-input" id="efCategory"><option value="Insumos">Insumos</option><option value="Renta">Renta</option><option value="Marketing">Marketing</option><option value="Servicios">Servicios públicos</option><option value="Educación">Educación/Cursos</option><option value="Equipamiento">Equipamiento</option><option value="General">General</option></select></div><div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="efNotes" placeholder="Detalles..."></textarea></div><button type="submit" class="btn btn-primary btn-block" id="expenseSubmitBtn">Guardar Gasto</button></form></div></div>
+<!-- MODAL: INVENTORY --><div id="invModal" class="modal-overlay"><div class="modal"><div class="modal-header"><div class="modal-title" id="invModalTitle">Nuevo Producto</div><button class="modal-close" onclick="closeModal('invModal')">✕</button></div><form id="invForm" onsubmit="submitInvForm(event)"><input type="hidden" id="editInvId"><div class="form-group"><label class="form-label">Nombre *</label><input type="text" class="form-input" id="ifName" placeholder="Ej: Soft Brown PhiBrows" required></div><div class="form-row"><div class="form-group"><label class="form-label">Categoría</label><select class="form-select form-input" id="ifCategory"><option value="Pigmentos">Pigmentos</option><option value="Agujas">Agujas</option><option value="Anestésicos">Anestésicos</option><option value="Equipamiento">Equipamiento</option><option value="Consumibles">Consumibles</option><option value="General">General</option></select></div><div class="form-group"><label class="form-label">Marca</label><input type="text" class="form-input" id="ifBrand" placeholder="Ej: PhiBrows"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Cantidad</label><input type="number" class="form-input" id="ifQty" value="0" min="0"></div><div class="form-group"><label class="form-label">Stock Mínimo</label><input type="number" class="form-input" id="ifMinStock" value="0" min="0"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Unidad</label><select class="form-select form-input" id="ifUnit"><option value="unidades">Unidades</option><option value="cajas">Cajas</option><option value="ml">ml</option><option value="piezas">Piezas</option></select></div><div class="form-group"><label class="form-label">Precio/Unidad ($)</label><input type="number" class="form-input" id="ifPrice" placeholder="0" step="0.01" min="0"></div></div><div class="form-group"><label class="form-label">Proveedor</label><input type="text" class="form-input" id="ifSupplier" placeholder="Nombre del proveedor"></div><div class="form-group"><label class="form-label">Notas</label><textarea class="form-textarea" id="ifNotes" placeholder="Notas..."></textarea></div><button type="submit" class="btn btn-primary btn-block" id="invSubmitBtn">Guardar</button></form></div></div>
+<!-- MODAL: FORM --><div id="formModal" class="modal-overlay"><div class="modal"><div class="modal-header"><div class="modal-title" id="formModalTitle">Formulario</div><button class="modal-close" onclick="closeModal('formModal')">✕</button></div><div id="formModalContent"></div></div></div>
 
 <script>
-const API_BASE='https://pmu-design-portal.preview.emergentagent.com';
-let currentPage='home',allClients=[],currentClientId=null,currentClientData=null,confirmCallback=null,searchTimeout=null,currentFinFilter='all';
+const API='https://pmu-design-portal.preview.emergentagent.com';
+let currentPage='home',allClients=[],currentClientId=null,currentClientData=null,confirmCallback=null,searchTimeout=null,currentFinFilter='all',currentInvFilter='all';
 
-// === NAV ===
-function navigateTo(page){
-    currentPage=page;
-    document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
-    const t=document.getElementById('page-'+page);
-    if(t){t.classList.remove('hidden');t.classList.add('fade-in')}
-    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-    const ni=document.querySelector(`.nav-item[data-page="${page}"]`);
-    if(ni)ni.classList.add('active');
-    if(page==='finance'||page==='ai-design')document.querySelector('.nav-item[data-page="more"]').classList.add('active');
-    if(page==='client-detail')document.querySelector('.nav-item[data-page="clients"]').classList.add('active');
-    const fab=document.getElementById('fabBtn');
-    if(page==='clients'||page==='appointments'){fab.classList.remove('hidden');fab.textContent='+'}else{fab.classList.add('hidden')}
-    if(page==='home')loadHomePage();
-    if(page==='clients')loadClients();
-    if(page==='appointments')loadAppointments();
-    if(page==='finance')loadFinance();
-    window.scrollTo(0,0);
-}
-function handleFab(){
-    if(currentPage==='clients')openAddClientModal();
-    if(currentPage==='appointments')openAddApptModal();
-}
-
-// === API ===
-async function apiCall(method,path,body=null){
-    const url=API_BASE+path;
-    const opts={method,headers:{'Content-Type':'application/json'}};
-    if(body)opts.body=JSON.stringify(body);
-    const r=await fetch(url,opts);
-    if(!r.ok){const t=await r.text();let m;try{m=JSON.parse(t).detail||'Error'}catch{m='Error ('+r.status+')'}throw new Error(m)}
-    return await r.json();
-}
-
-// === HOME ===
-async function loadHomePage(){
-    try{
-        const d=await apiCall('GET','/api/clients/list');
-        allClients=d.clients||[];
-        document.getElementById('statClients').textContent=allClients.length;
-        loadHomeStats(allClients);
-        const recent=allClients.slice(0,3);
-        const c=document.getElementById('recentClients');
-        if(!recent.length){c.innerHTML='<div class="empty-state"><div class="empty-icon">👥</div><div class="empty-text">No hay clientes aún</div></div>'}
-        else{c.innerHTML=recent.map(cl=>`<div class="card client-card" onclick="openClientDetail('${cl.id}')"><div class="client-avatar">${getInitials(cl.first_name,cl.last_name)}</div><div class="client-info"><div class="client-name">${esc(cl.first_name)} ${esc(cl.last_name)}</div><div class="client-detail">${esc(cl.phone||cl.email||'Sin contacto')}</div></div><span style="color:var(--text-muted);font-size:20px;">›</span></div>`).join('')}
-    }catch(e){console.error('Home error:',e)}
-}
-async function loadHomeStats(clients){
-    let total=0,month=0;const now=new Date(),m=now.getMonth(),y=now.getFullYear();
-    for(const cl of clients){try{const d=await apiCall('GET',`/api/clients/${cl.id}/services`);const s=d.services||[];total+=s.length;for(const sv of s){const dt=new Date(sv.date);if(dt.getMonth()===m&&dt.getFullYear()===y)month++}}catch{}}
-    document.getElementById('statServices').textContent=total;
-    document.getElementById('statMonth').textContent=month;
-}
-
-// === CLIENTS ===
-async function loadClients(search=''){
-    try{const sp=search?`?search=${encodeURIComponent(search)}`:'';const d=await apiCall('GET','/api/clients/list'+sp);allClients=d.clients||[];renderClientsList(allClients)}
-    catch(e){showToast('error','Error: '+e.message)}
-}
-function renderClientsList(clients){
-    const c=document.getElementById('clientsList');
-    if(!clients.length){const sv=document.getElementById('clientSearch').value;c.innerHTML=`<div class="empty-state"><div class="empty-icon">${sv?'🔍':'👥'}</div><div class="empty-text">${sv?'No se encontraron clientes':'No hay clientes aún'}</div></div>`;return}
-    c.innerHTML=clients.map(cl=>`<div class="card client-card"><div class="client-avatar" onclick="openClientDetail('${cl.id}')">${getInitials(cl.first_name,cl.last_name)}</div><div class="client-info" onclick="openClientDetail('${cl.id}')"><div class="client-name">${esc(cl.first_name)} ${esc(cl.last_name)}</div><div class="client-detail">${esc(cl.phone||'')} ${cl.email?'· '+esc(cl.email):''}</div></div><div class="client-actions"><button class="client-action-btn" onclick="event.stopPropagation();openEditClientModalById('${cl.id}')">✏️</button><button class="client-action-btn" onclick="event.stopPropagation();confirmDeleteClientById('${cl.id}','${esc(cl.first_name)} ${esc(cl.last_name)}')">🗑️</button></div></div>`).join('');
-}
-function debounceSearch(){clearTimeout(searchTimeout);searchTimeout=setTimeout(()=>{loadClients(document.getElementById('clientSearch').value)},350)}
-
-// === CLIENT DETAIL ===
-async function openClientDetail(id){
-    currentClientId=id;showLoading(true);
-    try{const d=await apiCall('GET',`/api/clients/${id}`);currentClientData=d.client;
-    document.getElementById('detailClientName').textContent=currentClientData.first_name+' '+currentClientData.last_name;
-    document.getElementById('detailClientSince').textContent='Cliente desde '+formatDate(currentClientData.created_at);
-    renderClientInfo(currentClientData);await loadClientServices(id);
-    switchDetailTab('info',document.querySelector('#page-client-detail .tab'));
-    navigateTo('client-detail')}catch(e){showToast('error','Error: '+e.message)}finally{showLoading(false)}
-}
-function renderClientInfo(c){
-    const items=[{i:'📧',l:'Email',v:c.email},{i:'📱',l:'Teléfono',v:c.phone},{i:'🎂',l:'Nacimiento',v:c.date_of_birth?formatDate(c.date_of_birth):''},{i:'🎨',l:'Tono de Piel',v:c.skin_tone},{i:'💇',l:'Color de Cabello',v:c.hair_color},{i:'👁️',l:'Color de Ojos',v:c.eye_color},{i:'⚠️',l:'Alergias',v:c.allergies},{i:'🏥',l:'Condiciones Médicas',v:c.medical_conditions},{i:'📝',l:'Notas',v:c.notes}].filter(x=>x.v);
-    document.getElementById('detailClientInfo').innerHTML=items.map(x=>`<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);"><span style="font-size:18px;">${x.i}</span><div><div style="font-size:12px;color:var(--text-muted);">${x.l}</div><div style="font-size:14px;color:var(--text-primary);margin-top:2px;">${esc(x.v)}</div></div></div>`).join('');
-}
-async function loadClientServices(id){try{const d=await apiCall('GET',`/api/clients/${id}/services`);renderServices(d.services||[])}catch{document.getElementById('servicesList').innerHTML='<div class="empty-state"><div class="empty-text">Error al cargar servicios</div></div>'}}
-function renderServices(svcs){
-    const c=document.getElementById('servicesList');
-    if(!svcs.length){c.innerHTML='<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No hay servicios registrados</div></div>';return}
-    c.innerHTML=svcs.map(s=>`<div class="service-card"><div class="service-header"><div><div class="service-type">${esc(s.service_type)}</div><div class="service-date">📅 ${formatDate(s.date)}</div></div><div class="service-price">$${Number(s.price).toFixed(2)}</div></div><div class="service-detail-row">${s.duration_minutes?`<span class="service-tag">⏱️ ${s.duration_minutes} min</span>`:''}${s.technique?`<span class="service-tag">🔧 ${esc(s.technique)}</span>`:''}${s.satisfaction?`<span class="service-tag">${satEmoji(s.satisfaction)} ${esc(s.satisfaction)}</span>`:''}</div>${s.pigments_used?`<div style="font-size:12px;color:var(--text-muted);margin-top:6px;">🎨 ${esc(s.pigments_used)}</div>`:''}${s.notes?`<div class="service-notes">"${esc(s.notes)}"</div>`:''}${s.next_session?`<div style="font-size:12px;color:var(--accent);margin-top:6px;">📌 ${esc(s.next_session)}</div>`:''}</div>`).join('');
-}
-function switchDetailTab(tab,el){document.querySelectorAll('#page-client-detail .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');document.getElementById('tab-info').classList.toggle('hidden',tab!=='info');document.getElementById('tab-services').classList.toggle('hidden',tab!=='services')}
-
-// === APPOINTMENTS ===
-async function loadAppointments(){
-    try{
-        const d=await apiCall('GET','/api/appointments/list');
-        const appts=d.appointments||[];
-        const now=new Date();
-        const upcoming=appts.filter(a=>new Date(a.date)>=now&&a.status!=='completada'&&a.status!=='cancelada');
-        const past=appts.filter(a=>new Date(a.date)<now||a.status==='completada'||a.status==='cancelada');
-        
-        document.getElementById('apptStats').innerHTML=`<div class="stat-card"><div class="stat-value" style="color:var(--success);">${upcoming.length}</div><div class="stat-label">Próximas</div></div><div class="stat-card"><div class="stat-value">${past.length}</div><div class="stat-label">Pasadas</div></div>`;
-        
-        document.getElementById('appt-tab-upcoming').innerHTML=upcoming.length?upcoming.map(a=>renderApptCard(a)).join('')+'<div style="height:20px;"></div>':`<div class="empty-state"><div class="empty-icon">📅</div><div class="empty-text">No hay citas próximas</div></div>`;
-        document.getElementById('appt-tab-past').innerHTML=past.length?past.map(a=>renderApptCard(a)).join(''):`<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No hay citas pasadas</div></div>`;
-    }catch(e){showToast('error','Error citas: '+e.message)}
-}
-function renderApptCard(a){
-    const statusMap={programada:'badge-info',confirmada:'badge-info',pendiente:'badge-warning',completada:'badge-success',cancelada:'badge-danger'};
-    const statusLabel={programada:'Programada',confirmada:'Confirmada',pendiente:'Pendiente',completada:'Completada',cancelada:'Cancelada'};
-    return `<div class="card appt-card status-${a.status}" style="margin-bottom:10px;"><div style="display:flex;justify-content:space-between;align-items:flex-start;"><div style="flex:1;"><div style="font-size:15px;font-weight:600;">${esc(a.client_name||'Sin cliente')}</div><div style="font-size:13px;color:var(--accent);margin-top:2px;">${esc(a.service_type)}</div><div style="font-size:12px;color:var(--text-muted);margin-top:4px;">📅 ${formatDate(a.date)} · 🕐 ${a.time||''} · ⏱️ ${a.duration_minutes} min${a.price?` · $${Number(a.price).toFixed(2)}`:''}</div>${a.notes?`<div style="font-size:12px;color:var(--text-muted);margin-top:4px;font-style:italic;">${esc(a.notes)}</div>`:''}</div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;"><span class="badge ${statusMap[a.status]||'badge-info'}">${statusLabel[a.status]||a.status}</span><div style="display:flex;gap:4px;"><button class="client-action-btn" onclick="openEditApptModal('${a.id}')" style="font-size:14px;">✏️</button><button class="client-action-btn" onclick="confirmDeleteAppt('${a.id}','${esc(a.client_name)}')" style="font-size:14px;">🗑️</button></div></div></div></div>`;
-}
-function switchApptTab(tab,el){document.querySelectorAll('#apptTabs .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');document.getElementById('appt-tab-upcoming').classList.toggle('hidden',tab!=='upcoming');document.getElementById('appt-tab-past').classList.toggle('hidden',tab!=='past')}
-
-// === FINANCE ===
-async function loadFinance(){
-    try{
-        const s=await apiCall('GET','/api/finance/summary');
-        document.getElementById('finStats').innerHTML=`<div class="stat-card"><div class="stat-value" style="color:var(--success);">$${fmt(s.total_income)}</div><div class="stat-label">Ingresos</div></div><div class="stat-card"><div class="stat-value" style="color:var(--danger);">$${fmt(s.total_expenses)}</div><div class="stat-label">Gastos</div></div><div class="stat-card"><div class="stat-value">$${fmt(s.balance)}</div><div class="stat-label">Balance</div></div>`;
-        loadTransactions(currentFinFilter);
-    }catch(e){showToast('error','Error finanzas: '+e.message)}
-}
-async function loadTransactions(filter){
-    currentFinFilter=filter;
-    try{
-        const param=filter&&filter!=='all'?`?tx_type=${filter}`:'';
-        const d=await apiCall('GET','/api/finance/transactions'+param);
-        const txs=d.transactions||[];
-        const c=document.getElementById('finTransactions');
-        if(!txs.length){c.innerHTML='<div class="empty-state"><div class="empty-icon">💰</div><div class="empty-text">No hay transacciones</div></div>';return}
-        c.innerHTML='<div class="card" style="padding:8px 14px;">'+txs.map(tx=>`<div class="tx-card"><div style="flex:1;"><div style="font-size:14px;font-weight:600;">${esc(tx.description)}</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px;">${formatDate(tx.date)}${tx.category?' · '+esc(tx.category):''}</div></div><div style="font-size:15px;font-weight:700;color:${tx.type==='income'?'var(--success)':'var(--danger)'};">${tx.type==='income'?'+':'-'}$${fmt(tx.amount)}</div></div>`).join('')+'</div>';
-    }catch(e){showToast('error','Error: '+e.message)}
-}
-function switchFinTab(tab,el){document.querySelectorAll('#finTabs .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');loadTransactions(tab)}
-
-// === MODALS: CLIENT ===
-function openAddClientModal(){document.getElementById('clientModalTitle').textContent='Nuevo Cliente';document.getElementById('clientSubmitBtn').textContent='Guardar';document.getElementById('editClientId').value='';document.getElementById('clientForm').reset();document.getElementById('clientModal').classList.add('show')}
-function openEditClientModal(){if(!currentClientData)return;fillClientForm(currentClientData);document.getElementById('clientModal').classList.add('show')}
-async function openEditClientModalById(id){showLoading(true);try{const d=await apiCall('GET',`/api/clients/${id}`);fillClientForm(d.client);document.getElementById('clientModal').classList.add('show')}catch(e){showToast('error','Error: '+e.message)}finally{showLoading(false)}}
-function fillClientForm(c){document.getElementById('clientModalTitle').textContent='Editar Cliente';document.getElementById('clientSubmitBtn').textContent='Actualizar';document.getElementById('editClientId').value=c.id;document.getElementById('cfFirstName').value=c.first_name||'';document.getElementById('cfLastName').value=c.last_name||'';document.getElementById('cfEmail').value=c.email||'';document.getElementById('cfPhone').value=c.phone||'';document.getElementById('cfDOB').value=c.date_of_birth||'';document.getElementById('cfSkinTone').value=c.skin_tone||'';document.getElementById('cfHairColor').value=c.hair_color||'';document.getElementById('cfEyeColor').value=c.eye_color||'';document.getElementById('cfAllergies').value=c.allergies||'';document.getElementById('cfMedical').value=c.medical_conditions||'';document.getElementById('cfNotes').value=c.notes||''}
-function closeClientModal(){document.getElementById('clientModal').classList.remove('show')}
-async function submitClientForm(e){
-    e.preventDefault();const editId=document.getElementById('editClientId').value;const isEdit=!!editId;
-    const p={first_name:document.getElementById('cfFirstName').value.trim(),last_name:document.getElementById('cfLastName').value.trim(),email:document.getElementById('cfEmail').value.trim(),phone:document.getElementById('cfPhone').value.trim(),date_of_birth:document.getElementById('cfDOB').value,skin_tone:document.getElementById('cfSkinTone').value.trim(),hair_color:document.getElementById('cfHairColor').value.trim(),eye_color:document.getElementById('cfEyeColor').value.trim(),allergies:document.getElementById('cfAllergies').value.trim(),medical_conditions:document.getElementById('cfMedical').value.trim(),notes:document.getElementById('cfNotes').value.trim()};
-    if(!p.first_name){showToast('error','El nombre es obligatorio');return}
-    const btn=document.getElementById('clientSubmitBtn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Guardando...';
-    try{if(isEdit){await apiCall('PUT',`/api/clients/update/${editId}`,p);showToast('success','Cliente actualizado ✓')}else{await apiCall('POST','/api/clients/add',p);showToast('success','Cliente guardado ✓')}closeClientModal();if(currentPage==='client-detail'&&isEdit)openClientDetail(editId);else loadClients()}catch(e){showToast('error','Error: '+e.message)}finally{btn.disabled=false;btn.textContent=isEdit?'Actualizar':'Guardar'}
-}
-
-// === DELETE CLIENT ===
-function confirmDeleteClient(){if(!currentClientId||!currentClientData)return;showConfirm(`¿Eliminar a ${currentClientData.first_name} ${currentClientData.last_name}?`,async()=>{showLoading(true);try{await apiCall('DELETE',`/api/clients/delete/${currentClientId}`);showToast('success','Cliente eliminado ✓');navigateTo('clients')}catch(e){showToast('error','Error: '+e.message)}finally{showLoading(false)}})}
-function confirmDeleteClientById(id,name){showConfirm(`¿Eliminar a ${name}?`,async()=>{showLoading(true);try{await apiCall('DELETE',`/api/clients/delete/${id}`);showToast('success','Cliente eliminado ✓');loadClients(document.getElementById('clientSearch').value)}catch(e){showToast('error','Error: '+e.message)}finally{showLoading(false)}})}
-
-// === MODALS: SERVICE ===
-function openAddServiceModal(){document.getElementById('serviceForm').reset();document.getElementById('sfDate').value=new Date().toISOString().split('T')[0];document.getElementById('serviceModal').classList.add('show')}
-function closeServiceModal(){document.getElementById('serviceModal').classList.remove('show')}
-async function submitServiceForm(e){
-    e.preventDefault();if(!currentClientId){showToast('error','No hay cliente');return}
-    const p={service_type:document.getElementById('sfType').value,date:document.getElementById('sfDate').value,price:parseFloat(document.getElementById('sfPrice').value)||0,duration_minutes:parseInt(document.getElementById('sfDuration').value)||120,technique:document.getElementById('sfTechnique').value.trim(),pigments_used:document.getElementById('sfPigments').value.trim(),notes:document.getElementById('sfNotes').value.trim(),satisfaction:document.getElementById('sfSatisfaction').value,next_session:document.getElementById('sfNextSession').value.trim()};
-    if(!p.service_type){showToast('error','Selecciona un servicio');return}
-    const btn=document.getElementById('serviceSubmitBtn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>';
-    try{await apiCall('POST',`/api/clients/${currentClientId}/services`,p);showToast('success','Servicio registrado ✓');closeServiceModal();await loadClientServices(currentClientId);switchDetailTab('services',document.querySelectorAll('#page-client-detail .tab')[1])}catch(e){showToast('error','Error: '+e.message)}finally{btn.disabled=false;btn.textContent='Guardar Servicio'}
-}
-
-// === MODALS: APPOINTMENT ===
-async function openAddApptModal(){
-    document.getElementById('apptModalTitle').textContent='Nueva Cita';document.getElementById('apptSubmitBtn').textContent='Guardar Cita';document.getElementById('editApptId').value='';document.getElementById('apptForm').reset();document.getElementById('afTime').value='10:00';document.getElementById('afDuration').value='120';
-    const tomorrow=new Date();tomorrow.setDate(tomorrow.getDate()+1);document.getElementById('afDate').value=tomorrow.toISOString().split('T')[0];
-    await populateClientSelect();document.getElementById('apptModal').classList.add('show');
-}
-async function openEditApptModal(id){
-    showLoading(true);
-    try{
-        const d=await apiCall('GET','/api/appointments/list');
-        const a=(d.appointments||[]).find(x=>x.id===id);
-        if(!a){showToast('error','Cita no encontrada');return}
-        await populateClientSelect();
-        document.getElementById('apptModalTitle').textContent='Editar Cita';document.getElementById('apptSubmitBtn').textContent='Actualizar';document.getElementById('editApptId').value=a.id;
-        document.getElementById('afClient').value=a.client_id||'';document.getElementById('afService').value=a.service_type||'';document.getElementById('afDate').value=a.date?a.date.split('T')[0]:'';document.getElementById('afTime').value=a.time||'10:00';document.getElementById('afDuration').value=a.duration_minutes||120;document.getElementById('afPrice').value=a.price||'';document.getElementById('afStatus').value=a.status||'programada';document.getElementById('afNotes').value=a.notes||'';
-        document.getElementById('apptModal').classList.add('show');
-    }catch(e){showToast('error','Error: '+e.message)}finally{showLoading(false)}
-}
-function closeApptModal(){document.getElementById('apptModal').classList.remove('show')}
-async function populateClientSelect(){
-    try{const d=await apiCall('GET','/api/clients/list');const sel=document.getElementById('afClient');const val=sel.value;sel.innerHTML='<option value="">Seleccionar cliente...</option>'+(d.clients||[]).map(c=>`<option value="${c.id}">${esc(c.first_name)} ${esc(c.last_name)}</option>`).join('');if(val)sel.value=val}catch{}
-}
-async function submitApptForm(e){
-    e.preventDefault();const editId=document.getElementById('editApptId').value;const isEdit=!!editId;
-    const sel=document.getElementById('afClient');const clientName=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].text:'';
-    const p={client_id:sel.value,client_name:clientName==='Seleccionar cliente...'?'':clientName,service_type:document.getElementById('afService').value,date:document.getElementById('afDate').value,time:document.getElementById('afTime').value,duration_minutes:parseInt(document.getElementById('afDuration').value)||120,price:parseFloat(document.getElementById('afPrice').value)||0,status:document.getElementById('afStatus').value,notes:document.getElementById('afNotes').value.trim()};
-    if(!p.service_type){showToast('error','Selecciona un servicio');return}
-    const btn=document.getElementById('apptSubmitBtn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>';
-    try{if(isEdit){await apiCall('PUT',`/api/appointments/update/${editId}`,p);showToast('success','Cita actualizada ✓')}else{await apiCall('POST','/api/appointments/add',p);showToast('success','Cita creada ✓')}closeApptModal();loadAppointments()}catch(e){showToast('error','Error: '+e.message)}finally{btn.disabled=false;btn.textContent=isEdit?'Actualizar':'Guardar Cita'}
-}
-function confirmDeleteAppt(id,name){showConfirm(`¿Eliminar cita de ${name}?`,async()=>{showLoading(true);try{await apiCall('DELETE',`/api/appointments/delete/${id}`);showToast('success','Cita eliminada ✓');loadAppointments()}catch(e){showToast('error','Error: '+e.message)}finally{showLoading(false)}})}
-
-// === MODALS: EXPENSE ===
-function openExpenseModal(){document.getElementById('expenseForm').reset();document.getElementById('efDate').value=new Date().toISOString().split('T')[0];document.getElementById('expenseModal').classList.add('show')}
-function closeExpenseModal(){document.getElementById('expenseModal').classList.remove('show')}
-async function submitExpenseForm(e){
-    e.preventDefault();
-    const p={description:document.getElementById('efDesc').value.trim(),amount:parseFloat(document.getElementById('efAmount').value)||0,date:document.getElementById('efDate').value,category:document.getElementById('efCategory').value,notes:document.getElementById('efNotes').value.trim()};
-    if(!p.description){showToast('error','La descripción es obligatoria');return}
-    if(p.amount<=0){showToast('error','El monto debe ser mayor a 0');return}
-    const btn=document.getElementById('expenseSubmitBtn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>';
-    try{await apiCall('POST','/api/finance/expense',p);showToast('success','Gasto registrado ✓');closeExpenseModal();loadFinance()}catch(e){showToast('error','Error: '+e.message)}finally{btn.disabled=false;btn.textContent='Guardar Gasto'}
-}
-
-// === UI HELPERS ===
+function navigateTo(p){currentPage=p;document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));const t=document.getElementById('page-'+p);if(t){t.classList.remove('hidden');t.classList.add('fade-in')}document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));const ni=document.querySelector(`.nav-item[data-page="${p}"]`);if(ni)ni.classList.add('active');if(['finance','ai-design','inventory','settings'].includes(p))document.querySelector('.nav-item[data-page="more"]').classList.add('active');if(p==='client-detail')document.querySelector('.nav-item[data-page="clients"]').classList.add('active');const f=document.getElementById('fabBtn');if(p==='clients'||p==='appointments'||p==='inventory'){f.classList.remove('hidden')}else{f.classList.add('hidden')}if(p==='home')loadHomePage();if(p==='clients')loadClients();if(p==='appointments')loadAppointments();if(p==='finance')loadFinance();if(p==='inventory')loadInventory();if(p==='settings')loadSettings();window.scrollTo(0,0)}
+function handleFab(){if(currentPage==='clients')openAddClientModal();if(currentPage==='appointments')openAddApptModal();if(currentPage==='inventory')openAddInvModal()}
+async function api(m,path,body=null){const u=API+path,o={method:m,headers:{'Content-Type':'application/json'}};if(body)o.body=JSON.stringify(body);const r=await fetch(u,o);if(!r.ok){const t=await r.text();let msg;try{msg=JSON.parse(t).detail||'Error'}catch{msg='Error ('+r.status+')'}throw new Error(msg)}return await r.json()}
+function closeModal(id){document.getElementById(id).classList.remove('show')}
 function showToast(type,msg){const t=document.getElementById('toast');t.className='toast show '+type;t.innerHTML=msg;setTimeout(()=>t.classList.remove('show'),3500)}
 function showLoading(s){document.getElementById('loadingOverlay').classList.toggle('show',s)}
 function showConfirm(text,cb){document.getElementById('confirmText').textContent=text;confirmCallback=cb;document.getElementById('confirmOverlay').classList.add('show')}
 function closeConfirm(){document.getElementById('confirmOverlay').classList.remove('show');confirmCallback=null}
 function executeConfirm(){const cb=confirmCallback;closeConfirm();if(cb)cb()}
-function getInitials(f,l){return((f||'')[0]||'')+((l||'')[0]||'')||'?'}
+function gi(f,l){return((f||'')[0]||'')+((l||'')[0]||'')||'?'}
 function esc(s){if(!s)return'';const d=document.createElement('div');d.textContent=s;return d.innerHTML}
-function formatDate(ds){if(!ds)return'';try{const d=new Date(ds);if(isNaN(d.getTime()))return ds;return d.toLocaleDateString('es-ES',{year:'numeric',month:'short',day:'numeric'})}catch{return ds}}
-function satEmoji(s){if(!s)return'';if(s.includes('Muy'))return'😄';if(s.includes('Satisf'))return'😊';if(s.includes('Neutral'))return'😐';return'😞'}
+function fd(ds){if(!ds)return'';try{const d=new Date(ds);if(isNaN(d.getTime()))return ds;return d.toLocaleDateString('es-ES',{year:'numeric',month:'short',day:'numeric'})}catch{return ds}}
 function fmt(n){return Number(n).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',')}
+function satE(s){if(!s)return'';if(s.includes('Muy'))return'😄';if(s.includes('Satisf'))return'😊';if(s.includes('Neutral'))return'😐';return'😞'}
 
-// === INIT ===
-async function initApp(){loadHomePage()}
-document.addEventListener('DOMContentLoaded',initApp);
-</script>
-</body>
-</html>
+// HOME
+async function loadHomePage(){try{const d=await api('GET','/api/clients/list');allClients=d.clients||[];document.getElementById('statClients').textContent=allClients.length;loadHomeStats();const r=allClients.slice(0,3),c=document.getElementById('recentClients');if(!r.length)c.innerHTML='<div class="empty-state"><div class="empty-icon">👥</div><div class="empty-text">No hay clientes aún</div></div>';else c.innerHTML=r.map(cl=>`<div class="card client-card" onclick="openClientDetail('${cl.id}')"><div class="client-avatar">${gi(cl.first_name,cl.last_name)}</div><div class="client-info"><div class="client-name">${esc(cl.first_name)} ${esc(cl.last_name)}</div><div class="client-detail">${esc(cl.phone||cl.email||'Sin contacto')}</div></div><span style="color:var(--text-muted);font-size:20px;">›</span></div>`).join('')}catch(e){console.error(e)}}
+async function loadHomeStats(){let t=0,m=0;const now=new Date(),mo=now.getMonth(),yr=now.getFullYear();for(const cl of allClients){try{const d=await api('GET',`/api/clients/${cl.id}/services`);const s=d.services||[];t+=s.length;for(const sv of s){const dt=new Date(sv.date);if(dt.getMonth()===mo&&dt.getFullYear()===yr)m++}}catch{}}document.getElementById('statServices').textContent=t;document.getElementById('statMonth').textContent=m}
+
+// CLIENTS
+async function loadClients(s=''){try{const sp=s?`?search=${encodeURIComponent(s)}`:'';const d=await api('GET','/api/clients/list'+sp);allClients=d.clients||[];renderCL(allClients)}catch(e){showToast('error','Error: '+e.message)}}
+function renderCL(cls){const c=document.getElementById('clientsList');if(!cls.length){c.innerHTML=`<div class="empty-state"><div class="empty-icon">${document.getElementById('clientSearch').value?'🔍':'👥'}</div><div class="empty-text">${document.getElementById('clientSearch').value?'No encontrado':'No hay clientes aún'}</div></div>`;return}c.innerHTML=cls.map(cl=>`<div class="card client-card"><div class="client-avatar" onclick="openClientDetail('${cl.id}')">${gi(cl.first_name,cl.last_name)}</div><div class="client-info" onclick="openClientDetail('${cl.id}')"><div class="client-name">${esc(cl.first_name)} ${esc(cl.last_name)}</div><div class="client-detail">${esc(cl.phone||'')} ${cl.email?'· '+esc(cl.email):''}</div></div><div class="client-actions"><button class="client-action-btn" onclick="event.stopPropagation();openEditById('${cl.id}')">✏️</button><button class="client-action-btn" onclick="event.stopPropagation();confirmDelCl('${cl.id}','${esc(cl.first_name)} ${esc(cl.last_name)}')">🗑️</button></div></div>`).join('')}
+function debounceSearch(){clearTimeout(searchTimeout);searchTimeout=setTimeout(()=>loadClients(document.getElementById('clientSearch').value),350)}
+
+// CLIENT DETAIL
+async function openClientDetail(id){currentClientId=id;showLoading(true);try{const d=await api('GET',`/api/clients/${id}`);currentClientData=d.client;document.getElementById('detailClientName').textContent=currentClientData.first_name+' '+currentClientData.last_name;document.getElementById('detailClientSince').textContent='Cliente desde '+fd(currentClientData.created_at);renderCI(currentClientData);await loadCS(id);await loadCF(id);switchDetailTab('info',document.querySelector('#page-client-detail .tab'));navigateTo('client-detail')}catch(e){showToast('error','Error: '+e.message)}finally{showLoading(false)}}
+function renderCI(c){const items=[{i:'📧',l:'Email',v:c.email},{i:'📱',l:'Teléfono',v:c.phone},{i:'🎂',l:'Nacimiento',v:c.date_of_birth?fd(c.date_of_birth):''},{i:'🎨',l:'Tono de Piel',v:c.skin_tone},{i:'💇',l:'Cabello',v:c.hair_color},{i:'👁️',l:'Ojos',v:c.eye_color},{i:'⚠️',l:'Alergias',v:c.allergies},{i:'🏥',l:'Condiciones',v:c.medical_conditions},{i:'📝',l:'Notas',v:c.notes}].filter(x=>x.v);document.getElementById('detailClientInfo').innerHTML=items.map(x=>`<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);"><span style="font-size:18px;">${x.i}</span><div><div style="font-size:12px;color:var(--text-muted);">${x.l}</div><div style="font-size:14px;margin-top:2px;">${esc(x.v)}</div></div></div>`).join('')}
+async function loadCS(id){try{const d=await api('GET',`/api/clients/${id}/services`);const s=d.services||[];const c=document.getElementById('servicesList');if(!s.length){c.innerHTML='<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No hay servicios</div></div>';return}c.innerHTML=s.map(s=>`<div class="service-card"><div class="service-header"><div><div class="service-type">${esc(s.service_type)}</div><div style="font-size:12px;color:var(--text-muted);">📅 ${fd(s.date)}</div></div><div class="service-price">$${fmt(s.price)}</div></div><div class="service-detail-row">${s.duration_minutes?`<span class="service-tag">⏱️ ${s.duration_minutes} min</span>`:''}${s.technique?`<span class="service-tag">🔧 ${esc(s.technique)}</span>`:''}${s.satisfaction?`<span class="service-tag">${satE(s.satisfaction)} ${esc(s.satisfaction)}</span>`:''}</div>${s.pigments_used?`<div style="font-size:12px;color:var(--text-muted);margin-top:6px;">🎨 ${esc(s.pigments_used)}</div>`:''}${s.notes?`<div class="service-notes">"${esc(s.notes)}"</div>`:''}${s.next_session?`<div style="font-size:12px;color:var(--accent);margin-top:6px;">📌 ${esc(s.next_session)}</div>`:''}</div>`).join('')}catch{document.getElementById('servicesList').innerHTML='<div class="empty-state"><div class="empty-text">Error</div></div>'}}
+async function loadCF(id){try{const d=await api('GET',`/api/forms/client/${id}`);const forms=d.forms||[];const c=document.getElementById('formsList');if(!forms.length){c.innerHTML='<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No hay formularios</div></div>';return}c.innerHTML=forms.map(f=>`<div class="card" style="margin-bottom:8px;"><div style="display:flex;justify-content:space-between;align-items:center;"><div><div style="font-size:15px;font-weight:600;">${esc(f.form_name)}</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px;">📅 ${fd(f.created_at)}</div></div><div style="display:flex;gap:8px;align-items:center;">${f.signed?'<span class="badge badge-success">✓ Firmado</span>':'<span class="badge badge-warning">Pendiente</span>'}<button class="client-action-btn" onclick="confirmDelForm('${f.id}')" style="font-size:14px;">🗑️</button></div></div></div>`).join('')}catch{document.getElementById('formsList').innerHTML='<div class="empty-state"><div class="empty-text">Error</div></div>'}}
+function switchDetailTab(tab,el){document.querySelectorAll('#page-client-detail .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');document.getElementById('tab-info').classList.toggle('hidden',tab!=='info');document.getElementById('tab-services').classList.toggle('hidden',tab!=='services');document.getElementById('tab-forms').classList.toggle('hidden',tab!=='forms')}
+
+// APPOINTMENTS
+async function loadAppointments(){try{const d=await api('GET','/api/appointments/list');const a=d.appointments||[];const now=new Date();const up=a.filter(x=>new Date(x.date)>=now&&x.status!=='completada'&&x.status!=='cancelada');const pa=a.filter(x=>new Date(x.date)<now||x.status==='completada'||x.status==='cancelada');document.getElementById('apptStats').innerHTML=`<div class="stat-card"><div class="stat-value" style="color:var(--success);">${up.length}</div><div class="stat-label">Próximas</div></div><div class="stat-card"><div class="stat-value">${pa.length}</div><div class="stat-label">Pasadas</div></div>`;document.getElementById('appt-tab-upcoming').innerHTML=up.length?up.map(renderAC).join(''):'<div class="empty-state"><div class="empty-icon">📅</div><div class="empty-text">No hay citas próximas</div></div>';document.getElementById('appt-tab-past').innerHTML=pa.length?pa.map(renderAC).join(''):'<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No hay citas pasadas</div></div>'}catch(e){showToast('error','Error: '+e.message)}}
+function renderAC(a){const sm={programada:'badge-info',confirmada:'badge-info',pendiente:'badge-warning',completada:'badge-success',cancelada:'badge-danger'},sl={programada:'Programada',confirmada:'Confirmada',pendiente:'Pendiente',completada:'Completada',cancelada:'Cancelada'};return`<div class="card appt-card status-${a.status}" style="margin-bottom:10px;"><div style="display:flex;justify-content:space-between;align-items:flex-start;"><div style="flex:1;"><div style="font-size:15px;font-weight:600;">${esc(a.client_name||'Sin cliente')}</div><div style="font-size:13px;color:var(--accent);margin-top:2px;">${esc(a.service_type)}</div><div style="font-size:12px;color:var(--text-muted);margin-top:4px;">📅 ${fd(a.date)} · 🕐 ${a.time||''} · ⏱️ ${a.duration_minutes}min${a.price?` · $${fmt(a.price)}`:''}</div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;"><span class="badge ${sm[a.status]||'badge-info'}">${sl[a.status]||a.status}</span><div style="display:flex;gap:4px;"><button class="client-action-btn" onclick="openEditAppt('${a.id}')" style="font-size:14px;">✏️</button><button class="client-action-btn" onclick="confirmDelAppt('${a.id}','${esc(a.client_name)}')" style="font-size:14px;">🗑️</button></div></div></div></div>`}
+function switchApptTab(tab,el){document.querySelectorAll('#apptTabs .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');document.getElementById('appt-tab-upcoming').classList.toggle('hidden',tab!=='upcoming');document.getElementById('appt-tab-past').classList.toggle('hidden',tab!=='past')}
+
+// FINANCE
+async function loadFinance(){try{const s=await api('GET','/api/finance/summary');document.getElementById('finStats').innerHTML=`<div class="stat-card"><div class="stat-value" style="color:var(--success);">$${fmt(s.total_income)}</div><div class="stat-label">Ingresos</div></div><div class="stat-card"><div class="stat-value" style="color:var(--danger);">$${fmt(s.total_expenses)}</div><div class="stat-label">Gastos</div></div><div class="stat-card"><div class="stat-value">$${fmt(s.balance)}</div><div class="stat-label">Balance</div></div>`;loadTX(currentFinFilter)}catch(e){showToast('error','Error: '+e.message)}}
+async function loadTX(f){currentFinFilter=f;try{const p=f&&f!=='all'?`?tx_type=${f}`:'';const d=await api('GET','/api/finance/transactions'+p);const tx=d.transactions||[];const c=document.getElementById('finTransactions');if(!tx.length){c.innerHTML='<div class="empty-state"><div class="empty-icon">💰</div><div class="empty-text">No hay transacciones</div></div>';return}c.innerHTML='<div class="card" style="padding:8px 14px;">'+tx.map(t=>`<div class="tx-card"><div style="flex:1;"><div style="font-size:14px;font-weight:600;">${esc(t.description)}</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px;">${fd(t.date)}${t.category?' · '+esc(t.category):''}</div></div><div style="font-size:15px;font-weight:700;color:${t.type==='income'?'var(--success)':'var(--danger)'};">${t.type==='income'?'+':'-'}$${fmt(t.amount)}</div></div>`).join('')+'</div>'}catch(e){showToast('error','Error: '+e.message)}}
+function switchFinTab(t,el){document.querySelectorAll('#finTabs .tab').forEach(x=>x.classList.remove('active'));el.classList.add('active');loadTX(t)}
+
+// INVENTORY
+async function loadInventory(){try{const p=currentInvFilter!=='all'?`?category=${encodeURIComponent(currentInvFilter)}`:'';const d=await api('GET','/api/inventory/list'+p);const items=d.items||[];document.getElementById('invStats').innerHTML=`<div class="stat-card"><div class="stat-value">${d.total}</div><div class="stat-label">Productos</div></div><div class="stat-card"><div class="stat-value" style="color:${d.low_stock>0?'var(--danger)':'var(--success)'};">${d.low_stock}</div><div class="stat-label">Stock Bajo</div></div><div class="stat-card"><div class="stat-value">$${fmt(d.total_value)}</div><div class="stat-label">Valor Total</div></div>`;const c=document.getElementById('invList');if(!items.length){c.innerHTML='<div class="empty-state"><div class="empty-icon">📦</div><div class="empty-text">No hay productos en inventario</div></div>';return}c.innerHTML='<div class="card" style="padding:8px 14px;">'+items.map(it=>{const low=it.min_stock>0&&it.quantity<=it.min_stock;const catIcons={Pigmentos:'🎨',Agujas:'💉',Anestésicos:'💊',Equipamiento:'🔧',Consumibles:'📦',General:'📋'};return`<div class="inv-item"><div class="inv-icon" style="background:${low?'rgba(239,68,68,0.15)':'rgba(232,121,249,0.1)'};">${catIcons[it.category]||'📋'}</div><div style="flex:1;min-width:0;"><div style="font-size:14px;font-weight:600;">${esc(it.name)}</div><div style="font-size:12px;color:var(--text-muted);margin-top:2px;">${esc(it.brand||it.category)} · $${fmt(it.price_per_unit)}/${it.unit}</div></div><div style="text-align:right;"><div style="font-size:16px;font-weight:700;color:${low?'var(--danger)':'var(--text-primary)'};">${it.quantity}</div><div style="font-size:10px;color:var(--text-muted);">${it.unit}</div></div><div style="display:flex;flex-direction:column;gap:2px;"><button class="client-action-btn" onclick="openEditInv('${it.id}')" style="font-size:14px;padding:2px;">✏️</button><button class="client-action-btn" onclick="confirmDelInv('${it.id}','${esc(it.name)}')" style="font-size:14px;padding:2px;">🗑️</button></div></div>`}).join('')+'</div>'}catch(e){showToast('error','Error: '+e.message)}}
+function switchInvTab(t,el){currentInvFilter=t;document.querySelectorAll('#invTabs .tab').forEach(x=>x.classList.remove('active'));el.classList.add('active');loadInventory()}
+
+// SETTINGS
+async function loadSettings(){try{const d=await api('GET','/api/settings');const s=d.settings;const c=document.getElementById('settingsContent');const days=['lunes','martes','miercoles','jueves','viernes','sabado','domingo'];const dayLabels={lunes:'Lunes',martes:'Martes',miercoles:'Miércoles',jueves:'Jueves',viernes:'Viernes',sabado:'Sábado',domingo:'Domingo'};c.innerHTML=`<div class="settings-section"><div class="settings-section-title">🏪 Información del Estudio</div><div class="card"><div class="form-group"><label class="form-label">Nombre del Estudio</label><input type="text" class="form-input" id="sName" value="${esc(s.studio_name||'')}"></div><div class="form-group"><label class="form-label">Propietaria</label><input type="text" class="form-input" id="sOwner" value="${esc(s.owner_name||'')}"></div><div class="form-row"><div class="form-group"><label class="form-label">Teléfono</label><input type="tel" class="form-input" id="sPhone" value="${esc(s.phone||'')}"></div><div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="sEmail" value="${esc(s.email||'')}"></div></div><div class="form-group"><label class="form-label">Dirección</label><input type="text" class="form-input" id="sAddress" value="${esc(s.address||'')}"></div><div class="form-row"><div class="form-group"><label class="form-label">Instagram</label><input type="text" class="form-input" id="sInsta" value="${esc(s.instagram||'')}" placeholder="@chicharmony"></div><div class="form-group"><label class="form-label">Website</label><input type="text" class="form-input" id="sWeb" value="${esc(s.website||'')}"></div></div></div></div><div class="settings-section"><div class="settings-section-title">🕐 Horario de Atención</div><div class="card">${days.map(d=>{const h=s.business_hours?.[d]||{open:'09:00',close:'18:00',active:true};return`<div class="hour-row"><div class="hour-day">${dayLabels[d]}</div><input type="time" class="hour-input" id="h_${d}_o" value="${h.open||''}"><span style="color:var(--text-muted);">-</span><input type="time" class="hour-input" id="h_${d}_c" value="${h.close||''}"><div class="check-box ${h.active?'checked':''}" onclick="this.classList.toggle('checked')" id="h_${d}_a">${h.active?'✓':''}</div></div>`}).join('')}</div></div><div class="settings-section"><div class="settings-section-title">💰 Precios Base</div><div class="card" id="pricesList">${(s.base_prices||[]).map((p,i)=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);"><div style="font-size:14px;flex:1;">${esc(p.service)}</div><div style="display:flex;align-items:center;gap:4px;"><span style="color:var(--text-muted);">$</span><input type="number" class="form-input" style="width:80px;padding:8px;text-align:right;" id="price_${i}" value="${p.price}" min="0" step="0.01"></div></div>`).join('')}</div></div><button class="btn btn-primary btn-block" onclick="saveSettings()" id="saveSettingsBtn">💾 Guardar Configuración</button>`}catch(e){showToast('error','Error: '+e.message)}}
+async function saveSettings(){const days=['lunes','martes','miercoles','jueves','viernes','sabado','domingo'];const bh={};days.forEach(d=>{const a=document.getElementById(`h_${d}_a`);bh[d]={open:document.getElementById(`h_${d}_o`).value,close:document.getElementById(`h_${d}_c`).value,active:a.classList.contains('checked')}});const priceEls=document.querySelectorAll('[id^="price_"]');const services=["Micropigmentación de Cejas - Microblading","Micropigmentación de Cejas - Powder Brows","Micropigmentación de Cejas - Técnica Híbrida","Retoque de Cejas","Lip Blush","Delineado de Ojos","Consulta"];const bp=[];priceEls.forEach((el,i)=>{if(services[i])bp.push({service:services[i],price:parseFloat(el.value)||0})});const data={studio_name:document.getElementById('sName').value,owner_name:document.getElementById('sOwner').value,phone:document.getElementById('sPhone').value,email:document.getElementById('sEmail').value,address:document.getElementById('sAddress').value,instagram:document.getElementById('sInsta').value,website:document.getElementById('sWeb').value,business_hours:bh,base_prices:bp};const btn=document.getElementById('saveSettingsBtn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>';try{await api('PUT','/api/settings',data);showToast('success','Configuración guardada ✓')}catch(e){showToast('error','Error: '+e.message)}finally{btn.disabled=false;btn.textContent='💾 Guardar Configuración'}}
+
+// CLIENT MODALS
+function openAddClientModal(){document.getElementById('clientModalTitle').textContent='Nuevo Cliente';document.getElementById('clientSubmitBtn').textContent='Guardar';document.getElementById('editClientId').value='';document.getElementById('clientForm').reset();document.getElementById('clientModal').classList.add('show')}
+function openEditClientModal(){if(!currentClientData)return;fillCF(currentClientData);document.getElementById('clientModal').classList.add('show')}
+async function openEditById(id){showLoading(true);try{const d=await api('GET',`/api/clients/${id}`);fillCF(d.client);document.getElementById('clientModal').classList.add('show')}catch(e){showToast('error','Error: '+e.message)}finally{showLoading(false)}}
+function fillCF(c){document.getElementById('clientModalTitle').textContent='Editar Cliente';document.getElementById('clientSubmitBtn').textContent='Actualizar';document.getElementById('editClientId').value=c.id;document.getElementById('cfFirstName').value=c.first_name||'';document.getElementById('cfLastName').value=c.last_name||'';document.getElementById('cfEmail').value=c.email||'';document.getElementById('cfPhone').value=c.phone||'';document.getElementById('cfDOB').value=c.date_of_birth||'';document.getElementById('cfSkinTone').value=c.skin_tone||'';document.getElementById('cfHairColor').value=c.hair_color||'';document.getElementById('cfEyeColor').value=c.eye_color||'';document.getElementById('cfAllergies').value=c.allergies||'';document.getElementById('cfMedical').value=c.medical_conditions||'';document.getElementById('cfNotes').value=c.notes||''}
+async function submitClientForm(e){e.preventDefault();const eid=document.getElementById('editClientId').value,isE=!!eid;const p={first_name:document.getElementById('cfFirstName').value.trim(),last_name:document.getElementById('cfLastName').value.trim(),email:document.getElementById('cfEmail').value.trim(),phone:document.getElementById('cfPhone').value.trim(),date_of_birth:document.getElementById('cfDOB').value,skin_tone:document.getElementById('cfSkinTone').value.trim(),hair_color:document.getElementById('cfHairColor').value.trim(),eye_color:document.getElementById('cfEyeColor').value.trim(),allergies:document.getElementById('cfAllergies').value.trim(),medical_conditions:document.getElementById('cfMedical').value.trim(),notes:document.getElementById('cfNotes').value.trim()};if(!p.first_name){showToast('error','Nombre obligatorio');return}const btn=document.getElementById('clientSubmitBtn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>';try{if(isE){await api('PUT',`/api/clients/update/${eid}`,p);showToast('success','Actualizado ✓')}else{await api('POST','/api/clients/add',p);showToast('success','Guardado ✓')}closeModal('clientModal');if(currentPage==='client-detail'&&isE)openClientDetail(eid);else loadClients()}catch(e){showToast('error','Error: '+e.message)}finally{btn.disabled=false;btn.textContent=isE?'Actualizar':'Guardar'}}
+function confirmDeleteClient(){if(!currentClientId)return;showConfirm(`¿Eliminar a ${currentClientData.first_name} ${currentClientData.last_name}?`,async()=>{showLoading(true);try{await api('DELETE',`/api/clients/delete/${currentClientId}`);showToast('success','Eliminado ✓');navigateTo('clients')}catch(e){showToast('error','Error: '+e.message)}finally{showLoading(false)}})}
+function confirmDelCl(id,n){showConfirm(`¿Eliminar a ${n}?`,async()=>{showLoading(true);try{await api('DELETE',`/api/clients/delete/${id}`);showToast('success','Eliminado ✓');loadClients(document.getElementById('clientSearch').value)}catch(e){showToast('error','Error: '+e.message)}finally{showLoading(false)}})}
+
+// SERVICE MODAL
+function openAddServiceModal(){document.getElementById('serviceForm').reset();document.getElementById('sfDate').value=new Date().toISOString().split('T')[0];document.getElementById('serviceModal').classList.add('show')}
+async function submitServiceForm(e){e.preventDefault();if(!currentClientId)return;const p={service_type:document.getElementById('sfType').value,date:document.getElementById('sfDate').value,price:parseFloat(document.getElementById('sfPrice').value)||0,duration_minutes:parseInt(document.getElementById('sfDuration').value)||120,technique:document.getElementById('sfTechnique').value.trim(),pigments_used:document.getElementById('sfPigments').value.trim(),notes:document.getElementById('sfNotes').value.trim(),satisfaction:document.getElementById('sfSatisfaction').value,next_session:document.getElementById('sfNextSession').value.trim()};if(!p.service_type){showToast('error','Selecciona servicio');return}const btn=document.getElementById('serviceSubmitBtn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>';try{await api('POST',`/api/clients/${currentClientId}/services`,p);showToast('success','Servicio registrado ✓');closeModal('serviceModal');await loadCS(currentClientId);switchDetailTab('services',document.querySelectorAll('#page-client-detail .tab')[1])}catch(e){showToast('error','Error: '+e.message)}finally{btn.disabled=false;btn.textContent='Guardar Servicio'}}
+
+// APPOINTMENT MODAL
+async function openAddApptModal(){document.getElementById('apptModalTitle').textContent='Nueva Cita';document.getElementById('apptSubmitBtn').textContent='Guardar Cita';document.getElementById('editApptId').value='';document.getElementById('apptForm').reset();document.getElementById('afTime').value='10:00';document.getElementById('afDuration').value='120';const tm=new Date();tm.setDate(tm.getDate()+1);document.getElementById('afDate').value=tm.toISOString().split('T')[0];await popCS();document.getElementById('apptModal').classList.add('show')}
+async function openEditAppt(id){showLoading(true);try{const d=await api('GET','/api/appointments/list');const a=(d.appointments||[]).find(x=>x.id===id);if(!a){showToast('error','No encontrada');return}await popCS();document.getElementById('apptModalTitle').textContent='Editar Cita';document.getElementById('apptSubmitBtn').textContent='Actualizar';document.getElementById('editApptId').value=a.id;document.getElementById('afClient').value=a.client_id||'';document.getElementById('afService').value=a.service_type||'';document.getElementById('afDate').value=a.date?a.date.split('T')[0]:'';document.getElementById('afTime').value=a.time||'10:00';document.getElementById('afDuration').value=a.duration_minutes||120;document.getElementById('afPrice').value=a.price||'';document.getElementById('afStatus').value=a.status||'programada';document.getElementById('afNotes').value=a.notes||'';document.getElementById('apptModal').classList.add('show')}catch(e){showToast('error','Error: '+e.message)}finally{showLoading(false)}}
+async function popCS(){try{const d=await api('GET','/api/clients/list');const sel=document.getElementById('afClient');const v=sel.value;sel.innerHTML='<option value="">Seleccionar...</option>'+(d.clients||[]).map(c=>`<option value="${c.id}">${esc(c.first_name)} ${esc(c.last_name)}</option>`).join('');if(v)sel.value=v}catch{}}
+async function submitApptForm(e){e.preventDefault();const eid=document.getElementById('editApptId').value,isE=!!eid;const sel=document.getElementById('afClient');const cn=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].text:'';const p={client_id:sel.value,client_name:cn==='Seleccionar...'?'':cn,service_type:document.getElementById('afService').value,date:document.getElementById('afDate').value,time:document.getElementById('afTime').value,duration_minutes:parseInt(document.getElementById('afDuration').value)||120,price:parseFloat(document.getElementById('afPrice').value)||0,status:document.getElementById('afStatus').value,notes:document.getElementById('afNotes').value.trim()};if(!p.service_type){showToast('error','Selecciona servicio');return}const btn=document.getElementById('apptSubmitBtn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>';try{if(isE){await api('PUT',`/api/appointments/update/${eid}`,p);showToast('success','Actualizada ✓')}else{await api('POST','/api/appointments/add',p);showToast('success','Creada ✓')}closeModal('apptModal');loadAppointments()}catch(e){showToast('error','Error: '+e.message)}finally{btn.disabled=false;btn.textContent=isE?'Actualizar':'Guardar Cita'}}
+function confirmDelAppt(id,n){showConfirm(`¿Eliminar cita de ${n}?`,async()=>{showLoading(true);try{await api('DELETE',`/api/appointments/delete/${id}`);showToast('success','Eliminada ✓');loadAppointments()}catch(e){showToast('error','Error: '+e.message)}finally{showLoading(false)}})}
+
+// EXPENSE MODAL
+function openExpenseModal(){document.getElementById('expenseForm').reset();document.getElementById('efDate').value=new Date().toISOString().split('T')[0]<response clipped><NOTE>To save on context only part of this file has been shown to you. You should retry this tool after you have searched inside the file with `grep -n` in order to find the line numbers of what you are looking for.</NOTE>
 
